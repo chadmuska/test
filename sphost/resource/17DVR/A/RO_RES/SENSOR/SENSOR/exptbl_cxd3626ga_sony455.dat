@@ -1,0 +1,146 @@
+2 /*n_tbl*/
+2 /*nreg*/
+/*loop2 for n_tbl*/
+4 /*n_entry*/
+0    /*tblidx_min*/
+0x30 /*sensorMode of this tbl*/
+80 /*expidx0_tvscale*/
+16 /*exp_tvscale*/
+1 /*n_burst_tbl*/
+0x81
+0x12
+0
+0
+0
+0   /*template*/
+0x81
+0x03
+0
+0
+0
+0   /*template*/
+/*loop1 for n_burst_tbl*/
+4  /*n_entry_burst*/
+4  /*nbyte_entry*/
+0  /*burstidx_min*/
+3  /*nreg_involved*/
+/*loop0 for nreg_involved*/
+0  /*reg# in template*/
+8  /*lsb right shift*/
+24 /*lsb left shift*/
+10 /*nbit_mask*/
+0  /*reg# in template*/
+0  /*lsb right shift*/
+40 /*lsb left shift*/
+8  /*nbit_mask*/
+1  /*reg# in template*/
+24 /*lsb right shift*/
+14 /*lsb left shift*/
+8  /*nbit_mask*/
+/*loop0 ends*/
+/*contains for n_entry_burst*/
+0
+100
+0
+2
+0
+20
+0
+1
+0
+20
+0
+0
+0
+100
+0
+0
+/*end contains*/
+/*end loop1*/
+1
+1 /*vtable,n_vtbl,def_vtype*/
+/*loop3 for n_vtbl*/
+2
+1
+0
+1 /*vtable,n_vidx,nbyte_entry,vmin,vtype*/
+/*contains*/
+3
+2
+/*end loop3*/
+0
+0
+64 /*etable,n_eidx,emin,escale in evtbl*/
+/*end loop2*/
+/*loop2 for n_tbl*/
+4 /*n_entry*/
+0    /*tblidx_min*/
+0x40 /*sensorMode of this tbl*/
+80 /*expidx0_tvscale*/
+16 /*exp_tvscale*/
+1 /*n_burst_tbl*/
+0x81
+0x12
+0
+0
+0
+0   /*template*/
+0x81
+0x03
+0
+0
+0
+0   /*template*/
+/*loop1 for n_burst_tbl*/
+4  /*n_entry_burst*/
+4  /*nbyte_entry*/
+0  /*burstidx_min*/
+3  /*nreg_involved*/
+/*loop0 for nreg_involved*/
+0  /*reg# in template*/
+8  /*lsb right shift*/
+24 /*lsb left shift*/
+10 /*nbit_mask*/
+0  /*reg# in template*/
+0  /*lsb right shift*/
+40 /*lsb left shift*/
+8  /*nbit_mask*/
+1  /*reg# in template*/
+24 /*lsb right shift*/
+14 /*lsb left shift*/
+8  /*nbit_mask*/
+/*loop0 ends*/
+/*contains for n_entry_burst*/
+0
+100
+0
+2
+0
+20
+0
+1
+0
+20
+0
+0
+0
+100
+0
+0
+/*end contains*/
+/*end loop1*/
+1
+1 /*vtable,n_vtbl,def_vtype*/
+/*loop3 for n_vtbl*/
+2
+1
+0
+1 /*vtable,n_vidx,nbyte_entry,vmin,vtype*/
+/*contains*/
+3
+2
+/*end loop3*/
+0
+0
+64 /*etable,n_eidx,emin,escale in evtbl*/
+/*end loop2*/

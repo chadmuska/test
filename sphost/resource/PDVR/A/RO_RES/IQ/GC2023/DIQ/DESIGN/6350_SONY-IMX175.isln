@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<SolutionInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Projects>
+    <string>ISO100\ISO100.icatproj</string>
+    <string>ISO100-video\ISO100-video.icatproj</string>
+    <string>ISO1600\ISO1600.icatproj</string>
+    <string>ISO1600-video\ISO1600-video.icatproj</string>
+    <string>ISO200\ISO200.icatproj</string>
+    <string>ISO200-video\ISO200-video.icatproj</string>
+    <string>ISO3200\ISO3200.icatproj</string>
+    <string>ISO400\ISO400.icatproj</string>
+    <string>ISO400-video\ISO400-video.icatproj</string>
+    <string>ISO6400\ISO6400.icatproj</string>
+    <string>ISO800\ISO800.icatproj</string>
+    <string>ISO800-video\ISO800-video.icatproj</string>
+  </Projects>
+  <VirtualFolders />
+  <Platform>6350</Platform>
+
+	<diq vers="1.0.31105">
+		<Decl>
+			<srm_cnt>2,1</srm_cnt> <ct_cnt>1</ct_cnt> <iso_cnt>5</iso_cnt>
+			<ct_def>1</ct_def> <iso_def>1</iso_def>
+		</Decl>
+				
+		<SrmCollect>
+			<srm_1>
+				<CtCollect>
+					<ct_1>ISO100-video\ISO100-video.icatproj</ct_1>
+				</CtCollect>				
+				<IsoCollect>
+					<iso_1>ISO100-video\ISO100-video.icatproj</iso_1>
+					<iso_2>ISO200-video\ISO200-video.icatproj</iso_2>
+					<iso_3>ISO400-video\ISO400-video.icatproj</iso_3>
+					<iso_4>ISO800-video\ISO800-video.icatproj</iso_4>
+					<iso_5>ISO1600-video\ISO1600-video.icatproj</iso_5>
+				</IsoCollect>
+			</srm_1>
+			
+			<srm_2>
+				<CtCollect>
+					<ct_1>ISO100\ISO100.icatproj</ct_1>
+				</CtCollect>				
+				<IsoCollect>
+					<iso_1>ISO100\ISO100.icatproj</iso_1>
+					<iso_2>ISO200\ISO200.icatproj</iso_2>
+					<iso_3>ISO400\ISO400.icatproj</iso_3>
+					<iso_4>ISO800\ISO800.icatproj</iso_4>
+					<iso_5>ISO1600\ISO1600.icatproj</iso_5>
+				</IsoCollect>
+			</srm_2>
+		</SrmCollect>
+	</diq>
+	  
+</SolutionInfo>

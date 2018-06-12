@@ -1,0 +1,117 @@
+0x000e
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+0xeffe
+
+// If you need customization, use the following modules (Hot key : alt+L -> alt+C)
+//0x0010    //UINT8 EmptyPara;		/* Auto create code zone, don't modify or delete! */                      
+//     	    //UINT8 ImageSize;		/* Auto create code zone, don't modify or delete! */                    
+//0x0001    //UINT8 ImageQuality;		/* Auto create code zone, don't modify or delete! */                  
+//    	    //UINT8 WBMode;		/* Auto create code zone, don't modify or delete! */                        
+//0x0000    //UINT8 PhotoBurst;		/* Auto create code zone, don't modify or delete! */                    
+//        	//UINT8 StillStampMode;		/* Auto create code zone, don't modify or delete! */                
+//0x0100    //UINT8 VideoSize;		/* Auto create code zone, don't modify or delete! */                    
+//        	//UINT8 VideoQuality;		/* Auto create code zone, don't modify or delete! */                  
+//0x0000    //UINT8 Seamless;		/* Auto create code zone, don't modify or delete! */                      
+//     	    //UINT8 VideoStampMode;		/* Auto create code zone, don't modify or delete! */                
+//0x0002    //UINT8 VideoEISMode;		/* Auto create code zone, don't modify or delete! */                  
+//     	    //UINT8 selImgProtect;		/* Auto create code zone, don't modify or delete! */                
+//0x0100    //UINT8 selImgDelete;		/* Auto create code zone, don't modify or delete! */                  
+//     	    //UINT8 ShutterSound;		/* Auto create code zone, don't modify or delete! */                  
+//0x0101   	//UINT8 StartupSound;		/* Auto create code zone, don't modify or delete! */                  
+//     	    //UINT8 BeepSound;		/* Auto create code zone, don't modify or delete! */                    
+//0x0002   	//UINT8 Volume;		/* Auto create code zone, don't modify or delete! */                        
+//     	    //UINT8 VoiceRec;		/* Auto create code zone, don't modify or delete! */                      
+//0x0000   	//UINT8 LightFreq;		/* Auto create code zone, don't modify or delete! */                    
+//     	    //UINT8 SleepTime;		/* Auto create code zone, don't modify or delete! */                    
+//0x0000   	//UINT8 powerOnRecord;		/* Auto create code zone, don't modify or delete! */                
+//     	    //UINT8 PeriodicalCap;		/* Auto create code zone, don't modify or delete! */                
+//0x0000   	//UINT8 rtcYear;		/* Auto create code zone, don't modify or delete! */                      
+//     	    //UINT8 rtcMonth;		/* Auto create code zone, don't modify or delete! */                      
+//0x0000    //UINT8 rtcDay;		/* Auto create code zone, don't modify or delete! */                        
+//     	    //UINT8 rtcHour;		/* Auto create code zone, don't modify or delete! */                      
+//0x0000   	//UINT8 rtcMinute;		/* Auto create code zone, don't modify or delete! */                    
+//     	    //UINT8 DateStyle;		/* Auto create code zone, don't modify or delete! */                    
+//0x0000   	//UINT8 Language;		/* Auto create code zone, don't modify or delete! */                      
+//        	//UINT8 TVMode;		/* Auto create code zone, don't modify or delete! */                        
+//0x0100   	//UINT8 USBMode;		/* Auto create code zone, don't modify or delete! */                      
+//        	//UINT8 VideoFormat;		/* Auto create code zone, don't modify or delete! */                  
+//0x0000    //UINT8 SceneMode;		/* Auto create code zone, don't modify or delete! */                    
+//     	    //UINT8 fileType;		/* Auto create code zone, don't modify or delete! */                      
+//0x0000    //UINT8 DriverMode;          																												
+//          //UINT8 VideoDist;           																												
+//0x0000    //UINT8 InvertMode;           	 																												                                                                
+//          //UINT8 WDRMode;              	 																												                                                                
+//0x0000    //UINT8 GPS;                  	 																												                                                                
+//          //UINT8 LOGOMark;             	 																												                                                                
+//0x0000    //UINT8 CollisionDetection;   	 																												                                                                
+//          //UINT8 TimeZones;            	 																												                                                                
+//0x0006    //UINT8 AEMode;               	 																												                                                                
+//          //UINT8 ImageEdge;            	 																												                                                                
+//0x0000    //UINT8 flash;                	 																												                                                                
+//          //UINT8 resCreate;            	 																												                                                                
+//0xeffe    //UINT8 BlinkMode;	           	 																												                                                                
+//          //UINT8 redEyePb;             	 																												                                                                
+//0x0027    //UINT8 tpCorrect;            	 																												                                                                
+//          //UINT8 shutter;              	 																												                                                                
+//0x0000    //UINT8 soundcontrol;         	 																												                                                                
+//          //UINT8 af;                   	 																												                                                                
+//0x0002    //UINT8 batteryType;          	 																												                                                                
+//          //UINT8 fileNumber;           	 																																												                                                                
+//0x0000    //UINT16 dcfDirKey;           	 																																												                                                                                                                                 
+//0x0000    //UINT16 dcfFileKey;                                                                                                                                         
+//0x0000    //UINT8 OpenPic;                                                                              
+//        	//UINT8 AEMetering;                                                                           
+//0x0000    //UINT8 Sharpness;                                                                            
+//     	    //UINT8 ImageEffect;                                                                          
+//0x0000    //UINT8 FeatureEffect;                                                                        
+//         	//UINT8 FaceTracking;                                                                         
+//0x0000    //UINT8 Digit;                                                                                
+//     	    //UINT8 RollingShutter;                                                                       
+//0x0000    //UINT8 VideoFaceTracking;                                                                    
+//     	    //UINT8 DiaMode;                                                                              
+//0x0000    //UINT8 AdvanceDenoise;                                                                       
+//     	    //UINT8 AutoReviewTime;                                                                       
+//0x0000    //UINT8 Iso;                                                                                  
+//     	    //UINT8 AEB;                                                                                  
+//0x0000    //UINT8 PhotoFrame;                                                                           
+//     	    //UINT8 DigitalZoom;                                                                          
+//0x0100    //UINT8 DisMode;                                                                              
+//         	//UINT8 MediaFormat;                                                                          
+//0x0000    //UINT8 selSlideMusic;                                                                        
+//     	    //UINT8 selSlideTrans;                                                                        
+//0x0000    //UINT8 selSlideRepeat;                                                                       
+//     	    //UINT8 selCopy2Card;                                                                         
+//0x0000    //UINT8 selImgEffect;                                                                         
+//        	//UINT8 selImgRotate;                                                                         
+//0x0000    //UINT8 selImgResize;                                                                         
+//     	    //UINT8 selVoiceMemo;                                                                         
+//0x0000    //UINT8 selStartImage;                                                                        
+//     	    //UINT8 selPhotoframe;                                                                        
+//0x0100    //UINT8 selSlideInteval;                                                                      
+//     	    //UINT8 CurViewMode; /* PASM ,Scene ,Video, Audio */                                          
+//0x00ff    //UINT8 CurScene; /* Current scene */                                                         
+//     	    //UINT8 ParkingMode;                                                                          
+//0x0000    //UINT8 vidrsc;                                                                               
+//     	    //UINT8 Stabilizer;                                                                           
+//0x4900    //UINT8 DateStamp;  
+////0x0     //#if ICAT_WIFI  UINT8 FirstWifiOn;  #endif  /* first open wifi after update FW */                                                                      
+//    	    //UINT8 iCatchFlag[6];                                                                         
+//0x4143    //                                                                                                                        
+//0x4354    //                                                                                                 
+//0x0048    //                                                                           
+//          //UINT32 Checksum; 
+//0x04e3
+//0x0000 

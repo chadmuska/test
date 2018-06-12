@@ -1,0 +1,15 @@
+[SRM] 0 - [ZOOM]
+ZOOM,TableSize,UsedSize,ResCnt,ResLoadFlag
+[0],264,16,1,0
+,Index,TicketNo,Dummy,Pointer,FN,Type,Size
+,[0],12,0,0x2498588,CF465E68.257,API1,128
+[1],264,32,3,0
+,Index,TicketNo,Dummy,Pointer,FN,Type,Size
+,[0],49,0,0x46ec768,CF4C2241.032,LSC,9216
+,[1],50,0,0x33edc28,76399249.055,LDC,3136
+,[2],51,0,0x2543978,63300405.257,API1,64
+[2],264,32,3,0
+,Index,TicketNo,Dummy,Pointer,FN,Type,Size
+,[0],49,0,0x46ec768,CF4C2241.032,LSC,9216
+,[1],52,0,0x33ee958,AFA748FF.055,LDC,3136
+,[2],51,0,0x2543978,63300405.257,API1,64

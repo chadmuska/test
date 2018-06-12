@@ -1,0 +1,338 @@
+/**************************************************************************
+ *
+ *       Copyright (c) 2008-2014 by iCatch Technology, Inc.
+ *
+ *  This software is copyrighted by and is the property of iCatch
+ *  Technology, Inc.. All rights are reserved by iCatch Technology, Inc..
+ *  This software may only be used in accordance with the corresponding
+ *  license agreement. Any unauthorized use, duplication, distribution,
+ *  or disclosure of this software is expressly forbidden.
+ *
+ *  This Copyright notice MUST not be removed or modified without prior
+ *  written consent of iCatch Technology, Inc..
+ *
+ *  iCatch Technology, Inc. reserves the right to modify this software
+ *  without notice.
+ *
+ *  iCatch Technology, Inc.
+ *  19-1, Innovation First Road, Science-Based Industrial Park,
+ *  Hsin-Chu, Taiwan.
+ *
+ **************************************************************************/
+#ifndef _SP5K_FTRACK_API_H_
+#define _SP5K_FTRACK_API_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+#include "common.h"
+#include "middleware/ftrack_def.h"
+
+
+/**< INTERFACE TO SP5K HOST */
+
+/**
+ * called in app_init.c and switch on/off in app_init.h
+ * ftrack FW module will not be linked in without calling
+ */
+/**< calling this if host wants HW face track support for preview */
+/*void ftrackPvInit(void);*/
+/**< calling this if host wants HW face track support for playback */
+/*void ftrackPbInit(void);*/
+
+typedef enum {
+	SP5K_PATTERN_TRACK_TARGET_FACE = PTRACK_TARGET_FACE,
+	SP5K_PATTERN_TRACK_TARGET_CAR  = PTRACK_TARGET_CAR,
+} sp5kPatternTrackTargetSel_t;
+
+UINT32 sp5kPatternTrackTargetSet(UINT32 target);
+
+/**
+ * \param mode disable, enable
+ * UINT32 sp5kPatternTrackModeSet(UINT32 mode);
+ */
+typedef enum {
+	SP5K_PATTERN_TRACK_MODE_OFF 		  = PTRACK_MODE_OFF,
+	SP5K_PATTERN_TRACK_MODE_PV_ON		  = PTRACK_MODE_PV_ON,
+	SP5K_PATTERN_TRACK_MODE_PV_DELAY_OFF  = PTRACK_MODE_PV_DELAY_OFF,
+} sp5kPatternTrackModeSel_t;
+
+UINT32 sp5kPatternTrackModeSet(UINT32 mode);
+
+
+/**
+ * \param param, user specified, for example, image id.
+ * user will later receive the corresponding host message attached
+ * with this param and pass to sp5kFaceTrackResultGet(param, ...);
+ * \param pbuf, a structure specifies the yuv frame buffer to do pattern
+ * tracking pbuf.yuvaddr must be 16-byte aligned and .yuvw must be multiple of
+ * 8 pixels .yuvw, .yuvh define the width and height in pixels of the yuv frame
+ * buffer in DRAM; .dispx, y, w, h define the cropping window displayed on 
+ * screen if pbuf.dispw,h are 0, cropping window fits the full yuv frame buffer.
+ * \param wratio,
+ * \param hratio, specifies the appearance geometry aspect ratio on screen
+ * for the cropping window defined by pbuf.dispw, .disph.
+ * if wratio, hratio == 0, the cropping window is squared pixel.
+ */
+typedef ptrackFrameBuf_t sp5kPatternTrackYuvBuf_t;
+
+UINT32 sp5kPatternTrackYuvBufStart(UINT32 param,
+	const sp5kPatternTrackYuvBuf_t *pbuf, UINT32 wratio, UINT32 hratio);
+
+/**
+ * \brief host calls this when receiving face tracking messages and
+ * sp5kFaceTrackResultGet() finished
+ * \param param, as used in sp5kFaceTrackYuvBufStart();
+ */
+UINT32 sp5kPatternTrackYuvBufEnd(UINT32 param);
+
+/**
+ * \param cfg in
+ * UINT32 sp5kPatternTrackCfgSet(UINT32 cfg,UINT32 val);
+ */
+typedef enum {
+	SP5K_PATTERN_TRACK_CFG_MIN_PATTERN_SIZE        = PTRACK_CFG_MIN_PATTERN_SIZE,
+	SP5K_PATTERN_TRACK_CFG_Y_BUF_NUM               = PTRACK_CFG_Y_BUF_NUM,
+	SP5K_PATTERN_TRACK_CFG_YSCALE_BUF_NUM          = PTRACK_CFG_YSCALE_BUF_NUM,
+	SP5K_PATTERN_TRACK_CFG_PROC_PATTERN_BUF_NUM    = PTRACK_CFG_PROC_PATTERN_BUF_NUM,
+	SP5K_PATTERN_TRACK_CFG_ACCUM_PERIOD            = PTRACK_CFG_ACCUM_PERIOD,
+	SP5K_PATTERN_TRACK_CFG_YUVBUF_BLOCK            = PTRACK_CFG_YUVBUF_BLOCK,
+	SP5K_PATTERN_TRACK_CFG_TRACK_DONE_CB           = PTRACK_CFG_TRACK_DONE_CB,
+	SP5K_PATTERN_TRACK_CFG_LOW_POWER               = PTRACK_CFG_LOW_POWER,
+	SP5K_PATTERN_TRACK_CFG_COPY_FRAME_BUF          = PTRACK_CFG_COPY_FRAME_BUF,
+	SP5K_PATTERN_TRACK_CFG_PV_SNAP_OFF             = PTRACK_CFG_PV_SNAP_OFF,
+	SP5K_PATTERN_TRACK_CFG_DRAM_PAUSE_PERIOD       = PTRACK_CFG_DRAM_PAUSE_PERIOD,
+	SP5K_PATTERN_TRACK_CFG_FRAME_FLESH_MODE        = PTRACK_CFG_FRAME_FLESH_MODE,
+	SP5K_PATTERN_TRACK_CFG_FRAME_FLESH_CNT_THRS    = PTRACK_CFG_FRAME_FLESH_CNT_THRS,
+	SP5K_PATTERN_TRACK_CFG_FRAME_FLESH_SCORE_THRS  = PTRACK_CFG_FRAME_FLESH_SCORE_THRS,
+	SP5K_PATTERN_TRACK_CFG_PROC_PB_DETECT_LIST_SEL = PTRACK_CFG_PROC_PB_DETECT_LIST_SEL,
+	SP5K_PATTERN_TRACK_CFG_PROC_COMPACT_BUF_MODE   = PTRACK_CFG_PROC_COMPACT_BUF_MODE,
+
+	/* shared by framework & algorithm */
+	SP5K_PATTERN_TRACK_CFG_PROC_MAX_PATTERNS       = PTRACK_CFG_PROC_MAX_PATTERNS,
+	SP5K_PATTERN_TRACK_CFG_PROC_IISII_OFF          = PTRACK_CFG_PROC_IISII_OFF,
+	SP5K_PATTERN_TRACK_CFG_PROC_DET_LIST_SEL       = PTRACK_CFG_PROC_DETECT_LIST_SEL,
+	SP5K_PATTERN_TRACK_CFG_COLOR_TABLE_SET         = PTRACK_CFG_FACE_COLOR_TABLE_SET,
+	SP5K_PATTERN_TRACK_CFG_LOVE_PORTRAIT_MODE      = PTRACK_CFG_FACE_LOVE_PORTRAIT_MODE,
+} sp5kPatternTrackCfgSel_t;
+
+/**
+ * \param cfg in ftrackCfgSel_t
+ */
+UINT32 sp5kPatternTrackCfgSet(UINT32 cfg, UINT32 val);
+UINT32 sp5kPatternTrackCfgGet(UINT32 cfg, UINT32 *pval);
+
+
+
+/**< upon receiving host message SP5K_MSG_PATTERN_TRACK_READY, host calls */
+/**
+ * \param param is the param attached to the received host message for checking
+ * \param pnun points to a UINT32 in which track system fills number of patterns
+ * found
+ * \param presult points to
+ * presult[ 0.. *pnum-1 ] are properties of those patterns. See 
+ * sp5kPatternTrackFaceRes_t or sp5kPattenTrackCarRes_t for detail.
+ */
+SINT32 sp5kPatternTrackResultGet(UINT32 param, UINT32 *pnum,
+		void *presult);
+
+
+/**************************************************************************
+ * Face Track Support
+ **************************************************************************/
+typedef ptrackFaceRes_t sp5kPatternTrackFaceRes_t;
+	
+typedef enum {
+	SP5K_PATTERN_TRACK_FACE_SMILE_DETECT        = PTRACK_CFG_FACE_SMILE_DETECT,
+	SP5K_PATTERN_TRACK_FACE_BLINK_DETECT        = PTRACK_CFG_FACE_BLINK_DETECT,
+	/* 1: one eye blink as blink, 2: two eyes blink as blink */
+	SP5K_PATTERN_TRACK_FACE_BLINK_NUM           = PTRACK_CFG_FACE_BLINK_NUM,  
+	SP5K_PATTERN_TRACK_FACE_WINK_DETECT         = PTRACK_CFG_FACE_WINK_DETECT,
+	SP5K_PATTERN_TRACK_FACE_EYE_INFO_DETECT     = PTRACK_CFG_FACE_EYE_INFO_DETECT,
+	SP5K_PATTERN_TRACK_FACE_KEY_FACE            = PTRACK_CFG_FACE_KEY_FACE,
+	SP5K_PATTERN_TRACK_FACE_CHECK_COLOR         = PTRACK_CFG_FACE_CHECK_COLOR,
+	SP5K_PATTERN_TRACK_FACE_PROC_RESTART        = PTRACK_CFG_FACE_RESTART,
+	SP5K_PATTERN_TRACK_FACE_CHECK_NOSE          = PTRACK_CFG_FACE_CHECK_NOSE,
+	SP5K_PATTERN_TRACK_FACE_REF_BUF_INFO        = PTRACK_CFG_FACE_REF_BUF_INFO,
+	/* 0~100, 0: quickiest response, 100: stable */
+	SP5K_PATTERN_TRACK_FACE_MOVE_SENSITIVITY    = PTRACK_CFG_FACE_MOVE_SENSITIVITY,
+	SP5K_PATTERN_TRACK_FACE_POST_FILTER_PARAM0  = PTRACK_CFG_FACE_POST_FILTER_PARAM0,
+	SP5K_PATTERN_TRACK_FACE_POST_PROCESS_BYPASS = PTRACK_CFG_FACE_POST_PROCESS_BYPASS,
+	SP5K_PATTERN_TRACK_FACE_TOTAL               = PTRACK_CFG_FACE_TOTAL,
+} sp5kFaceTrackCfgSel_t;
+	
+/**< Rotation axis is normal line on guy's nose, while viewer see the guy in picture:
+     it's 0 degree when guy's forehead is up in picture,
+     it's 90 degrees when guy's forhead is left in picture (counter-clockwise 90 degrees),
+     it's 270 degrees when guy's forhead is right in picture (clockwise 90 degrees).
+ */
+typedef enum {
+	SP5K_PATTERN_TRACK_FACE_ANGLE_0   = PTRACK_FACE_ANGLE_0,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_15  = PTRACK_FACE_ANGLE_15,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_30  = PTRACK_FACE_ANGLE_30,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_45  = PTRACK_FACE_ANGLE_45,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_60  = PTRACK_FACE_ANGLE_60,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_75  = PTRACK_FACE_ANGLE_75,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_90  = PTRACK_FACE_ANGLE_90,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_105 = PTRACK_FACE_ANGLE_105,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_120 = PTRACK_FACE_ANGLE_120,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_135 = PTRACK_FACE_ANGLE_135,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_150 = PTRACK_FACE_ANGLE_150,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_165 = PTRACK_FACE_ANGLE_165,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_180 = PTRACK_FACE_ANGLE_180,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_195 = PTRACK_FACE_ANGLE_195,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_210 = PTRACK_FACE_ANGLE_210,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_225 = PTRACK_FACE_ANGLE_225,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_240 = PTRACK_FACE_ANGLE_240,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_255 = PTRACK_FACE_ANGLE_255,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_270 = PTRACK_FACE_ANGLE_270,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_285 = PTRACK_FACE_ANGLE_285,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_300 = PTRACK_FACE_ANGLE_300,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_315 = PTRACK_FACE_ANGLE_315,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_330 = PTRACK_FACE_ANGLE_330,
+	SP5K_PATTERN_TRACK_FACE_ANGLE_345 = PTRACK_FACE_ANGLE_345,
+} sp5kPatternTrackFaceAngle_e;
+
+
+/* flow selector ID */
+typedef enum {
+	SP5K_FACE_TRACK_FLOW_SEL_NORMAL  = FTRACK_DETECT_FLOW_SEL_NORMAL,
+	SP5K_FACE_TRACK_FLOW_SEL_LOVE_PORTRAIT = FTRACK_DETECT_FLOW_SEL_LOVE_PORTRAIT,
+	SP5K_FACE_TRACK_FLOW_SEL_SIMPLE     = FTRACK_DETECT_FLOW_SEL_SIMPLE,
+	SP5K_FACE_TRACK_FLOW_SEL_PB         = FTRACK_DETECT_FLOW_SEL_PB,
+	SP5K_FACE_TRACK_FLOW_SEL_SECOND_PB  = FTRACK_DETECT_FLOW_SEL_SECOND_PB,
+	SP5K_FACE_TRACK_FLOW_SEL_TOTAL      = FTRACK_DETECT_FLOW_SEL_TOTAL
+} sp5kFaceTrackFlowSel_t;
+
+typedef enum {
+	SP5K_FACE_TRACK_FACE_SMILE_SMALL = PTRACK_FACE_SMILE_SMALL,
+	SP5K_FACE_TRACK_FACE_SMILE_MID   = PTRACK_FACE_SMILE_MID,
+	SP5K_FACE_TRACK_FACE_SMILE_LARGE = PTRACK_FACE_SMILE_LARGE,
+} sp5kFaceTrackFaceSmileDegree_e;
+
+/**< face types bitwise-OR bitmap */
+#define SP5K_FACE_TRACK_FACE_TYPE_SMILE   PTRACK_FACE_TYPE_SMILE
+#define SP5K_FACE_TRACK_FACE_TYPE_BLINK   PTRACK_FACE_TYPE_BLINK
+#define SP5K_FACE_TRACK_FACE_TYPE_WINK    PTRACK_FACE_TYPE_WINK
+#define SP5K_FACE_TRACK_FACE_TYPE_KEYFACE PTRACK_FACE_TYPE_KEYFACE
+
+#define SP5K_FACE_TRACK_FACE_ANGLE_MASK   PTRACK_FACE_ANGLE_MASK
+#define SP5K_FACE_TRACK_SMILE_DEGREE_MASK PTRACK_FACE_SMILE_DEGREE_MASK
+
+
+/**************************************************************************
+ * Vehicle Track Support
+ **************************************************************************/
+typedef ptrackCarRes_t sp5kPatternTrackCarRes_t;
+typedef ptrackCarInfo_t sp5kPatternTrackCarInfo_t;
+
+typedef enum {		
+	SP5K_PATTERN_TRACK_CAR_FC_WARN_DISTANCE       = PTRACK_CFG_CAR_FC_WARN_DISTANCE,
+	SP5K_PATTERN_TRACK_CAR_FC_ROI_CROP_FACTOR     = PTRACK_CFG_CAR_FC_ROI_CROP_FACTOR,
+	SP5K_PATTERN_TRACK_CAR_FC_ROI_CROP_OFFSET     = PTRACK_CFG_CAR_FC_ROI_CROP_OFFSET,
+	SP5K_PATTERN_TRACK_CAR_FC_NIGHT_YUV_LUT_TABLE = PTRACK_CFG_CAR_FC_NIGHT_YUV_LUT_TABLE,
+	SP5K_PATTERN_TRACK_CAR_FC_SENSOR_PIXEL_UNIT   = PTRACK_CFG_CAR_FC_SENSOR_PIXEL_UNIT,
+	SP5K_PATTERN_TRACK_CAR_FC_SENSOR_FOCAL        = PTRACK_CFG_CAR_FC_SENSOR_FOCAL, 	 
+	SP5K_PATTERN_TRACK_CAR_FC_DAYNIGHT            = PTRACK_CFG_CAR_FC_DAYNIGHT,
+	SP5K_PATTERN_TRACK_CAR_FC_REMOVE_DETECT       = PTRACK_CFG_CAR_FC_REMOVE_DETECT,
+	SP5K_PATTERN_TRACK_CAR_FC_CENTER_POINT        = PTRACK_CFG_CAR_FC_CENTER_POINT,
+	SP5K_PATTERN_TRACK_CAR_FC_IMAGE_SCALE_FACTOR  = PTRACK_CFG_CAR_FC_IMAGE_SCALE_FACTOR,
+	SP5K_PATTERN_TRACK_CAR_FC_CENTER_TOLER_FACTOR = PTRACK_CFG_CAR_FC_CENTER_TOLER_FACTOR,
+} sp5kPatternTrackCarCfgSel_t;
+
+#define SP5K_PATTERN_TRACK_CAR_TYPE_SEDAN PTRACK_CAR_TYPE_VEHICLE_SEDAN
+#define SP5K_PATTERN_TRACK_CAR_TYPE_HB    PTRACK_CAR_TYPE_VEHICLE_HB
+#define SP5K_PATTERN_TRACK_CAR_TYPE_TRUCK PTRACK_CAR_TYPE_VEHICLE_TRUCK
+#define SP5K_PATTERN_TRACK_CAR_TYPE_BUS   PTRACK_CAR_TYPE_VEHICLE_BUS
+
+/**************************************************************************
+ * Backward compatible
+ **************************************************************************/
+#define sp5kFaceTrackFaceRes_t   sp5kPatternTrackFaceRes_t
+#define sp5kFaceTrackYuvBuf_t    sp5kPatternTrackYuvBuf_t
+#define sp5kFaceTrackModeSet     sp5kPatternTrackModeSet
+#define sp5kFaceTrackResultGet   sp5kPatternTrackResultGet
+#define sp5kFaceTrackYuvBufStart sp5kPatternTrackYuvBufStart
+#define sp5kFaceTrackYuvBufEnd   sp5kPatternTrackYuvBufEnd
+#define sp5kFaceTrackCfgSet      sp5kPatternTrackCfgSet
+#define sp5kFaceTrackCfgGet      sp5kPatternTrackCfgGet
+
+#define SP5K_FACE_TRACK_CFG_MIN_FACE_SIZE           PTRACK_CFG_MIN_PATTERN_SIZE
+#define SP5K_FACE_TRACK_CFG_II_BUF_NUM              PTRACK_CFG_Y_BUF_NUM
+#define SP5K_FACE_TRACK_CFG_IISCALE_BUF_NUM         PTRACK_CFG_YSCALE_BUF_NUM
+#define SP5K_FACE_TRACK_CFG_PROC_FACE_BUF_NUM       PTRACK_CFG_PROC_PATTERN_BUF_NUM
+#define SP5K_FACE_TRACK_CFG_ACCUM_PERIOD            PTRACK_CFG_ACCUM_PERIOD
+#define SP5K_FACE_TRACK_CFG_YUVBUF_BLOCK            PTRACK_CFG_YUVBUF_BLOCK
+#define SP5K_FACE_TRACK_CFG_FD_DONE_CB              PTRACK_CFG_TRACK_DONE_CB
+#define SP5K_FACE_TRACK_CFG_LOW_POWER               PTRACK_CFG_LOW_POWER
+#define SP5K_FACE_TRACK_CFG_COPY_FRAME_BUF          PTRACK_CFG_COPY_FRAME_BUF
+#define SP5K_FACE_TRACK_CFG_PV_SNAP_OFF             PTRACK_CFG_PV_SNAP_OFF
+#define SP5K_FACE_TRACK_CFG_DRAM_PAUSE_PERIOD       PTRACK_CFG_DRAM_PAUSE_PERIOD
+#define SP5K_FACE_TRACK_CFG_FRAME_FLESH_MODE        PTRACK_CFG_FRAME_FLESH_MODE
+#define SP5K_FACE_TRACK_CFG_FRAME_FLESH_CNT_THRS    PTRACK_CFG_FRAME_FLESH_CNT_THRS
+#define SP5K_FACE_TRACK_CFG_FRAME_FLESH_SCORE_THRS  PTRACK_CFG_FRAME_FLESH_SCORE_THRS
+#define SP5K_FACE_TRACK_CFG_PROC_PB_DETECT_LIST_SEL PTRACK_CFG_PROC_PB_DETECT_LIST_SEL
+#define SP5K_FACE_TRACK_CFG_PROC_COMPACT_BUF_MODE   PTRACK_CFG_PROC_COMPACT_BUF_MODE
+/* shared by framework & algorithm */
+#define SP5K_FACE_TRACK_CFG_PROC_MAX_FACE           PTRACK_CFG_PROC_MAX_PATTERNS
+#define SP5K_FACE_TRACK_CFG_PROC_IISII_OFF          PTRACK_CFG_PROC_IISII_OFF
+#define SP5K_FACE_TRACK_CFG_PROC_DET_LIST_SEL       PTRACK_CFG_PROC_DETECT_LIST_SEL
+#define SP5K_FACE_TRACK_CFG_COLOR_TABLE_SET         PTRACK_CFG_FACE_COLOR_TABLE_SET
+#define SP5K_FACE_TRACK_CFG_LOVE_PORTRAIT_MODE      PTRACK_CFG_FACE_LOVE_PORTRAIT_MODE
+
+#define SP5K_FACE_TRACK_CFG_SMILE_DETECT            SP5K_PATTERN_TRACK_FACE_SMILE_DETECT
+#define SP5K_FACE_TRACK_CFG_BLINK_DETECT		    SP5K_PATTERN_TRACK_FACE_BLINK_DETECT
+#define SP5K_FACE_TRACK_CFG_BLINK_NUM			    SP5K_PATTERN_TRACK_FACE_BLINK_NUM
+#define SP5K_FACE_TRACK_CFG_WINK_DETECT 		    SP5K_PATTERN_TRACK_FACE_WINK_DETECT
+#define SP5K_FACE_TRACK_CFG_EYE_INFO_DETECT         SP5K_PATTERN_TRACK_FACE_EYE_INFO_DETECT
+#define SP5K_FACE_TRACK_CFG_PROC_EYE_INFO_DETECT	SP5K_PATTERN_TRACK_FACE_EYE_INFO_DETECT /* avoid broken build */
+#define SP5K_FACE_TRACK_CFG_KEY_FACE			    SP5K_PATTERN_TRACK_FACE_KEY_FACE
+#define SP5K_FACE_TRACK_CFG_CHECK_COLOR 		    SP5K_PATTERN_TRACK_FACE_CHECK_COLOR
+#define SP5K_FACE_TRACK_CFG_PROC_RESTART		    SP5K_PATTERN_TRACK_FACE_PROC_RESTART
+#define SP5K_FACE_TRACK_CFG_CHECK_NOSE			    SP5K_PATTERN_TRACK_FACE_CHECK_NOSE
+#define SP5K_FACE_TRACK_CFG_PROC_REF_BUF_INFO	    SP5K_PATTERN_TRACK_FACE_REF_BUF_INFO
+#define SP5K_FACE_TRACK_CFG_PROC_MOVE_SENSITIVITY   SP5K_PATTERN_TRACK_FACE_MOVE_SENSITIVITY
+#define SP5K_FACE_TRACK_CFG_TOTAL				    SP5K_PATTERN_TRACK_FACE_TOTAL
+
+
+typedef enum {
+	SP5K_FACE_TRACK_MODE_OFF           = SP5K_PATTERN_TRACK_MODE_OFF,
+	SP5K_FACE_TRACK_MODE_PV_ON         = SP5K_PATTERN_TRACK_MODE_PV_ON,
+	SP5K_FACE_TRACK_MODE_PV_DELAY_OFF  = SP5K_PATTERN_TRACK_MODE_PV_DELAY_OFF,
+} sp5kFaceTrackModeSel_t;
+
+typedef enum {
+	SP5K_FACE_TRACK_FACE_ANGLE_0   = SP5K_PATTERN_TRACK_FACE_ANGLE_0,
+	SP5K_FACE_TRACK_FACE_ANGLE_15  = SP5K_PATTERN_TRACK_FACE_ANGLE_15,
+	SP5K_FACE_TRACK_FACE_ANGLE_30  = SP5K_PATTERN_TRACK_FACE_ANGLE_30,
+	SP5K_FACE_TRACK_FACE_ANGLE_45  = SP5K_PATTERN_TRACK_FACE_ANGLE_45,
+	SP5K_FACE_TRACK_FACE_ANGLE_60  = SP5K_PATTERN_TRACK_FACE_ANGLE_60,
+	SP5K_FACE_TRACK_FACE_ANGLE_75  = SP5K_PATTERN_TRACK_FACE_ANGLE_75,
+	SP5K_FACE_TRACK_FACE_ANGLE_90  = SP5K_PATTERN_TRACK_FACE_ANGLE_90,
+	SP5K_FACE_TRACK_FACE_ANGLE_105 = SP5K_PATTERN_TRACK_FACE_ANGLE_105,
+	SP5K_FACE_TRACK_FACE_ANGLE_120 = SP5K_PATTERN_TRACK_FACE_ANGLE_120,
+	SP5K_FACE_TRACK_FACE_ANGLE_135 = SP5K_PATTERN_TRACK_FACE_ANGLE_135,
+	SP5K_FACE_TRACK_FACE_ANGLE_150 = SP5K_PATTERN_TRACK_FACE_ANGLE_150,
+	SP5K_FACE_TRACK_FACE_ANGLE_165 = SP5K_PATTERN_TRACK_FACE_ANGLE_165,
+	SP5K_FACE_TRACK_FACE_ANGLE_180 = SP5K_PATTERN_TRACK_FACE_ANGLE_180,
+	SP5K_FACE_TRACK_FACE_ANGLE_195 = SP5K_PATTERN_TRACK_FACE_ANGLE_195,
+	SP5K_FACE_TRACK_FACE_ANGLE_210 = SP5K_PATTERN_TRACK_FACE_ANGLE_210,
+	SP5K_FACE_TRACK_FACE_ANGLE_225 = SP5K_PATTERN_TRACK_FACE_ANGLE_225,
+	SP5K_FACE_TRACK_FACE_ANGLE_240 = SP5K_PATTERN_TRACK_FACE_ANGLE_240,
+	SP5K_FACE_TRACK_FACE_ANGLE_255 = SP5K_PATTERN_TRACK_FACE_ANGLE_255,
+	SP5K_FACE_TRACK_FACE_ANGLE_270 = SP5K_PATTERN_TRACK_FACE_ANGLE_270,
+	SP5K_FACE_TRACK_FACE_ANGLE_285 = SP5K_PATTERN_TRACK_FACE_ANGLE_285,
+	SP5K_FACE_TRACK_FACE_ANGLE_300 = SP5K_PATTERN_TRACK_FACE_ANGLE_300,
+	SP5K_FACE_TRACK_FACE_ANGLE_315 = SP5K_PATTERN_TRACK_FACE_ANGLE_315,
+	SP5K_FACE_TRACK_FACE_ANGLE_330 = SP5K_PATTERN_TRACK_FACE_ANGLE_330,
+	SP5K_FACE_TRACK_FACE_ANGLE_345 = SP5K_PATTERN_TRACK_FACE_ANGLE_345,
+} sp5kFaceTrackFaceAngle_e;
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _SP5K_FTRACK_API_H_ */

@@ -1,0 +1,9 @@
+PRJ := 17DVR
+PLATFORM := spca6350
+WIFION := 
+USBWIFI := NO
+SDIODRV := NO
+NDK2 := YES
+WIFI_NAME := 
+BTON := 
+PREFIX := /cygdrive/c/Progra~1/iCatchtek/tool-chain4/bin/mipsel-icatchtek-elf-

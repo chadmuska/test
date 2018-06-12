@@ -1,0 +1,560 @@
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/io'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/io'
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/io'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/io'
+#@make -C customization/hostfw -f MakefileMenu
+=== diq YES, wine YES ===
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost'
+#/bin/rm -f resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/diq.def
+
+GetConsoleScreenBufferInfo (6)
+RESCMPZ> parameter file: "C:\cygwin\home\isaac.fong\PSIA19DVRBASE\sphost/resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/DESIGN/-diq\sp6350diq.txt" used.
+ooooooooooooooooooooooook
+[[ DRW lib 1.0.70504.2 ]]
+[[ diq parameters ]]
+ResRevision= 80321.00
+RevisedStaff= "n/a                             "
+Version= 13505221(0x00ce12c5)
+ToolVersion= 207705031(0x0c6153c7)
+MemPoolSize= 0 bytes ; Use FW memory allocation...
+SrmTotal= 2
+SrmMap[ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ; 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 ]
+CtTotal= 6
+CtLattice[ 220 305 395 430 521 649 0 0 ]
+CtLatticeDist[ 429 85 90 35 91 128 0 0 ]
+CtDefault= 6
+IsoTotal= 6
+IsoLattice[ 0 16 32 48 64 80 0 0 0 0 0 0 0 0 0 0 ]
+IsoDefault= 1
+LvTotal= 0
+LvLattice[ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ]
+ZoomTotal= 0
+LscWithZoom= no
+SpcTotal= 0
+FlowUsed[ 0 0 0 0 0 0 0 0 ]
+PvResSize[ ]
+CapResSize[ ]
+*** dump of final DP.BIN ***
+[[ DRW lib 1.0.70504.2 ]]
+[[ diq parameters ]]
+ResRevision= 80321.00
+RevisedStaff= "n/a                             "
+Version= 13505221(0x00ce12c5)
+ToolVersion= 207705031(0x0c6153c7)
+MemPoolSize= 103424 bytes
+SrmTotal= 2
+SrmMap[ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ; 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 ]
+CtTotal= 6
+CtLattice[ 220 305 395 430 521 649 0 0 ]
+CtLatticeDist[ 429 85 90 35 91 128 0 0 ]
+CtDefault= 6
+IsoTotal= 6
+IsoLattice[ 0 16 32 48 64 80 0 0 0 0 0 0 0 0 0 0 ]
+IsoDefault= 1
+LvTotal= 0
+LvLattice[ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ]
+ZoomTotal= 0
+LscWithZoom= no
+SpcTotal= 0
+FlowUsed[ 0 0 0 0 0 0 0 0 ]
+PvResSize[ 0:43984 32:38400 34:1024 36:1024 37:1024 38:1024 43:720 51:256 52:512 ]
+CapResSize[ 0:43984 32:38400 34:1024 36:1024 37:1024 38:1024 43:720 51:256 52:512 ]
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost'
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost'
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/BB1A9F3B.272 _17DVR/download/A/RO_RES/BB1A9F3B.272
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/17A67BD2.273 _17DVR/download/A/RO_RES/17A67BD2.273
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/BA48280E.032 _17DVR/download/A/RO_RES/BA48280E.032
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/BDC6EBCA.036 _17DVR/download/A/RO_RES/BDC6EBCA.036
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/BDC6EBCA.037 _17DVR/download/A/RO_RES/BDC6EBCA.037
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/BDC6EBCA.038 _17DVR/download/A/RO_RES/BDC6EBCA.038
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/5852BAB0.043 _17DVR/download/A/RO_RES/5852BAB0.043
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/D1695146.052 _17DVR/download/A/RO_RES/D1695146.052
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/DC902835.257 _17DVR/download/A/RO_RES/DC902835.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/9E7094CC.257 _17DVR/download/A/RO_RES/9E7094CC.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/902E85E2.274 _17DVR/download/A/RO_RES/902E85E2.274
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/F3899008.034 _17DVR/download/A/RO_RES/F3899008.034
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/3E5605BA.051 _17DVR/download/A/RO_RES/3E5605BA.051
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/56E2B4B0.257 _17DVR/download/A/RO_RES/56E2B4B0.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/989C1F40.257 _17DVR/download/A/RO_RES/989C1F40.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/D19FB015.034 _17DVR/download/A/RO_RES/D19FB015.034
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/77A54382.051 _17DVR/download/A/RO_RES/77A54382.051
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/7DDB39D7.257 _17DVR/download/A/RO_RES/7DDB39D7.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/4915E882.034 _17DVR/download/A/RO_RES/4915E882.034
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/A7196429.051 _17DVR/download/A/RO_RES/A7196429.051
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/7C7EDCA7.257 _17DVR/download/A/RO_RES/7C7EDCA7.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/FE05B2EC.034 _17DVR/download/A/RO_RES/FE05B2EC.034
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/81BCCEC4.051 _17DVR/download/A/RO_RES/81BCCEC4.051
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/99D19FF1.257 _17DVR/download/A/RO_RES/99D19FF1.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/916684CA.274 _17DVR/download/A/RO_RES/916684CA.274
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/B776B9C4.034 _17DVR/download/A/RO_RES/B776B9C4.034
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/931033B7.051 _17DVR/download/A/RO_RES/931033B7.051
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/EE95896A.257 _17DVR/download/A/RO_RES/EE95896A.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/A098F257.257 _17DVR/download/A/RO_RES/A098F257.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/9EC900A6.034 _17DVR/download/A/RO_RES/9EC900A6.034
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/CEF248D7.051 _17DVR/download/A/RO_RES/CEF248D7.051
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/69FD1C39.257 _17DVR/download/A/RO_RES/69FD1C39.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/2E72E4F3.257 _17DVR/download/A/RO_RES/2E72E4F3.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/461D108A.257 _17DVR/download/A/RO_RES/461D108A.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/B8D87E56.257 _17DVR/download/A/RO_RES/B8D87E56.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/54977BE0.257 _17DVR/download/A/RO_RES/54977BE0.257
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/CTCOND0.BIN _17DVR/download/A/RO_RES/CTCOND0.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/ISOCOND0.BIN _17DVR/download/A/RO_RES/ISOCOND0.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/LVCOND0.BIN _17DVR/download/A/RO_RES/LVCOND0.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/ZMCOND0.BIN _17DVR/download/A/RO_RES/ZMCOND0.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/SPCCOND0.BIN _17DVR/download/A/RO_RES/SPCCOND0.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/CTCOND1.BIN _17DVR/download/A/RO_RES/CTCOND1.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/ISOCOND1.BIN _17DVR/download/A/RO_RES/ISOCOND1.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/CTCOND2.BIN _17DVR/download/A/RO_RES/CTCOND2.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/ISOCOND2.BIN _17DVR/download/A/RO_RES/ISOCOND2.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/RA.BIN _17DVR/download/A/RO_RES/RA.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/DIQ/DP.BIN _17DVR/download/A/RO_RES/DP.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AWBCTT.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AWBCTT.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AWBFILT.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AWBFILT.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AWDRALG.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AWDRALG.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AECONFIG.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AECONFIG.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZ10F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZ10F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZ15F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZ15F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZ30F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZ30F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZ60F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZ60F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZISO100.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZISO100.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZCAP.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZCAP.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART50HZCAPMD.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART50HZCAPMD.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZ10F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZ10F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZ15F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZ15F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZ30F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZ30F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZ60F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZ60F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZISO100.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZISO100.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZCAP.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZCAP.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART60HZCAPMD.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART60HZCAPMD.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART120F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART120F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEPCHART240F.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEPCHART240F.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEWINDOWLV.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEWINDOWLV.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEWINDOWMULTI.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEWINDOWMULTI.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEWINDOWCENTER.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEWINDOWCENTER.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AEWINDOWSPOT.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AEWINDOWSPOT.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/AETARGET.BIN _17DVR/download/A/RO_RES/IQ/AR0230/AETARGET.BIN
+/bin/cp -f -u resource/17DVR/A/RO_RES/WAV/SHUTTER.WAV _17DVR/download/A/RO_RES/WAV/SHUTTER.WAV
+/bin/cp -f -u resource/17DVR/A/RO_RES/WAV/BEEP.WAV _17DVR/download/A/RO_RES/WAV/BEEP.WAV
+/bin/cp -f -u resource/17DVR/A/RO_RES/WAV/WARNING.WAV _17DVR/download/A/RO_RES/WAV/WARNING.WAV
+../tool/fif.sh -cachelinesize=32 -c1 _17DVR/download/A/RO_RES/AFECMD.BIN _17DVR/download/A/RO_RES/EXPOSURE.BIN _17DVR/download/A/RO_RES/AGC.BIN
+../tool/fif.sh -cachelinesize=32 -c1 _17DVR/download/A/RO_RES/DISP/DISP.BIN _17DVR/download/A/RO_RES/DISP/DISPGAMA.BIN _17DVR/download/A/RO_RES/DISP/DISPMAX.BIN _17DVR/download/A/RO_RES/DISP/DISPGAM0.BIN _17DVR/download/A/RO_RES/DISP/DISPMAX0.BIN
+../tool/fif.sh -cachelinesize=32 -c1 _17DVR/download/A/RO_RES/CALIB/COLD.BIN _17DVR/download/A/RO_RES/CALIB/BATTERY.BIN _17DVR/download/A/RO_RES/CALIB/CALIB.BIN _17DVR/download/A/RO_RES/CALIB/CALIBAF.BIN
+../tool/fif.sh -cachelinesize=32 -c1 _17DVR/download/A/RO_RES/WAV/AUDIO.BIN _17DVR/download/A/RO_RES/WAV/BEEP.WAV _17DVR/download/A/RO_RES/WAV/WARNING.WAV _17DVR/download/A/RO_RES/WAV/SHUTTER.WAV
+/bin/cp -f -u resource/17DVR/A/RO_RES/IQ/AR0230/WDRFT.BIN _17DVR/download/A/RO_RES/WDRFT.BIN
+../tool/fif.sh -cachelinesize=32 -c1 _17DVR/download/A/RO_RES/IQ.BIN _17DVR/download/A/RO_RES/WDRFT.BIN _17DVR/download/A/RO_RES/BB1A9F3B.272 _17DVR/download/A/RO_RES/17A67BD2.273 _17DVR/download/A/RO_RES/BA48280E.032 _17DVR/download/A/RO_RES/BDC6EBCA.036 _17DVR/download/A/RO_RES/BDC6EBCA.037 _17DVR/download/A/RO_RES/BDC6EBCA.038 _17DVR/download/A/RO_RES/5852BAB0.043 _17DVR/download/A/RO_RES/D1695146.052 _17DVR/download/A/RO_RES/DC902835.257 _17DVR/download/A/RO_RES/9E7094CC.257 _17DVR/download/A/RO_RES/902E85E2.274 _17DVR/download/A/RO_RES/F3899008.034 _17DVR/download/A/RO_RES/3E5605BA.051 _17DVR/download/A/RO_RES/56E2B4B0.257 _17DVR/download/A/RO_RES/989C1F40.257 _17DVR/download/A/RO_RES/D19FB015.034 _17DVR/download/A/RO_RES/77A54382.051 _17DVR/download/A/RO_RES/7DDB39D7.257 _17DVR/download/A/RO_RES/4915E882.034 _17DVR/download/A/RO_RES/A7196429.051 _17DVR/download/A/RO_RES/7C7EDCA7.257 _17DVR/download/A/RO_RES/FE05B2EC.034 _17DVR/download/A/RO_RES/81BCCEC4.051 _17DVR/download/A/RO_RES/99D19FF1.257 _17DVR/download/A/RO_RES/916684CA.274 _17DVR/download/A/RO_RES/B776B9C4.034 _17DVR/download/A/RO_RES/931033B7.051 _17DVR/download/A/RO_RES/EE95896A.257 _17DVR/download/A/RO_RES/A098F257.257 _17DVR/download/A/RO_RES/9EC900A6.034 _17DVR/download/A/RO_RES/CEF248D7.051 _17DVR/download/A/RO_RES/69FD1C39.257 _17DVR/download/A/RO_RES/2E72E4F3.257 _17DVR/download/A/RO_RES/461D108A.257 _17DVR/download/A/RO_RES/B8D87E56.257 _17DVR/download/A/RO_RES/54977BE0.257 _17DVR/download/A/RO_RES/CTCOND0.BIN _17DVR/download/A/RO_RES/ISOCOND0.BIN _17DVR/download/A/RO_RES/LVCOND0.BIN _17DVR/download/A/RO_RES/ZMCOND0.BIN _17DVR/download/A/RO_RES/SPCCOND0.BIN _17DVR/download/A/RO_RES/CTCOND1.BIN _17DVR/download/A/RO_RES/ISOCOND1.BIN _17DVR/download/A/RO_RES/CTCOND2.BIN _17DVR/download/A/RO_RES/ISOCOND2.BIN _17DVR/download/A/RO_RES/RA.BIN _17DVR/download/A/RO_RES/DP.BIN
+../tool/fic.sh -cachelinesize=32 _17DVR/download/FIC.BIN _17DVR/download/A/RO_RES/AFECMD.BIN
+/bin/cp -f -u _17DVR/download/A/RO_RES/IQ.BIN resource/17DVR/A/RO_RES/IQ/AR0230/IQ.BIN
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost'
+*** _17DVR/download/FIC.BIN is built successfully! ***
+   Compiling < customization/app_init.c > to < app_init.o >
+   Compiling < customization/arch/spca6350/dev_init.c > to < dev_init.o >
+   Compiling < customization/fastboot_custom.c > to < fastboot_custom.o >
+   Compiling < customization/sensor_custom.c > to < sensor_custom.o >
+   Compiling < customization/command.c > to < command.o >
+   Compiling < customization/sp5k_job.c > to < sp5k_job.o >
+   Compiling < customization/drivers/if/if_v35.c > to < if_v35.o >
+Making customization/hostfw/libhostfw.a
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/hostfw'
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/hostfw'
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/hostfw'
+   Compiling < app_ver.c > to < app_ver.o >
+   Compiling < app_infohandler.c > to < app_infohandler.o >
+   Compiling < app_infohandler_func.c > to < app_infohandler_func.o >
+   Compiling < app_infohandler_feedback.c > to < app_infohandler_feedback.o >
+   Compiling < jet_utility.c > to < jet_utility.o >
+   Compiling < jet_cdfs.c > to < jet_cdfs.o >
+   Compiling < sys/app_main.c > to < app_main.o >
+   Compiling < sys/app_power_on.c > to < app_power_on.o >
+   Compiling < sys/app_power_off.c > to < app_power_off.o >
+   Compiling < sys/app_batcharging.c > to < app_batcharging.o >
+   Compiling < sys/app_fast_boot.c > to < app_fast_boot.o >
+   Compiling < sys/app_power_hibernate.c > to < app_power_hibernate.o >
+   Compiling < sys/app_uart2.c > to < app_uart2.o >
+   Compiling < sys/app_i2ctool.c > to < app_i2ctool.o >
+   Compiling < sys/app_cmd_gsensor.c > to < app_cmd_gsensor.o >
+   Compiling < sys/app_jet_power_off.c > to < app_jet_power_off.o >
+   Compiling < sys/app_jet_sd_cert.c > to < app_jet_sd_cert.o >
+   Compiling < service/misc/app_jet_cmd.c > to < app_jet_cmd.o >
+   Compiling < sys/state_ctrl/app_state_ctrl.c > to < app_state_ctrl.o >
+   Compiling < sys/state_ctrl/app_state_null.c > to < app_state_null.o >
+   Compiling < sys/state_ctrl/app_state_preproc.c > to < app_state_preproc.o >
+   Compiling < sys/state_ctrl/app_state_postproc.c > to < app_state_postproc.o >
+   Compiling < device/app_disk.c > to < app_disk.o >
+   Compiling < device/app_timer.c > to < app_timer.o >
+   Compiling < device/app_timer_isr.c > to < app_timer_isr.o >
+   Compiling < device/app_key.c > to < app_key.o >
+   Compiling < device/app_key_name.c > to < app_key_name.o >
+   Compiling < device/app_tvlcd.c > to < app_tvlcd.o >
+   Compiling < device/app_sound.c > to < app_sound.o >
+   Compiling < device/app_sensor.c > to < app_sensor.o >
+   Compiling < device/app_battery.c > to < app_battery.o >
+   Compiling < device/app_dev_plug.c > to < app_dev_plug.o >
+   Compiling < device/app_buzzer.c > to < app_buzzer.o >
+   Compiling < device/app_uvc_request.c > to < app_uvc_request.o >
+   Compiling < device/lens/app_lens_sample.c > to < app_lens_sample.o >
+   Compiling < device/lens/app_lens_mshut.c > to < app_lens_mshut.o >
+   Compiling < device/app_strobe.c > to < app_strobe.o >
+   Compiling < device/app_rtc.c > to < app_rtc.o >
+   Compiling < device/app_led.c > to < app_led.o >
+   Compiling < service/misc/app_misc.c > to < app_misc.o >
+   Compiling < service/misc/app_msg_ext.c > to < app_msg_ext.o >
+   Compiling < service/misc/app_sio_filter.c > to < app_sio_filter.o >
+   Compiling < service/misc/app_custom_cmd.c > to < app_custom_cmd.o >
+   Compiling < service/misc/app_param_manager.c > to < app_param_manager.o >
+   Compiling < service/misc/app_view_param.c > to < app_view_param.o >
+   Compiling < service/misc/app_background_timer.c > to < app_background_timer.o >
+   Compiling < service/misc/app_user_setting.c > to < app_user_setting.o >
+   Compiling < service/misc/app_errorosd.c > to < app_errorosd.o >
+   Compiling < service/misc/app_error_msg.c > to < app_error_msg.o >
+   Compiling < service/misc/app_jpg_draw.c > to < app_jpg_draw.o >
+   Compiling < service/misc/app_card_isp.c > to < app_card_isp.o >
+   Compiling < service/misc/app_simple_menu.c > to < app_simple_menu.o >
+   Compiling < service/misc/app_yuv_illustrator.c > to < app_yuv_illustrator.o >
+   Compiling < service/misc/app_modeSet.c > to < app_modeSet.o >
+   Compiling < service/misc/tg_cmd.c > to < tg_cmd.o >
+   Compiling < service/misc/app_battery_ctrl.c > to < app_battery_ctrl.o >
+   Compiling < service/misc/app_battery_charge.c > to < app_battery_charge.o >
+   Compiling < service/misc/app_spca7002_utility.c > to < app_spca7002_utility.o >
+   Compiling < service/misc/app_sd_log.c > to < app_sd_log.o >
+   Compiling < service/misc/app_watch_dog.c > to < app_watch_dog.o >
+   Compiling < service/misc/app_dead_process.c > to < app_dead_process.o >
+   Compiling < service/misc/app_facedetect_ex.c > to < app_facedetect_ex.o >
+   Compiling < service/misc/app_yuvscale.c > to < app_yuvscale.o >
+   Compiling < service/osd/app_osd_init.c > to < app_osd_init.o >
+   Compiling < service/osd/app_osd_lib.c > to < app_osd_lib.o >
+   Compiling < service/osd/app_osd_api.c > to < app_osd_api.o >
+   Compiling < service/exif/app_exif.c > to < app_exif.o >
+   Compiling < service/dcf/app_dcf.c > to < app_dcf.o >
+   Compiling < service/cdfs/app_cdfs_api.c > to < app_cdfs_api.o >
+   Compiling < service/dpof/app_dpof.c > to < app_dpof.o >
+   Compiling < service/calib/app_calib.c > to < app_calib.o >
+   Compiling < service/calib/app_camcfg_main.c > to < app_camcfg_main.o >
+   Compiling < service/calib/app_calib_api.c > to < app_calib_api.o >
+   Compiling < service/calib/app_calib_zoom.c > to < app_calib_zoom.o >
+   Compiling < service/calib/app_calib_awb.c > to < app_calib_awb.o >
+   Compiling < service/script/app_script.c > to < app_script.o >
+   Compiling < service/script/app_script_lib.c > to < app_script_lib.o >
+   Compiling < service/testbed/app_tb_main.c > to < app_tb_main.o >
+   Compiling < service/testbed/app_tb_util.c > to < app_tb_util.o >
+   Compiling < service/testbed/app_tb_unit_test.c > to < app_tb_unit_test.o >
+   Compiling < service/testbed/app_tb_batcurve.c > to < app_tb_batcurve.o >
+   Compiling < service/testbed/app_tb_cipa.c > to < app_tb_cipa.o >
+   Compiling < service/syscfg/app_is_cfg.c > to < app_is_cfg.o >
+   Compiling < ui/still/app_zoom_api.c > to < app_zoom_api.o >
+   Compiling < ui/still/app_still_view.c > to < app_still_view.o >
+   Compiling < ui/still/app_still_callback.c > to < app_still_callback.o >
+   Compiling < ui/still/app_still_capture.c > to < app_still_capture.o >
+   Compiling < ui/still/app_still_burst.c > to < app_still_burst.o >
+   Compiling < ui/still/app_still_setting.c > to < app_still_setting.o >
+   Compiling < ui/still/app_view_osd.c > to < app_view_osd.o >
+   Compiling < ui/still/app_still_background.c > to < app_still_background.o >
+   Compiling < ui/still/app_still_busy.c > to < app_still_busy.o >
+   Compiling < ui/still/app_still_aaa.c > to < app_still_aaa.o >
+   Compiling < ui/still/app_still_flow.c > to < app_still_flow.o >
+   Compiling < ui/still/app_still_util.c > to < app_still_util.o >
+   Compiling < ui/video/app_video_view.c > to < app_video_view.o >
+   Compiling < ui/video/app_video_record.c > to < app_video_record.o >
+   Compiling < ui/video/app_video_setting.c > to < app_video_setting.o >
+   Compiling < ui/video/app_video_osd.c > to < app_video_osd.o >
+   Compiling < ui/video/app_video_stamp.c > to < app_video_stamp.o >
+   Compiling < ui/audio/app_audio_record.c > to < app_audio_record.o >
+   Compiling < ui/play/app_playback_main.c > to < app_playback_main.o >
+   Compiling < ui/play/app_playback_prot.c > to < app_playback_prot.o >
+   Compiling < ui/play/app_playback_del.c > to < app_playback_del.o >
+   Compiling < ui/play/app_playback_video.c > to < app_playback_video.o >
+   Compiling < ui/play/app_playback_lib.c > to < app_playback_lib.o >
+   Compiling < ui/play/app_playback_osd.c > to < app_playback_osd.o >
+   Compiling < ui/menu/app_ui_para.c > to < app_ui_para.o >
+   Compiling < ui/menu/app_menu_state.c > to < app_menu_state.o >
+   Compiling < ui/menu/app_menu_tab_17dvr.c > to < app_menu_tab_17dvr.o >
+   Compiling < ui/menu/app_menu_core.c > to < app_menu_core.o >
+   Compiling < ui/menu/app_menu_disp.c > to < app_menu_disp.o >
+   Compiling < ui/menu/app_menu_disp1.c > to < app_menu_disp1.o >
+   Compiling < ui/menu/app_menu_event_cvr.c > to < app_menu_event_cvr.o >
+   Compiling < ui/menu/app_menu_active_cvr.c > to < app_menu_active_cvr.o >
+   Compiling < ui/menu/app_menu_frameosd.c > to < app_menu_frameosd.o >
+   Compiling < ui/setup/app_setup_lib.c > to < app_setup_lib.o >
+   Compiling < ui/usb/app_usb_create.c > to < app_usb_create.o >
+   Compiling < ui/usb/app_usb_msdc.c > to < app_usb_msdc.o >
+   Compiling < ui/usb/app_usb_pccam.c > to < app_usb_pccam.o >
+   Compiling < ui/hot_plug/app_tv_plug.c > to < app_tv_plug.o >
+   Compiling < ui/hot_plug/app_HDMI_plug.c > to < app_HDMI_plug.o >
+   Compiling < ui/hot_plug/app_cec_capability_ctrl.c > to < app_cec_capability_ctrl.o >
+   Compiling < ui/hot_plug/app_card_plug.c > to < app_card_plug.o >
+   Compiling < ui/util/app_callback_setting.c > to < app_callback_setting.o >
+   Compiling < aaa/app_ae.c > to < app_ae.o >
+   Compiling < aaa/app_awb.c > to < app_awb.o >
+   Compiling < aaa/app_still_awb.c > to < app_still_awb.o >
+   Compiling < aaa/app_still_flash.c > to < app_still_flash.o >
+*** ../../_17DVR/_spca6350/customization/hostfw/libhostfw.a is built successfully! ***
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/hostfw'
+*** _17DVR/_spca6350/customization/hostfw/libhostfw.a is built successfully! ***
+Making customization/drivers/disp/libdisp_custom.a
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/disp'
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/disp'
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/disp'
+   Compiling < disp_composite_tv.c > to < disp_composite_tv_ntsc.o >
+   Compiling < disp_composite_tv.c > to < disp_composite_tv_pal.o >
+   Compiling < disp_composite_tv.c > to < disp_composite_tv_all.o >
+   Compiling < disp_hdmi_tv.c > to < disp_hdmi_tv_all.o >
+   Compiling < disp_auo_a030vac01.c > to < disp_auo_a030vac01_ups051.o >
+   Compiling < disp_auo_a030vac01.c > to < disp_auo_a030vac01_ups052.o >
+   Compiling < disp_auo_a030vac01.c > to < disp_auo_a030vac01_yuv_w720_l480.o >
+   Compiling < disp_gp_gpm1303a0.c > to < disp_gp_gpm1303a0_ups051.o >
+   Compiling < disp_nq_y83482v01.c > to < disp_nq_y83482v01_ups051.o >
+   Compiling < disp_gp_gpm1410a0.c > to < disp_gp_gpm1410a0_ups051.o >
+   Compiling < disp_gp_gpg64482qs2.c > to < disp_gp_gpg64482qs2_yuv_w640.o >
+   Compiling < disp_gp_gpm1502_030.c > to < disp_gp_gpm1502_030_ups051.o >
+   Compiling < disp_gp_gpm1502_030.c > to < disp_gp_gpm1502_030_ups052.o >
+   Compiling < disp_gp_gpm1502b0_030.c > to < disp_gp_gpm1502b0_030_ups051.o >
+   Compiling < disp_gp_gpm1177b1.c > to < disp_gp_gpm1177b1_ups052.o >
+   Compiling < disp_vs_vs020c2a.c > to < disp_vs_vs020c2a_ups052.o >
+   Compiling < disp_gt_gm15000.c > to < disp_gt_gm15000_ups052.o >
+   Compiling < disp_moto_12m80967a78.c > to < disp_moto_12m80967a78_dsi1_lcd.o >
+   Compiling < disp_moto_12m80967a78.c > to < disp_moto_12m80967a78_dsi1_lcm.o >
+   Compiling < disp_moto_12m80967a78.c > to < disp_moto_12m80967a78_dsi2_lcd.o >
+   Compiling < disp_moto_12m80967a78.c > to < disp_moto_12m80967a78_dsi2_lcm.o >
+   Compiling < disp_ss_ams326pm01.c > to < disp_ss_ams326pm01_ups051.o >
+   Compiling < disp_tp_td025theea.c > to < disp_tp_td025theea_ups052.o >
+   Compiling < disp_txd_txdt250c.c > to < disp_txd_txdt250c_ups052.o >
+   Compiling < disp_wd_F9648XF7FLWa_030.c > to < disp_wd_F9648XF7FLWa_030_ups051.o >
+   Compiling < disp_wd_F9648XF7FLWa_030.c > to < disp_wd_F9648XF7FLWa_030_ups052.o >
+   Compiling < disp_wd_F9648XJ_030.c > to < disp_wd_F9648XJ_030_ups051.o >
+   Compiling < disp_wd_F9648XJ_030.c > to < disp_wd_F9648XJ_030_ups052.o >
+   Compiling < disp_tcs_cogt350.c > to < disp_tcs_cogt350_lcm_h.o >
+   Compiling < disp_zyw_t2024pd0.c > to < disp_zyw_t2024pd0_lcm_h.o >
+   Compiling < disp_dul_GpWt_030.c > to < disp_dul_GpWt_030_ups051.o >
+   Compiling < disp_xt_xt32025f.c > to < disp_xt_xt32025f_ups051.o >
+   Compiling < disp_ss_s6d04d2.c > to < disp_ss_s6d04d2_dsi1_lcd.o >
+   Compiling < disp_ss_s6d04d2.c > to < disp_ss_s6d04d2_dsi1_lcm.o >
+   Compiling < disp_ss_s6d04d2.c > to < disp_ss_s6d04d2_dsi2_lcd.o >
+   Compiling < disp_ss_s6d04d2.c > to < disp_ss_s6d04d2_dsi2_lcm.o >
+   Compiling < disp_dummy.c > to < disp_dummy_one.o >
+*** ../../../_17DVR/_spca6350/customization/drivers/disp/libdisp_custom.a is built successfully! ***
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/disp'
+*** _17DVR/_spca6350/customization/drivers/disp/libdisp_custom.a is built successfully! ***
+Making customization/arch/spca6350/drivers/sensor/libsensor_custom.a
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/arch/spca6350/drivers/sensor'
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/arch/spca6350/drivers/sensor'
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/arch/spca6350/drivers/sensor'
+   Compiling < model/sensor_tg_ov2710.c > to < sensor_tg_ov2710.o >
+   Compiling < model/sensor_afe_ov2710.c > to < sensor_afe_ov2710.o >
+   Compiling < model/sensor_tg_ov2718.c > to < sensor_tg_ov2718.o >
+   Compiling < model/sensor_afe_ov2718.c > to < sensor_afe_ov2718.o >
+   Compiling < model/sensor_tg_ov2735.c > to < sensor_tg_ov2735.o >
+   Compiling < model/sensor_afe_ov2735.c > to < sensor_afe_ov2735.o >
+   Compiling < model/sensor_tg_dual_ov2735.c > to < sensor_tg_dual_ov2735.o >
+   Compiling < model/sensor_afe_dual_ov2735.c > to < sensor_afe_dual_ov2735.o >
+   Compiling < model/sensor_tg_ov2740.c > to < sensor_tg_ov2740.o >
+   Compiling < model/sensor_afe_ov2740.c > to < sensor_afe_ov2740.o >
+   Compiling < model/sensor_tg_ov4689.c > to < sensor_tg_ov4689.o >
+   Compiling < model/sensor_afe_ov4689.c > to < sensor_afe_ov4689.o >
+   Compiling < model/sensor_tg_dual_ov4689.c > to < sensor_tg_dual_ov4689.o >
+   Compiling < model/sensor_afe_dual_ov4689.c > to < sensor_afe_dual_ov4689.o >
+   Compiling < model/sensor_tg_ov5680.c > to < sensor_tg_ov5680.o >
+   Compiling < model/sensor_afe_ov5680.c > to < sensor_afe_ov5680.o >
+   Compiling < model/sensor_tg_ov5695.c > to < sensor_tg_ov5695.o >
+   Compiling < model/sensor_afe_ov5695.c > to < sensor_afe_ov5695.o >
+   Compiling < model/sensor_tg_hm2130.c > to < sensor_tg_hm2130.o >
+   Compiling < model/sensor_afe_hm2130.c > to < sensor_afe_hm2130.o >
+   Compiling < model/sensor_tg_sc1023.c > to < sensor_tg_sc1023.o >
+   Compiling < model/sensor_afe_sc1023.c > to < sensor_afe_sc1023.o >
+   Compiling < model/sensor_tg_ov7956.c > to < sensor_tg_ov7956.o >
+   Compiling < model/sensor_afe_ov7956.c > to < sensor_afe_ov7956.o >
+   Compiling < model/sensor_tg_ov7695.c > to < sensor_tg_ov7695.o >
+   Compiling < model/sensor_afe_ov7695.c > to < sensor_afe_ov7695.o >
+   Compiling < model/sensor_tg_ov7736.c > to < sensor_tg_ov7736.o >
+   Compiling < model/sensor_afe_ov7736.c > to < sensor_afe_ov7736.o >
+   Compiling < model/sensor_tg_ov7676.c > to < sensor_tg_ov7676.o >
+   Compiling < model/sensor_afe_ov7676.c > to < sensor_afe_ov7676.o >
+   Compiling < model/sensor_tg_ov9734.c > to < sensor_tg_ov9734.o >
+   Compiling < model/sensor_afe_ov9734.c > to < sensor_afe_ov9734.o >
+   Compiling < model/sensor_tg_ov9756.c > to < sensor_tg_ov9756.o >
+   Compiling < model/sensor_afe_ov9756.c > to < sensor_afe_ov9756.o >
+   Compiling < model/sensor_tg_panamn34227.c > to < sensor_tg_panamn34227.o >
+   Compiling < model/sensor_afe_panamn34227.c > to < sensor_afe_panamn34227.o >
+   Compiling < model/sensor_tg_panamn34229.c > to < sensor_tg_panamn34229.o >
+   Compiling < model/sensor_afe_panamn34229.c > to < sensor_afe_panamn34229.o >
+   Compiling < model/sensor_tg_tids90ub914q.c > to < sensor_tg_tids90ub914q.o >
+   Compiling < model/sensor_afe_tids90ub914q.c > to < sensor_afe_tids90ub914q.o >
+   Compiling < model/sensor_tg_sonyimx175.c > to < sensor_tg_sonyimx175.o >
+   Compiling < model/sensor_afe_sonyimx175.c > to < sensor_afe_sonyimx175.o >
+   Compiling < model/sensor_tg_sonyimx179.c > to < sensor_tg_sonyimx179.o >
+   Compiling < model/sensor_afe_sonyimx179.c > to < sensor_afe_sonyimx179.o >
+   Compiling < model/sensor_tg_nvp6112.c > to < sensor_tg_nvp6112.o >
+   Compiling < model/sensor_afe_nvp6112.c > to < sensor_afe_nvp6112.o >
+   Compiling < model/sensor_tg_fake.c > to < sensor_tg_fake.o >
+   Compiling < model/sensor_afe_fake.c > to < sensor_afe_fake.o >
+   Compiling < model/sensor_tg_sonyimx200.c > to < sensor_tg_sonyimx200.o >
+   Compiling < model/sensor_afe_sonyimx200.c > to < sensor_afe_sonyimx200.o >
+   Compiling < model/sensor_tg_sonyimx118.c > to < sensor_tg_sonyimx118.o >
+   Compiling < model/sensor_afe_sonyimx118.c > to < sensor_afe_sonyimx118.o >
+   Compiling < model/sensor_tg_sonyimx147.c > to < sensor_tg_sonyimx147.o >
+   Compiling < model/sensor_afe_sonyimx147.c > to < sensor_afe_sonyimx147.o >
+   Compiling < model/sensor_tg_sonyimx283.c > to < sensor_tg_sonyimx283.o >
+   Compiling < model/sensor_afe_sonyimx283.c > to < sensor_afe_sonyimx283.o >
+   Compiling < model/sensor_tg_sonyimx206.c > to < sensor_tg_sonyimx206.o >
+   Compiling < model/sensor_afe_sonyimx206.c > to < sensor_afe_sonyimx206.o >
+   Compiling < model/sensor_tg_sonyimx214.c > to < sensor_tg_sonyimx214.o >
+   Compiling < model/sensor_afe_sonyimx214.c > to < sensor_afe_sonyimx214.o >
+   Compiling < model/sensor_tg_sonyimx322.c > to < sensor_tg_sonyimx322.o >
+   Compiling < model/sensor_afe_sonyimx322.c > to < sensor_afe_sonyimx322.o >
+   Compiling < model/sensor_tg_sonyimx323.c > to < sensor_tg_sonyimx323.o >
+   Compiling < model/sensor_afe_sonyimx323.c > to < sensor_afe_sonyimx323.o >
+   Compiling < model/sensor_tg_sonyimx326.c > to < sensor_tg_sonyimx326.o >
+   Compiling < model/sensor_afe_sonyimx326.c > to < sensor_afe_sonyimx326.o >
+   Compiling < model/sensor_tg_sonyimx326_lvds.c > to < sensor_tg_sonyimx326_lvds.o >
+   Compiling < model/sensor_afe_sonyimx326_lvds.c > to < sensor_afe_sonyimx326_lvds.o >
+   Compiling < model/sensor_tg_sonyimx291.c > to < sensor_tg_sonyimx291.o >
+   Compiling < model/sensor_afe_sonyimx291.c > to < sensor_afe_sonyimx291.o >
+   Compiling < model/sensor_tg_sonyimx258.c > to < sensor_tg_sonyimx258.o >
+   Compiling < model/sensor_afe_sonyimx258.c > to < sensor_afe_sonyimx258.o >
+   Compiling < model/sensor_tg_sonyimx307.c > to < sensor_tg_sonyimx307.o >
+   Compiling < model/sensor_afe_sonyimx307.c > to < sensor_afe_sonyimx307.o >
+   Compiling < model/sensor_tg_sonyimx335.c > to < sensor_tg_sonyimx335.o >
+   Compiling < model/sensor_afe_sonyimx335.c > to < sensor_afe_sonyimx335.o >
+   Compiling < model/sensor_tg_sonyimx385.c > to < sensor_tg_sonyimx385.o >
+   Compiling < model/sensor_afe_sonyimx385.c > to < sensor_afe_sonyimx385.o >
+   Compiling < model/sensor_tg_s5k3p3sm.c > to < sensor_tg_s5k3p3sm.o >
+   Compiling < model/sensor_afe_s5k3p3sm.c > to < sensor_afe_s5k3p3sm.o >
+   Compiling < model/sensor_tg_dual_sonyimx258.c > to < sensor_tg_dual_sonyimx258.o >
+   Compiling < model/sensor_afe_dual_sonyimx258.c > to < sensor_afe_dual_sonyimx258.o >
+   Compiling < model/sensor_tg_sonyimx317_lvds.c > to < sensor_tg_sonyimx317_lvds.o >
+   Compiling < model/sensor_afe_sonyimx317_lvds.c > to < sensor_afe_sonyimx317_lvds.o >
+   Compiling < model/sensor_tg_sonyimx317_mipi.c > to < sensor_tg_sonyimx317_mipi.o >
+   Compiling < model/sensor_afe_sonyimx317_mipi.c > to < sensor_afe_sonyimx317_mipi.o >
+   Compiling < model/sensor_tg_soif02.c > to < sensor_tg_soif02.o >
+   Compiling < model/sensor_afe_soif02.c > to < sensor_afe_soif02.o >
+   Compiling < model/sensor_tg_soif22.c > to < sensor_tg_soif22.o >
+   Compiling < model/sensor_afe_soif22.c > to < sensor_afe_soif22.o >
+   Compiling < model/sensor_tg_gc4603.c > to < sensor_tg_gc4603.o >
+   Compiling < model/sensor_afe_gc4603.c > to < sensor_afe_gc4603.o >
+   Compiling < model/sensor_tg_gc8603.c > to < sensor_tg_gc8603.o >
+   Compiling < model/sensor_afe_gc8603.c > to < sensor_afe_gc8603.o >
+   Compiling < model/sensor_tg_dual_gc8603.c > to < sensor_tg_dual_gc8603.o >
+   Compiling < model/sensor_afe_dual_gc8603.c > to < sensor_afe_dual_gc8603.o >
+   Compiling < model/sensor_tg_gc1024.c > to < sensor_tg_gc1024.o >
+   Compiling < model/sensor_afe_gc1024.c > to < sensor_afe_gc1024.o >
+   Compiling < model/sensor_tg_gc1024_parallel.c > to < sensor_tg_gc1024_parallel.o >
+   Compiling < model/sensor_afe_gc1024_parallel.c > to < sensor_afe_gc1024_parallel.o >
+   Compiling < model/sensor_tg_gc2023.c > to < sensor_tg_gc2023.o >
+   Compiling < model/sensor_afe_gc2023.c > to < sensor_afe_gc2023.o >
+   Compiling < model/sensor_tg_ps5220.c > to < sensor_tg_ps5220.o >
+   Compiling < model/sensor_afe_ps5220.c > to < sensor_afe_ps5220.o >
+   Compiling < model/sensor_tg_dual_ps5246.c > to < sensor_tg_dual_ps5246.o >
+   Compiling < model/sensor_afe_dual_ps5246.c > to < sensor_afe_dual_ps5246.o >
+   Compiling < model/sensor_tg_ps5246.c > to < sensor_tg_ps5246.o >
+   Compiling < model/sensor_afe_ps5246.c > to < sensor_afe_ps5246.o >
+   Compiling < model/sensor_tg_dual_sonyimx206.c > to < sensor_tg_dual_sonyimx206.o >
+   Compiling < model/sensor_afe_dual_sonyimx206.c > to < sensor_afe_dual_sonyimx206.o >
+   Compiling < model/sensor_tg_sonyimx078.c > to < sensor_tg_sonyimx078.o >
+   Compiling < model/sensor_afe_sonyimx078.c > to < sensor_afe_sonyimx078.o >
+   Compiling < model/sensor_tg_spca7002.c > to < sensor_tg_spca7002.o >
+   Compiling < model/sensor_afe_spca7002.c > to < sensor_afe_spca7002.o >
+   Compiling < model/sensor_afe_serdes_spca7002.c > to < sensor_afe_serdes_spca7002.o >
+   Compiling < model/sensor_tg_serdes_spca7002.c > to < sensor_tg_serdes_spca7002.o >
+   Compiling < model/sensor_afe_serdes_spca7002_parallel.c > to < sensor_afe_serdes_spca7002_parallel.o >
+   Compiling < model/sensor_tg_serdes_spca7002_parallel.c > to < sensor_tg_serdes_spca7002_parallel.o >
+   Compiling < model/sensor_tg_cp8020.c > to < sensor_tg_cp8020.o >
+   Compiling < model/sensor_afe_cp8020.c > to < sensor_afe_cp8020.o >
+   Compiling < model/sensor_tg_ar0330_spca7002.c > to < sensor_tg_ar0330_spca7002.o >
+   Compiling < model/sensor_tg_ar0330_ov7956.c > to < sensor_tg_ar0330_ov7956.o >
+   Compiling < model/sensor_tg_ar0330cs_ov7956.c > to < sensor_tg_ar0330cs_ov7956.o >
+   Compiling < model/sensor_tg_ar0330cs_dm5885.c > to < sensor_tg_ar0330cs_dm5885.o >
+   Compiling < model/sensor_tg_ar0330_dm5885.c > to < sensor_tg_ar0330_dm5885.o >
+   Compiling < model/sensor_tg_ov2710_spca7002.c > to < sensor_tg_ov2710_spca7002.o >
+   Compiling < model/sensor_tg_ov4689_spca7002.c > to < sensor_tg_ov4689_spca7002.o >
+   Compiling < model/sensor_tg_sonyimx323_spca7002.c > to < sensor_tg_sonyimx323_spca7002.o >
+   Compiling < model/sensor_tg_sonyimx291_spca7002.c > to < sensor_tg_sonyimx291_spca7002.o >
+   Compiling < model/sensor_tg_panamn34227_nvp6112.c > to < sensor_tg_panamn34227_nvp6112.o >
+   Compiling < model/sensor_tg_ov2710_nvp6112.c > to < sensor_tg_ov2710_nvp6112.o >
+   Compiling < model/sensor_tg_ar0330_serdes_spca7002.c > to < sensor_tg_ar0330_serdes_spca7002.o >
+   Compiling < model/sensor_tg_ov4689_serdes_spca7002.c > to < sensor_tg_ov4689_serdes_spca7002.o >
+   Compiling < model/sensor_tg_ov4689_dm5885.c > to < sensor_tg_ov4689_dm5885.o >
+   Compiling < model/sensor_tg_ov4689_nvp6124b.c > to < sensor_tg_ov4689_nvp6124b.o >
+   Compiling < model/sensor_tg_ar0230_serdes_spca7002_parallel.c > to < sensor_tg_ar0230_serdes_spca7002_parallel.o >
+   Compiling < model/sensor_tg_ov4689_tids90ub914q.c > to < sensor_tg_ov4689_tids90ub914q.o >
+   Compiling < model/sensor_tg_primary_serdes_spca7002.c > to < sensor_tg_primary_serdes_spca7002.o >
+   Compiling < model/sensor_afe_primary_serdes_spca7002.c > to < sensor_afe_primary_serdes_spca7002.o >
+   Compiling < model/sensor_tg_dual_serdes_spca7002.c > to < sensor_tg_dual_serdes_spca7002.o >
+   Compiling < model/sensor_tg_dual_soif22.c > to < sensor_tg_dual_soif22.o >
+   Compiling < model/sensor_afe_dual_soif22.c > to < sensor_afe_dual_soif22.o >
+   Compiling < model/sensor_tg_ar0330cs.c > to < sensor_tg_ar0330cs.o >
+   Compiling < model/sensor_afe_ar0330cs.c > to < sensor_afe_ar0330cs.o >
+   Compiling < model/sensor_tg_ar0330.c > to < sensor_tg_ar0330.o >
+   Compiling < model/sensor_afe_ar0330.c > to < sensor_afe_ar0330.o >
+   Compiling < model/sensor_tg_dual_ar0330.c > to < sensor_tg_dual_ar0330.o >
+   Compiling < model/sensor_afe_dual_ar0330.c > to < sensor_afe_dual_ar0330.o >
+   Compiling < model/sensor_tg_ar0230.c > to < sensor_tg_ar0230.o >
+   Compiling < model/sensor_afe_ar0230.c > to < sensor_afe_ar0230.o >
+   Compiling < model/sensor_tg_ar0237.c > to < sensor_tg_ar0237.o >
+   Compiling < model/sensor_afe_ar0237.c > to < sensor_afe_ar0237.o >
+   Compiling < model/sensor_tg_ar0239.c > to < sensor_tg_ar0239.o >
+   Compiling < model/sensor_afe_ar0239.c > to < sensor_afe_ar0239.o >
+   Compiling < model/sensor_tg_ar0238_parallel.c > to < sensor_tg_ar0238_parallel.o >
+   Compiling < model/sensor_afe_ar0238_parallel.c > to < sensor_afe_ar0238_parallel.o >
+   Compiling < model/sensor_tg_dual_ar0238.c > to < sensor_tg_dual_ar0238.o >
+   Compiling < model/sensor_afe_dual_ar0238.c > to < sensor_afe_dual_ar0238.o >
+   Compiling < model/sensor_tg_ar0835.c > to < sensor_tg_ar0835.o >
+   Compiling < model/sensor_afe_ar0835.c > to < sensor_afe_ar0835.o >
+   Compiling < model/sensor_tg_ar1335.c > to < sensor_tg_ar1335.o >
+   Compiling < model/sensor_afe_ar1335.c > to < sensor_afe_ar1335.o >
+   Compiling < model/sensor_tg_mi5100p.c > to < sensor_tg_mi5100p.o >
+   Compiling < model/sensor_afe_mi5100p.c > to < sensor_afe_mi5100p.o >
+   Compiling < model/serdes_driver/serdes_io.c > to < serdes_io.o >
+   Compiling < model/serdes_driver/serdes_os.c > to < serdes_os.o >
+   Compiling < model/serdes_driver/serdes_initial.c > to < serdes_initial.o >
+   Compiling < model/serdes_driver/serdes_clock.c > to < serdes_clock.o >
+   Compiling < model/serdes_driver/serdes_utility.c > to < serdes_utility.o >
+   Compiling < model/serdes_driver/serdes_gpio.c > to < serdes_gpio.o >
+   Compiling < model/serdes_driver/serdes_custom_gpio.c > to < serdes_custom_gpio.o >
+   Compiling < model/serdes_driver/serdes_lvds.c > to < serdes_lvds.o >
+   Compiling < model/serdes_driver/serdes_mipi.c > to < serdes_mipi.o >
+   Compiling < model/serdes_driver/serdes_spca7002.c > to < serdes_spca7002.o >
+   Compiling < model/serdes_driver/serdes_fortest.c > to < serdes_fortest.o >
+   Compiling < model/serdes_driver/serdes_debug.c > to < serdes_debug.o >
+   Compiling < model/nvp6124b_sample_code/nvp6124_drv.c > to < nvp6124_drv.o >
+   Compiling < model/nvp6124b_sample_code/nvp6124b_audio.c > to < nvp6124b_audio.o >
+   Compiling < model/nvp6124b_sample_code/nvp6124b_coax_protocol.c > to < nvp6124b_coax_protocol.o >
+   Compiling < model/nvp6124b_sample_code/nvp6124b_motion.c > to < nvp6124b_motion.o >
+   Compiling < model/nvp6124b_sample_code/nvp6124b_video.c > to < nvp6124b_video.o >
+   Compiling < model/nvp6124b_sample_code/nvp6124b_video_eq.c > to < nvp6124b_video_eq.o >
+   Compiling < model/nvp6124b_sample_code/video_eq_6124b.c > to < video_eq_6124b.o >
+   Compiling < model/sensor_tg_std_bt1120.c > to < sensor_tg_std_bt1120.o >
+   Compiling < model/sensor_afe_std_bt1120.c > to < sensor_afe_std_bt1120.o >
+   Compiling < model/sensor_tg_brv0500.c > to < sensor_tg_brv0500.o >
+   Compiling < model/sensor_afe_brv0500.c > to < sensor_afe_brv0500.o >
+   Compiling < model/sensor_tg_panamn34110.c > to < sensor_tg_panamn34110.o >
+   Compiling < model/sensor_afe_panamn34110.c > to < sensor_afe_panamn34110.o >
+   Compiling < model/sensor_tg_panamn34120.c > to < sensor_tg_panamn34120.o >
+   Compiling < model/sensor_afe_panamn34120.c > to < sensor_afe_panamn34120.o >
+   Compiling < model/sensor_tg_dm5885.c > to < sensor_tg_dm5885.o >
+   Compiling < model/sensor_afe_dm5885.c > to < sensor_afe_dm5885.o >
+   Compiling < model/sensor_tg_nvp6124b.c > to < sensor_tg_nvp6124b.o >
+   Compiling < model/sensor_afe_nvp6124b.c > to < sensor_afe_nvp6124b.o >
+   Compiling < sensor_config.c > to < sensor_config.o >
+   Compiling < model/sensor_tg_adv7480.c > to < sensor_tg_adv7480.o >
+   Compiling < model/sensor_afe_adv7480.c > to < sensor_afe_adv7480.o >
+*** ../../../../../_17DVR/_spca6350/customization/arch/spca6350/drivers/sensor/libsensor_custom.a is built successfully! ***
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/arch/spca6350/drivers/sensor'
+*** _17DVR/_spca6350/customization/arch/spca6350/drivers/sensor/libsensor_custom.a is built successfully! ***
+Making customization/drivers/gsensor/libgsensor_custom.a
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/gsensor'
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/gsensor'
+make[1]: Entering directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/gsensor'
+   Compiling < app_gSensor_bma250e.c > to < app_gSensor_bma250e.o >
+   Compiling < app_gSensor.c > to < app_gSensor.o >
+*** ../../../_17DVR/_spca6350/customization/drivers/gsensor/libgsensor_custom.a is built successfully! ***
+make[1]: Leaving directory `/home/isaac.fong/PSIA19DVRBASE/sphost/customization/drivers/gsensor'
+*** _17DVR/_spca6350/customization/drivers/gsensor/libgsensor_custom.a is built successfully! ***
+*** _17DVR/spca6350.elf is built successfully! ***
+*** _17DVR/spca6350.bin is built successfully! ***
+*** _17DVR/multiload.dat is built successfully! ***
+4562176 _17DVR/download/17DVR.bin
+*** _17DVR/download/17DVR.bin is built successfully! ***
+/bin/cp -f resource/17DVR/RAWC.BIN _17DVR/download/
+Select V35 (3bytes) operation!
+Building spca6350 : 17DVR HW_17DVR  done
+/bin/cp -f _17DVR/download/17DVR.bin _17DVR/download/17DVRFW1.bin

@@ -1,0 +1,86 @@
+#/**************************************************************************
+# *
+# *         Copyright (c) 2002-2013 by iCatch Technology Inc.
+# *
+# *  This software is copyrighted by and is the property of iCatch
+# *  Technology Inc. All rights are reserved by iCatch Technology Inc.
+# *  This software may only be used in accordance with the corresponding
+# *  license agreement. Any unauthorized use, duplication, distribution,
+# *  or disclosure of this software is expressly forbidden.
+# *
+# *  This Copyright notice MUST not be removed or modified without prior
+# *  written consent of iCatch Technology Inc.
+# *
+# *  iCatch Technology Inc. reserves the right to modify this software
+# *  without notice.
+# *
+
+HOST_ROOT := ../..
+include $(HOST_ROOT)/host.def
+
+
+#iCatch Menu/UI Utilities(IMU) Generated(GEN) files
+#Phil: Because the IMU can not support multi CPU cores compiling process
+#      We marked the last four files for work around
+#      This file rules could still work well in most cases.
+#
+IMU_GEN_FILES :=
+IMU_GEN_FILES += ui/menu/app_menu_tab.c
+#IMU_GEN_FILES += include/app_menu_tab.h
+#IMU_GEN_FILES += include/app_menu_event.h
+#IMU_GEN_FILES += include/app_icon_def.h
+#IMU_GEN_FILES += include/app_ui_para.h
+
+#iCatch Menu/UI Utilities(IMU) depend(DPD) files and paths
+#Host add new differnet height icon path here.
+#
+IMU_DPD_FILES :=
+IMU_DPD_FILES += $(HOST_ROOT)/resource/$(PRJ_NAME)/MENU/icatchtek.xls
+
+IMU_DPD_FILES += $(HOST_ROOT)/script/menu_install.bat
+IMU_DPD_FILES += $(HOST_ROOT)/resource/$(PRJ_NAME)/A/RO_RES/UI/ICON_SRC/32
+#IMU_DPD_FILES += $(HOST_ROOT)/resource/$(PRJ_NAME)/A/RO_RES/UI/ICON_SRC/48
+
+#Data stamp font Generated(GEN) files
+#Host add new differnet height font date stamp here.
+#DS_GEN_PATH := $(HOST_ROOT)/resource/$(PRJ_NAME)/A/RO_RES/UI/FONT
+#DS_GEN_FILES :=
+#DS_GEN_FILES += $(DS_GEN_PATH)/DATESTAMP_16.SFN
+#DS_GEN_FILES += $(DS_GEN_PATH)/DATESTAMP_32.SFN
+#DS_GEN_FILES += $(DS_GEN_PATH)/DATESTAMP_48.SFN
+#DS_GEN_FILES += $(DS_GEN_PATH)/DATESTAMP_64.SFN
+
+#Data stamp font depend(DPD) files and paths
+#
+#DS_DPD_PATH := $(HOST_ROOT)/resource/$(PRJ_NAME)/A/RO_RES/UI/FONT
+#DS_DPD_FILES :=
+#DS_DPD_FILES += $(DS_DPD_PATH)/DS_UNICODE.TXT
+#DS_DPD_FILES += $(HOST_ROOT)/script/ds_gen.bat
+
+
+
+#---------------------------------------------------------------------------
+# Explicit rules
+#---------------------------------------------------------------------------
+.PHONY: all
+
+# IMU resource file rules
+all: $(IMU_GEN_FILES) $(DS_GEN_FILES)
+
+$(IMU_GEN_FILES): $(IMU_DPD_FILES)
+	@ECHO "make resource files for IMU start"
+	@$(HOST_ROOT)/script/menu_install.bat ..\\..\\script\\
+	@ECHO "make resource files for IMU over"
+
+#$(DS_GEN_FILES): $(DS_DPD_FILES)
+#	@ECHO "make resource files for date stamp start"
+#	@$(HOST_ROOT)/script/ds_gen.bat ..\\..\\script\\
+#	@ECHO "make resource files for date stamp over"
+
+.PHONY: clean clean_IMU
+
+clean: clean_IMU
+
+clean_IMU:
+	@ECHO "Clear IMU resource files"
+	@$(HOST_ROOT)/script/menu_clean.bat ..\\..\\script\\

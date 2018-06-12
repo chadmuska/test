@@ -1,0 +1,280 @@
+/**************************************************************************
+ *
+ *       Copyright (c) 2006-2018 by iCatch Technology, Inc.
+ *
+ *  This software is copyrighted by and is the property of iCatch
+ *  Technology, Inc.. All rights are reserved by iCatch Technology, Inc..
+ *  This software may only be used in accordance with the corresponding
+ *  license agreement. Any unauthorized use, duplication, distribution,
+ *  or disclosure of this software is expressly forbidden.
+ *
+ *  This Copyright notice MUST not be removed or modified without prior
+ *  written consent of iCatch Technology, Inc..
+ *
+ *  iCatch Technology, Inc. reserves the right to modify this software
+ *  without notice.
+ *
+ *  iCatch Technology, Inc.
+ *  19-1, Innovation First Road, Science-Based Industrial Park,
+ *  Hsin-Chu, Taiwan.
+ *
+ **************************************************************************/
+#ifndef _APP_VIEW_PARAM_DEF_H_
+#define _APP_VIEW_PARAM_DEF_H_
+
+enum {
+	UI_STILL_SIZE_FULL,
+	UI_STILL_SIZE_MAX,
+	UI_STILL_SIZE_8M,
+	UI_STILL_SIZE_5M,
+	UI_STILL_SIZE_4M,
+	UI_STILL_SIZE_3M,
+	UI_STILL_SIZE_2M,
+	UI_STILL_SIZE_VGA,
+};
+
+enum {
+	UI_QUALITY_SUPERFINE,
+	UI_QUALITY_FINE,
+	UI_QUALITY_NORMAL,
+	UI_QUALITY_MAX,
+};
+
+enum {
+	UI_STILL_DRIVERMODE_OFF,
+	UI_STILL_DRIVERMODE_BURST_H,
+	UI_STILL_DRIVERMODE_BURST_L,
+	UI_STILL_DRIVERMODE_MAX,
+	UI_STILL_DRIVERMODE_AEB,
+	UI_STILL_DRIVERMODE_HDR,
+};
+
+#if SP5K_USB_UVC_SUPPORT || SP5K_SENSOR_DUAL_MODE
+#if defined(PRJ_19DVR)/*Isaac add this and need modified to fixed it*/
+
+	enum {
+		UI_VIDEO_DUAL_SIZE_FHD,
+		UI_VIDEO_DUAL_SIZE_FHD_720P,
+		UI_VIDEO_DUAL_SIZE_FHD_VGA,
+		UI_VIDEO_SIZE_FHD_PARK,
+		UI_VIDEO_SIZE_MAX,
+		UI_VIDEO_SIZE_FHD_60FPS,
+		UI_VIDEO_SIZE_FHD_30FPS,
+		UI_VIDEO_SIZE_HD_120FPS,
+		UI_VIDEO_SIZE_HD_60FPS,
+		UI_VIDEO_SIZE_HD_30FPS,
+		UI_VIDEO_SIZE_4K2K,
+		UI_VIDEO_SIZE_27K
+	};
+#else
+	enum {
+		UI_VIDEO_DUAL_SIZE_FHD,
+		UI_VIDEO_DUAL_SIZE_FHD_720P,
+		UI_VIDEO_DUAL_SIZE_FHD_VGA,
+		#if SINGLE_DUAL_SWITCH_SAMPLE
+		    UI_VIDEO_SIZE_FHD_60FPS,
+	        #if SP5K_DIQ_HDR
+	        	UI_VIDEO_SIZE_FHD_HDR,
+	        #endif
+			UI_VIDEO_SIZE_MAX,
+		#else
+			UI_VIDEO_SIZE_MAX,
+			UI_VIDEO_SIZE_FHD_60FPS,
+		    #if SP5K_DIQ_HDR
+		    	UI_VIDEO_SIZE_FHD_HDR,
+		    #endif
+		#endif
+		UI_VIDEO_SIZE_FHD_30FPS,
+		UI_VIDEO_SIZE_HD_120FPS,
+		UI_VIDEO_SIZE_HD_60FPS,
+		UI_VIDEO_SIZE_HD_30FPS,
+	    UI_VIDEO_SIZE_4K2K,
+	    UI_VIDEO_SIZE_27K
+	};
+#endif
+#elif defined(PRJ_PDVR)
+	enum {
+	UI_VIDEO_SIZE_FHD_30FPS,
+	UI_VIDEO_SIZE_HD_30FPS,
+	UI_VIDEO_SIZE_FHD_60FPS,
+	UI_VIDEO_SIZE_4K2K,
+	UI_VIDEO_SIZE_27K,
+	UI_VIDEO_SIZE_MAX,
+	UI_VIDEO_SIZE_HD_120FPS,
+	UI_VIDEO_SIZE_HD_60FPS,
+       #if SP5K_DIQ_HDR
+	UI_VIDEO_SIZE_FHD_HDR,
+	#endif
+	};
+#elif defined(PRJ_17DVR)
+	enum {
+	UI_VIDEO_SIZE_FHD_30FPS,
+	UI_VIDEO_SIZE_HD_30FPS,
+	UI_VIDEO_SIZE_FHD_PARK,
+	UI_VIDEO_SIZE_4K2K,
+	UI_VIDEO_SIZE_27K,
+	UI_VIDEO_SIZE_MAX,
+	UI_VIDEO_SIZE_FHD_60FPS,
+	UI_VIDEO_SIZE_HD_120FPS,
+	UI_VIDEO_SIZE_HD_60FPS,
+       #if SP5K_DIQ_HDR
+	UI_VIDEO_SIZE_FHD_HDR,
+	#endif
+	};
+#elif defined(PRJ_19DVR)/*weikai added*/
+	enum {
+	UI_VIDEO_SIZE_FHD_30FPS,
+	UI_VIDEO_SIZE_HD_30FPS,
+	UI_VIDEO_SIZE_FHD_PARK,
+	UI_VIDEO_SIZE_4K2K,
+	UI_VIDEO_SIZE_27K,
+	UI_VIDEO_SIZE_MAX,
+	UI_VIDEO_SIZE_FHD_60FPS,
+	UI_VIDEO_SIZE_HD_120FPS,
+	UI_VIDEO_SIZE_HD_60FPS,
+       #if SP5K_DIQ_HDR
+	UI_VIDEO_SIZE_FHD_HDR,
+	#endif
+	};
+
+#else	/*Normal Single*/
+	enum {
+		UI_VIDEO_SIZE_FHD_60FPS,
+		UI_VIDEO_SIZE_FHD_30FPS,
+		UI_VIDEO_SIZE_HD_30FPS,
+	    UI_VIDEO_SIZE_4K2K,
+	    UI_VIDEO_SIZE_27K,
+	    UI_VIDEO_SIZE_MAX,
+
+		UI_VIDEO_SIZE_HD_120FPS,
+		UI_VIDEO_SIZE_HD_60FPS,
+	    #if SP5K_DIQ_HDR
+	    	UI_VIDEO_SIZE_FHD_HDR,
+	    #endif
+	};
+#endif
+
+enum {
+	UI_VIDEO_SEAMLESS_OFF,
+	UI_VIDEO_SEAMLESS_1MIN,
+	UI_VIDEO_SEAMLESS_3MIN,
+	UI_VIDEO_SEAMLESS_5MIN,
+	UI_VIDEO_SEAMLESS_MAX,
+};
+
+enum
+{
+	UI_STILL_STAMP_OFF,
+	UI_STILL_STAMP_DATE,
+	UI_STILL_STAMP_DATE_TIME,
+	UI_STILL_STAMP_MAX,
+};
+
+enum {
+	UI_DATESTAMP_OFF,
+	UI_DATESTAMP_DATE,
+	UI_DATESTAMP_DATETIME,
+	UI_DATESTAMP_MAX,
+};
+
+enum {
+	UI_EIS_OFF,
+	UI_EIS_ON,
+	UI_EIS_MAX,
+};
+
+enum {
+	UI_METERING_CENTER,
+	UI_METERING_MULTI,
+	UI_METERING_SPOT,
+	UI_METERING_MAX,
+};
+
+enum {
+	UI_WB_AUTO,
+	UI_WB_DAYLIGHT,
+	UI_WB_CLOUDY,
+	UI_WB_TUNGSTEN,
+	UI_WB_FLUORESCENT_H,
+	UI_WB_MAX,
+	UI_WB_FLUORESCENT_L,
+	UI_WB_CUSTOM,
+	UI_WB_UNDERWATER,
+	UI_WB_FLUORESCENT,
+	UI_WB_SUNSET,
+	UI_WB_DAWN,
+	UI_WB_BLACKWHITE,
+	UI_WB_FLUORE,
+};
+
+enum {
+	UI_ISO_AUTO,
+	UI_ISO_50,
+	UI_ISO_100,
+	UI_ISO_200,
+	UI_ISO_400,
+	UI_ISO_800,
+	UI_ISO_1600,
+	UI_ISO_MAX,
+};
+
+enum {
+	UI_EXP_BIAS_N200,
+	UI_EXP_BIAS_N166,
+	UI_EXP_BIAS_N133,
+	UI_EXP_BIAS_N100,
+	UI_EXP_BIAS_N066,
+	UI_EXP_BIAS_N033,
+	UI_EXP_BIAS_ZERO,
+	UI_EXP_BIAS_P033,
+	UI_EXP_BIAS_P066,
+	UI_EXP_BIAS_P100,
+	UI_EXP_BIAS_P133,
+	UI_EXP_BIAS_P166,
+	UI_EXP_BIAS_P200,
+	UI_EXP_BIAS_MAX,
+};
+
+enum {
+	UI_SHARP_MORE,
+	UI_SHARP_NORMAL,
+	UI_SHARP_LESS,
+	UI_SHARP_MAX,
+};
+
+enum {
+	UI_STABILIZER_OFF,
+	UI_STABILIZER_ON,
+	UI_STABILIZER_MAX,
+};
+
+enum {
+	UI_FOCUS_NORMAL,
+	UI_FOCUS_MACRO,
+	UI_FOCUS_INFINITY,
+	UI_FOCUS_MAX
+};
+
+enum {
+	UI_FLASH_AUTO,
+	UI_FLASH_RED_EYE,
+	UI_FLASH_ON,
+	UI_FLASH_SLOW_SYNC,
+	UI_FLASH_OFF,
+	UI_FLASH_MAX,
+};
+
+enum {
+	UI_PV_FLICKERMODE_50HZ,
+	UI_PV_FLICKERMODE_60HZ,
+	UI_PV_FLICKERMODE_MAX,
+};
+
+enum {
+	UI_ROLLING_SHUTTER_OFF,
+	UI_ROLLING_SHUTTER_ON,
+	UI_ROLLING_SHUTTER_MAX,
+};
+
+#endif  /* _APP_VIEW_PARAM_DEF_H_ */
+

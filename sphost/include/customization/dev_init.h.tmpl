@@ -1,0 +1,668 @@
+/**************************************************************************
+ *
+ *       Copyright (c) 2006-2018 by iCatch Technology, Inc.
+ *
+ *  This software is copyrighted by and is the property of iCatch
+ *  Technology, Inc.. All rights are reserved by iCatch Technology, Inc..
+ *  This software may only be used in accordance with the corresponding
+ *  license agreement. Any unauthorized use, duplication, distribution,
+ *  or disclosure of this software is expressly forbidden.
+ *
+ *  This Copyright notice MUST not be removed or modified without prior
+ *  written consent of iCatch Technology, Inc..
+ *
+ *  iCatch Technology, Inc. reserves the right to modify this software
+ *  without notice.
+ *
+ *  iCatch Technology, Inc.
+ *  19-1, Innovation First Road, Science-Based Industrial Park,
+ *  Hsin-Chu, Taiwan.
+ *
+ **************************************************************************/
+/**
+ * @file dev_init.h
+ *
+ * @author
+ */
+#ifndef _DEV_INIT_H_
+#define _DEV_INIT_H_
+
+/* CPU CLK setting */
+/* 5310 */
+/* 0: 131.625 MHz */
+/* 1: 189 MHz*/
+/* 2: 162 MHz */
+/* 3: 222.75 MHz*/
+/* 4: 243 MHz */
+
+/* 5330 */
+/* 0: 135 MHz */
+/* 1: 189 MHz */
+/* 2: 162 MHz */
+/* 3: 267 MHz */
+/* 4: 243 MHz */
+/* 5: 297 MHz */
+/* 6: 300 MHz */
+
+/* 6330 */
+/* 7: 333 MHz */
+/* 8: 360 MHz */
+
+/* 6350 */
+/* 9: 216 MHz */
+
+#ifndef CPU_CLK
+#if SPCA6330
+#ifdef DDR2
+#define CPU_CLK  0
+#elif defined(DDR3)
+#define CPU_CLK  6
+#else
+#error No cpu clock specified
+#endif
+#else
+#ifndef DDR2
+#define CPU_CLK  0
+#else
+#define CPU_CLK  1
+#endif
+#endif
+#endif /*#ifndef CPU_CLK*/
+
+/*_________________________________________________________________________
+
+  NAND timing.
+ _________________________________________________________________________
+*/
+#ifndef SP5K_NAND_TIME_CUSTOM_DEFINE
+#define NAND_ACT_RCV_TIME          0x23
+#define NAND_ACT_RCV_TIME_192MHZ   0xC8
+#endif
+
+/*_________________________________________________________________________
+
+  power on battery voltage detecting workaround.
+ _________________________________________________________________________
+*/
+/*DO NOT DEFINE THIS IF YOUR APPLICATION NEEDS NO SUCH WORKAROUND*/
+#undef POCU_SAR0_LOWBAT_CHECK_WORKAROUND_THRESHOLD_VALUE
+/* #define POCU_SAR0_LOWBAT_CHECK_WORKAROUND_THRESHOLD_VALUE  600 */
+/* sar0 threshold value range 0 .. +1023 */
+
+/*_________________________________________________________________________
+
+  RTC
+ _________________________________________________________________________
+*/
+#define RTC_RELIABLE_CODE	0x5a
+
+#ifndef __ASSEMBLER__
+
+#include "api/sp5k_global_api.h"
+
+/*******************************************************************************
+*                              C O N S T A N T S
+*******************************************************************************/
+/*_________________________________________________________________________
+
+  storage media.
+ _________________________________________________________________________
+*/
+
+#define SP5K_DISK_SD              1
+#define SP5K_DISK_CF_IDE          0
+#define SP5K_DISK_CF_MEM          0
+#define SP5K_DISK_MS              0
+#define SP5K_DISK_RAM             0
+#define SP5K_DISK_XD              0
+#define SP5K_DISK_USB             1
+#define SP5K_DISK_TOTAL           (SP5K_DISK_EMMC + SP5K_DISK_NAND + SP5K_DISK_SD + \
+                                  SP5K_DISK_CF_IDE + SP5K_DISK_CF_MEM + \
+                                  SP5K_DISK_MS + SP5K_DISK_RAM + SP5K_DISK_XD + SP5K_DISK_SPI + \
+                                  SP5K_DISK_USB)
+#define SP5K_DISK_RAM_SIZE        (6*1024*1024) /*in bytes; 0:default size*/
+
+/*typically nand and ram disk, if applicable, are always attached to system*/
+#define SP5K_DISK_NO_SCAN_NAND    0
+#define SP5K_DISK_NO_SCAN_SD      0
+#define SP5K_DISK_NO_SCAN_CFIDE   0
+#define SP5K_DISK_NO_SCAN_CFMEM   0
+#define SP5K_DISK_NO_SCAN_MS      0
+#define SP5K_DISK_NO_SCAN_RAM     0
+#define SP5K_DISK_NO_SCAN_XD      0
+
+
+/* SD gpio pin define */
+#define SP5K_SD_CLKCMD_ID         ((1 << 5) | (1 << 6))
+#define SP5K_SD_DAT_ID            ((1 << 7) | (1 << 8) | (1 << 9) | (1 << 10))
+#define SP5K_SD_CLKCMDDAT_GRP     SP5K_GPIO_GRP_FML
+#ifdef _CUSTOM_HW_		/* --------- CUSTOM ------------------------------- */
+#define SP5K_SD_DETECT_GRP        SP5K_GPIO_GRP_FMH
+#define SP5K_SD_DETECT_ID         (45-32)
+#define SP5K_SD_DETECT_POL        SP5K_GPIO_ACTIVE_LOW
+
+#define SP5K_SD_PWREN_GRP         SP5K_GPIO_GRP_NO_USE
+#define SP5K_SD_PWREN_ID          (47-32)
+#define SP5K_SD_PWREN_POL         SP5K_GPIO_ACTIVE_LOW
+
+#define SP5K_SD_WRP_GRP           SP5K_GPIO_GRP_GEN
+#define SP5K_SD_WRP_ID            6
+#define SP5K_SD_WRP_POL           SP5K_GPIO_ACTIVE_HIGH
+#endif
+
+typedef struct appDiskCapbaility_s {
+	UINT8 sdType;	/* LSB */
+	UINT8 sdMode;	/* HSB */
+} appDiskCapability_t;
+
+/*_________________________________________________________________________
+
+  disp device.
+ _________________________________________________________________________
+*/
+/* default display device.
+ * 1: lcd panel
+ * 2: composite tv ntsc
+ * 3: composite tv pal
+ */
+
+/* lcd panel display device selection list.
+ * A015AN04: AUO 1.5"
+ * A020BL01: AUO 2.0"
+ * A025BN01: AUO 2.5"
+ * A025DL01: AUO 2.5"
+ * A027BN01: AUO 2.7"
+ * A030DL01: AUO 3.0"
+ * A030VN01: AUO 3.0"
+ * A040FL01: AUO 4.0"
+ * H019HN01: AUO 2.0"
+ * H020HN01: AUO 2.0"
+ * GPG12129QS1: Giant Plus 1.5"
+ * GPG1216011QS1: Giant Plus 1.8"
+ * GPM1316B0: Giant Plus 3.97"
+ * GPM779A0: Giant Plus 2.0"
+ * GPM815B0: Giant Plus 1.5"
+ * LTD1571: Hitachi 2.2"
+ * TXDT180A: Tongxingda 1.77"
+ * TXDT240TQ: Tongxingda 2.4"
+ * TD025THEB1: Topoly 2.5"
+ */
+#ifndef SP5K_LCD_CUSTOM_DEFINE
+#define SP5K_LCD_A015AN04_UPS051        0  /* 280*220 */
+#define SP5K_LCD_A015AN04_UPS052        0  /* 305*220 */
+#define SP5K_LCD_A020BL01_UPS052        0
+#define SP5K_LCD_A025BN01_UPS051        0  /* 640*240 (ok) */
+#define SP5K_LCD_A025BN01_UPS052        0  /* 320*240 (ok) */
+#define SP5K_LCD_A025BN01_CCIR601_NTSC  0  /* 720*480 (ok) */
+#define SP5K_LCD_A025BN01_CCIR601_PAL   0  /* 720*576 (ok) */
+#define SP5K_LCD_A025BN01_CCIR656_NTSC  0  /* 720*480 (ok) */
+#define SP5K_LCD_A025BN01_CCIR656_PAL   0  /* 720*576 (ok) */
+#define SP5K_LCD_A025DL01_UPS052        0  /* 360*240 */
+#define SP5K_LCD_A027DN01_UPS052        0  /* 320*240 (ok) */
+#define SP5K_LCD_A030DL01_UPS051        0  /* 960*240 (ok) */
+#define SP5K_LCD_A030DL01_UPS052        0  /* 360*288 (ok) */
+#define SP5K_LCD_A030VN01_UPS051        0  /* 640*480 */
+#define SP5K_LCD_A040FL01_UPS051        0  /* 480*272 (ok) */
+#define SP5K_LCD_H019HN01_UPS051        0  /* 176*220 */
+#define SP5K_LCD_H020HN01_LCM_H         0  /* 220*176 (ok) */
+#define SP5K_LCD_H020HN01_LCM_V         0  /* 176*220 (ok) */
+#define SP5K_LCD_GPG12129QS1_LCM_H      0  /* 128*128 (ok) */
+#define SP5K_LCD_GPG12129QS1_LCM_V      0  /* 128*128 (ok) */
+#define SP5K_LCD_GPG1216011QS1_LCM_H    0  /* 160*128 (ok) */
+#define SP5K_LCD_GPG1216011QS1_LCM_V    0  /* 128*160 (ok) */
+#define SP5K_LCD_GPM779A0_LCM_H         0  /* 220*176 */
+#define SP5K_LCD_GPM779A0_LCM_V         0  /* 176*220 */
+#define SP5K_LCD_GPM815B0_LCM_H         0  /* 128*128 (ok) */
+#define SP5K_LCD_GPM815B0_LCM_V         0  /* 128*128 (ok) */
+#define SP5K_LCD_GPM1303A0_UPS051       0  /* 960*480 (ok) */
+#define SP5K_LCD_Y83482V01_UPS051       0  /* 320*240 (ok) */
+#define SP5K_LCD_GPM1177B1_UPS052       0  /* 960*480 (ok) */
+#define SP5K_LCD_GPM1316B0_DSI_H        0  /* 800*480 (ok) */
+#define SP5K_LCD_GPM1316B0_DSI_V        0  /* 480*800 (ok) */
+#define SP5K_LCD_LTD1571_LCM_H          0  /* 320*240 */
+#define SP5K_LCD_LTD1571_LCM_V          0  /* 240*320 (ok) */
+#define SP5K_LCD_TXDT180A_LCM_H         0  /* 160*128 (ok) */
+#define SP5K_LCD_TXDT180A_LCM_V         0  /* 128*160 (ok) */
+#define SP5K_LCD_TXDT240TQ_LCM_H        0  /* 320*240 (ok) */
+#define SP5K_LCD_TXDT240TQ_LCM_V        0  /* 240*320 (ok) */
+#define SP5K_LCD_TXDT250C_UPS052        0  /* 320*240 */
+#define SP5K_LCD_TD015THEB2_UPS052      0  /* 480*240 */
+#define SP5K_LCD_TD025THEB1_UPS052      0  /* 320*240 */
+#define SP5K_LCD_TD025THEEA_UPS052      0  /* 320*240 (ok) */
+#define SP5K_LCD_HDTV_BT1120            0  /* 1920*1080(ok) */
+#define SP5K_LCD_WDF9648XK7FLWA_UPS051  0  /* 320*480 */
+#define SP5K_LCD_VS020C2A_UPS052		0  /* 176*220 */
+#define SP5K_LCD_GM15000_UPS052         0  /* 480*240 */
+#define SP5K_LCD_DUMMY                  0  /* 320*240 */
+#endif /* #ifndef SP5K_LCD_CUSTOM_DEFINE */
+
+
+/* lcd #2
+ */
+#ifndef SP5K_LCD2_CUSTOM_DEFINE
+#define SP5K_LCD2_A025BN01_UPS051        0  /* 640*240 (ok) */
+#define SP5K_LCD2_A025BN01_UPS052        0  /* 320*240 (ok) */
+#define SP5K_LCD2_A025BN01_CCIR601_NTSC  0  /* 720*480 (ok) */
+#define SP5K_LCD2_A025BN01_CCIR601_PAL   0  /* 720*576 (ok) */
+#define SP5K_LCD2_A025BN01_CCIR656_NTSC  0  /* 720*480 (ok) */
+#define SP5K_LCD2_A025BN01_CCIR656_PAL   0  /* 720*576 (ok) */
+#define SP5K_LCD2_A030DL01_UPS051        0  /* 960*240 (ok) */
+#define SP5K_LCD2_A030DL01_UPS052        0  /* 360*288 (ok) */
+#define SP5K_LCD2_A030VN01_UPS051        0  /* 640*480 (ok) */
+#define SP5K_LCD2_A040FL01_UPS051        0  /* 480*272 (ok) */
+#define SP5K_LCD2_GPM1303A0_UPS051       1  /* 960*480 (ok) */
+#define SP5K_LCD2_Y83482V01_UPS051       0  /* 320*240 (ok) */
+#define SP5K_LCD2_LTD1571_LCM_H          0  /* 320*240 */
+#define SP5K_LCD2_LTD1571_LCM_V          0  /* 240*320 (ok) */
+#define SP5K_LCD2_TD025THEEA_UPS052      0  /* 320*240 (ok) */
+#define SP5K_LCD2_HDTV_BT1120            0  /* 1920*1080(ok) */
+#endif /* #ifndef SP5K_LCD2_CUSTOM_DEFINE */
+
+
+#define SP5K_DISP_DEFAULT_DEV  1
+
+
+#ifndef SP5K_DISP_PIN_CB
+#if defined(HW_EVB_DSC13003)
+#define SP5K_DISP_LCD_RESET_GRP         (SP5K_GPIO_GRP_NO_USE)
+#define SP5K_DISP_LCD_RESET_MASK        (1<<18)
+#define SP5K_DISP_LCD_BACKLIGHT_GRP     (SP5K_GPIO_GRP_LMI)
+#define SP5K_DISP_LCD_BACKLIGHT_MASK    (1<<18)
+#define SP5K_DISP_LCD2_BACKLIGHT_GRP    (SP5K_GPIO_GRP_LMI)
+#define SP5K_DISP_LCD2_BACKLIGHT_MASK   (1<<19)
+#define SP5K_DISP_LCD_SHDB_GRP          (SP5K_GPIO_GRP_NO_USE)
+#define SP5K_DISP_LCD_SHDB_MASK         (1<<17)
+#endif
+
+/*_________________________________________________________________________
+
+  thee-wire gpio pin selection.
+  plz refer to sp5kGpioGrp_t in sp5k_global_api.h to select gpio group.
+ _________________________________________________________________________
+*/
+
+#if defined(HW_EVB_DSC13003)
+#define SP5K_DISP_SPI_SCL_GRP  SP5K_GPIO_GRP_DISP
+#define SP5K_DISP_SPI_SCL_ID   12/*(38-32)*/
+#define SP5K_DISP_SPI_SDA_GRP  SP5K_GPIO_GRP_DISP
+#define SP5K_DISP_SPI_SDA_ID   17/*(39-32)*/
+#define SP5K_DISP_SPI_CS_GRP   SP5K_GPIO_GRP_DISP
+#define SP5K_DISP_SPI_CS_ID    11/*25*/
+#define SP5K_DISP_SPI_CS2_GRP  SP5K_GPIO_GRP_DISP
+#define SP5K_DISP_SPI_CS2_ID   30
+#define SP5K_DISP_IO_CFG       ((1 << 11) | (1 << 12) | (1 << 17))
+#define SP5K_DISP_IO_VAL       ((1 << 11) | (1 << 12) | (1 << 17))
+#endif
+#endif /* #ifndef SP5K_DISP_PIN_CB */
+
+/*_________________________________________________________________________
+
+  usb.
+ _________________________________________________________________________
+*/
+/*USB gpio pin define*/
+#ifdef FPGA
+#define SP5K_USB_VBUS_SCAN    0
+#else
+#define SP5K_USB_VBUS_SCAN    1
+#endif
+
+
+#if SPCA5330
+#define SP5K_VBUS_DETECT_GRP      SP5K_GPIO_GRP_USB
+#define SP5K_VBUS_DETECT_ID       0
+#define SP5K_VBUS_DETECT_POL      SP5K_GPIO_ACTIVE_HIGH
+#else
+#define SP5K_VBUS_DETECT_GRP      SP5K_GPIO_GRP_DISP
+#define SP5K_VBUS_DETECT_ID       17
+#define SP5K_VBUS_DETECT_POL      SP5K_GPIO_ACTIVE_LOW
+#endif
+
+/*_________________________________________________________________________
+
+  front.
+ _________________________________________________________________________
+*/
+/*select sensor TG master clock source, select either ONE of the 3*/
+#ifndef SP5K_FRONT_MCLK_SRC_CUSTOM_DEFINE
+#define SP5K_FRONT_MCLK_SRC_NOT_CONNECT   0 /*sensor/XTG has own MCLK*/
+#define SP5K_FRONT_MCLK_SRC_SP5K_TGPLL    1
+#define SP5K_FRONT_MCLK_SRC_ADCLPI_PAD    0
+#endif
+
+/*select sensor SyncSigGen clock source master, select either ONE of the 2
+ *NOTE: not all the sensor drivers support both modes
+ *such sensor drivers will ignore this setting
+ */
+#define SP5K_FRONT_SYNC_SIG_SP5K_MASTER   0
+#define SP5K_FRONT_SYNC_SIG_SP5K_SLAVE    1
+
+/*select sensor/TG, AFE*/
+#ifndef SP5K_SENSOR_CUSTOM_DEFINE
+#define SP5K_SENSOR_OV5610                  0
+#define SP5K_SENSOR_OV14810                 0
+#define SP5K_SENSOR_OV5633                  1
+#define SP5K_SENSOR_OV9655                  0
+#define SP5K_SENSOR_OV16820                 0
+#define SP5K_SENSOR_MT9J003                 0
+#define SP5K_SENSOR_MT9F002                 0
+#define SP5K_SENSOR_1628SB                  0
+#define SP5K_SENSOR_SONYIMX175              0
+#define SP5K_SENSOR_SONYIMX118              0
+#define SP5K_SENSOR_SONYIMX206              0
+#define SP5K_SENSOR_SONYIMX147              0
+/*PANASONIC */
+#define SP5K_SENSOR_TG_PANX12069_MN39600    0
+#define SP5K_SENSOR_AFE_PANX12069           0
+
+/*ADI AFE*/
+#define SP5K_SENSOR_AFE_AD9010              0
+
+#define SP5K_SENSOR_TG_PANX12081A_MN34510   0
+#define SP5K_SENSOR_AFE_PANX12081A          0
+
+/*TI 3-in-1 AFE*/
+#define SP5K_SENSOR_AFE_VSP6244             0
+#define SP5K_SENSOR_AFE_VSP6300A            0
+
+/*SONY */
+#define SP5K_SENSOR_TG_VSP6244_SONY677      0
+#define SP5K_SENSOR_TG_VSP6244_SONY681      0
+#define SP5K_SENSOR_TG_VSP6244_SONY682      0
+/*Sharp  */
+#define SP5K_SENSOR_TG_VSP6244_SHARPRJ23W3E 0
+
+/* ICAT IQ EVB fake sensor */
+#define SP5K_SENSOR_ICATEVBFAKE           0
+
+/* CISPLUS CMOS Image Sensor */
+#define SP5K_SENSOR_TT3131                0
+
+/* OmniVision CMOS Image Sensor */
+#define SP5K_SENSOR_OV2610                0
+#define SP5K_SENSOR_OV5620                0
+#define SP5K_SENSOR_OV8810                0
+#define SP5K_SENSOR_OV5640                0  /*MIPI YUV 2Lane*/
+
+/* Micro CMOS Image Sensor */
+#define SP5K_SENSOR_MI5100                0
+
+/* Panasonic CCD Image Sensor */
+#define SP5K_SENSOR_TG_PANX12067_MN39830     0
+#define SP5K_SENSOR_AFE_PANX12067            0
+#define SP5K_SENSOR_TG_PANX12069_MN39830     0
+#define SP5K_SENSOR_TG_VSP6244_PANAMN34571   0
+#define SP5K_SENSOR_TG_AD9010_PANAMN34575    0
+#define SP5K_SENSOR_TG_VSP6300A_PANAMN34575  0
+#define SP5K_SENSOR_TG_VSP6300A_PANAMN34596  0
+
+/* Sony CCD Image Sensor */
+#define SP5K_SENSOR_TG_CXD4805GA_SONY624  0
+#define SP5K_SENSOR_AFE_CXD4805GA         0
+#define SP5K_SENSOR_TG_CXD3626GA_SONY455  0
+#define SP5K_SENSOR_AFE_AD9943            0
+#define SP5K_SENSOR_TG_AD9923_SONY629     0
+#define SP5K_SENSOR_AFE_AD9923            0
+#define SP5K_SENSOR_TG_AD9920_SONY636     0
+#define SP5K_SENSOR_TG_AD9920_SONY646     0
+#define SP5K_SENSOR_TG_AD9000_SONY675     0
+
+#define SP5K_SENSOR_TG_VSP6244_SONY675    0
+
+/* Sharp CCD Image Sensor */
+#define SP5K_SENSOR_TG_AD9920_SHARPRJ23T3A 0
+#define SP5K_SENSOR_TG_AD9920_SHARPRJ23V3B 0
+#define SP5K_SENSOR_TG_AD9920_SHARPRJ23U3B 0
+
+/*ADI 3-in-1 AFE*/
+#define SP5K_SENSOR_AFE_AD9920            0
+#define SP5K_SENSOR_AFE_AD9000            0
+
+/* CUSTOM */
+#define SP5K_SENSOR_TG_CUSTOM             0
+#define SP5K_SENSOR_AFE_CUSTOM            0
+#endif /* #ifndef SP5K_SENSOR_CUSTOM_DEFINE */
+
+/*mechanical shutter support for snap*/
+#define SP5K_SNAP_SHUTTER_SUPPORT     1
+
+/*select TV-in decoder. set all to 0 if no TV-in support*/
+#define SP5K_TVIN_DEC_XXX 0
+#define SP5K_TVIN_DEC_YYY 0
+
+/*_________________________________________________________________________
+
+  audio device.
+ _________________________________________________________________________
+*/
+
+#ifndef SP5K_AUDIO_DEVICE_CUSTOM_DEFINE
+#define SP5K_AUD_DEVICE_INTERNAL    1
+#define SP5K_AUD_DEVICE_HDMI        0
+#define SP5K_AUD_DEVICE_WS8751      0
+#define SP5K_AUD_DEVICE_PCM3001E    0
+
+
+#define SP5K_AUD_DEVICE2_INTERNAL    0
+#define SP5K_AUD_DEVICE2_HDMI        1
+#define SP5K_AUD_DEVICE2_WS8751      0
+#define SP5K_AUD_DEVICE2_PCM3001E    0
+#endif
+
+
+#define SP5K_AUD_DEV_SPEAKER_GRP    SP5K_GPIO_GRP_FMH
+#define SP5K_AUD_DEV_SPEAKER_ID     (50-32)
+#define SP5K_AUD_DEV_SPEAKER_POL    SP5K_GPIO_ACTIVE_HIGH
+
+/*_________________________________________________________________________
+
+  key button.
+ _________________________________________________________________________
+*/
+
+#define SP5K_BUTTON_DIRECT_GPIO_NUMBER  GPIO_BTN_NUM
+#define SP5K_BUTTON_ADC_NUMBER          ADC_BTN_NUM
+
+
+/*_________________________________________________________________________
+
+  power init.
+ _________________________________________________________________________
+*/
+#define APP_LOG_TO_SD_ENABLE			1	/* activate file "SDMARK.LOG" should still saved to SD card;  0:disable , 1:enable */
+#define APP_DEAD_MENU_ENABLE			0	/* user menu enable after program dead; 0:disable , 1:enable */
+
+/*_________________________________________________________________________
+
+  macros.
+ _________________________________________________________________________
+*/
+#include "macro_expand.h"
+
+typedef struct {
+	UINT16 grp;
+	UINT8 id;
+	UINT8 pol;
+	UINT32 msk;
+} iopin_t;
+enum { SPI_CS2, SPI_CS, SPI_SCL, SPI_SDA };
+
+typedef struct {
+	UINT8 ioidx;
+	UINT8 pol;
+	UINT16 delayms;
+} ioseq_t;
+
+#endif  /* __ASSEMBLER__ */
+
+#endif  /* _DEV_INIT_H_ */
+
+
+/*-------------------------------------------------------------------------
+ * SPCA GPIO Related Definition
+ */
+#define GPIO_MASK(PinNo)    (0x00000001L << (PinNo))
+#define dummyio_set         do { } while(0)
+#define dummyio_get         do { } while(0)
+#define dummyio				0
+
+/*-------------------------------------------------------------------------
+ * SPCA GPIO BIT Mask Definition
+ */
+#define BIT0    0x00000001
+#define BIT1    0x00000002
+#define BIT2    0x00000004
+#define BIT3    0x00000008
+#define BIT4    0x00000010
+#define BIT5    0x00000020
+#define BIT6    0x00000040
+#define BIT7    0x00000080
+#define BIT8    0x00000100
+#define BIT9    0x00000200
+#define BIT10   0x00000400
+#define BIT11   0x00000800
+#define BIT12   0x00001000
+#define BIT13   0x00002000
+#define BIT14   0x00004000
+#define BIT15   0x00008000
+#define BIT16   0x00010000
+#define BIT17   0x00020000
+#define BIT18   0x00040000
+#define BIT19   0x00080000
+#define BIT20   0x00100000
+#define BIT21   0x00200000
+#define BIT22   0x00400000
+#define BIT23   0x00800000
+#define BIT24   0x01000000
+#define BIT25   0x02000000
+#define BIT26   0x04000000
+#define BIT27   0x08000000
+#define BIT28   0x10000000
+#define BIT29   0x20000000
+#define BIT30   0x40000000
+#define BIT31   0x80000000
+
+/*-------------------------------------------------------------------------
+ * SPCA GPIO Mask Shift Definition
+ */
+#define PIN_0     0
+#define PIN_1     1
+#define PIN_2     2
+#define PIN_3     3
+#define PIN_4     4
+#define PIN_5     5
+#define PIN_6     6
+#define PIN_7     7
+#define PIN_8     8
+#define PIN_9     9
+#define PIN_10    10
+#define PIN_11    11
+#define PIN_12    12
+#define PIN_13    13
+#define PIN_14    14
+#define PIN_15    15
+#define PIN_16    16
+#define PIN_17    17
+#define PIN_18    18
+#define PIN_19    19
+#define PIN_20    20
+#define PIN_21    21
+#define PIN_22    22
+#define PIN_23    23
+#define PIN_24    24
+#define PIN_25    25
+#define PIN_26    26
+#define PIN_27    27
+#define PIN_28    28
+#define PIN_29    29
+#define PIN_30    30
+#define PIN_31    31
+
+#define PIN_32    0
+#define PIN_33    1
+#define PIN_34    2
+#define PIN_35    3
+#define PIN_36    4
+#define PIN_37    5
+#define PIN_38    6
+#define PIN_39    7
+#define PIN_40    8
+#define PIN_41    9
+#define PIN_42    10
+#define PIN_43    11
+#define PIN_44    12
+#define PIN_45    13
+#define PIN_46    14
+#define PIN_47    15
+#define PIN_48    16
+#define PIN_49    17
+#define PIN_50    18
+#define PIN_51    19
+
+#define bit_0     0
+#define bit_1     1
+#define bit_2     2
+#define bit_3     3
+#define bit_4     4
+#define bit_5     5
+#define bit_6     6
+#define bit_7     7
+#define bit_8     8
+#define bit_9     9
+#define bit_10   10
+#define bit_11   11
+#define bit_12   12
+#define bit_13   13
+#define bit_14   14
+#define bit_15   15
+#define bit_16   16
+#define bit_17   17
+#define bit_18   18
+#define bit_19   19
+#define bit_20   20
+#define bit_21   21
+#define bit_22   22
+#define bit_23   23
+#define bit_24   24
+#define bit_25   25
+#define bit_26   26
+#define bit_27   27
+#define bit_28   28
+#define bit_29   29
+#define bit_30   30
+#define bit_31   31
+#define bit_32   32
+#define bit_33   33
+#define bit_34   34
+#define bit_35   35
+#define bit_36   36
+#define bit_37   37
+#define bit_38   38
+#define bit_39   39
+#define bit_40   40
+#define bit_41   41
+#define bit_42   42
+#define bit_43   43
+#define bit_44   44
+#define bit_45   45
+#define bit_46   46
+#define bit_47   47
+#define bit_48   48
+#define bit_49   49
+#define bit_50   50
+#define bit_51   51
+
+#define VALI_GenGPIO(Num)    _GENGPIO_PIN_IN(Num)
+#define VALI_TgGPIO(Num)     _TGGPIO_PIN_IN(Num)
+#define VALI_DispGPIO(Num)   _DISPGPIO_PIN_IN(Num)
+#define VALI_FmGPIO(Num)     _FMGPIO_PIN_IN(Num)
+#define VALI_LmiGPIO(Num)    _LMIGPIO_PIN_IN(Num)
+#define VALI_PocuGPIO(Num)   _POCUGPIO_PIN_IN(Num)
+#define VALI_UsbGPIO(Num)    _USBGPIO_PIN_IN(Num)
+
+#define VALO_GenGPIO(Num)    _GENGPIO_PIN_OUT(Num)
+#define VALO_TgGPIO(Num)     _TGGPIO_PIN_OUT(Num)
+#define VALO_DispGPIO(Num)   _DISPGPIO_PIN_OUT(Num)
+#define VALO_FmGPIO(Num)     _FMGPIO_PIN_OUT(Num)
+#define VALO_LmiGPIO(Num)    _LMIGPIO_PIN_OUT(Num)
+#define VALO_PocuGPIO(Num)

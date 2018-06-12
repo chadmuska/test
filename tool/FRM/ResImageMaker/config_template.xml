@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResImageMaker>
+  <Res root="..\download">
+    <!--Both alignSize and maxSize are in decimal format, KB unit;
+	supported fsType: FAT12, FAT16, FAT32, CRAMFS;
+	if you do not want to specify fsType, just delete this attr or set it to "DEFAULT"
+	decrypt is for FSG files, if you need to decrypt, then set to 1, or 0-->
+    <FirstDisk src="A" dest="AIMG" fsType="DEFAULT" alignSize="128" decrypt="1" />
+    <SecondDisk src="B" dest="BIMG" fsType="DEFAULT" alignSize="128" decrypt="1" />
+  </Res>
+</ResImageMaker>

@@ -1,0 +1,1168 @@
+2 /*n_tbl*/
+3 /*nreg*/
+/*loop2 for n_tbl*/
+177 /*n_entry*/
+0    /*tblidx_min*/
+0x30 /*sensorMode of this tbl*/
+/*apex value of tblidx i = (i + exp_tblidx0_unit) / exp_tblidx_unit*/
+0  /*(SINT8)exp_tblidx0_unit*/
+16 /*exp_tblidx_unit*/
+3 /*n_burst_sec*/
+/*template*/ /*nreg*/
+0x63
+0
+0
+0
+0
+/*template*/
+0x64
+0x10
+0
+0
+0
+/*template*/
+0x68
+0xf0
+0xff
+0xff
+0x3f
+/*loop1 for n_burst_sec*/ /*long exp*/
+79  /*n_burstidx*/
+1  /*nbyte_entry*/
+0  /*burstidx_min*/
+1  /*n_op*/
+/*loop0 for n_op*/
+0   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+12  /*reg_lsb: left shift to reg*/
+12  /*nbit_mask*/ /*NOTE! LSB12->8*/
+/*loop0 ends*/
+/*contains for n_burstidx * nbyte_entry*/
+29
+28
+27
+26
+25
+24
+23
+22
+21
+20
+19
+18
+17
+17
+16
+15
+14
+14
+13
+13
+12
+12
+11
+11
+10
+10
+9
+9
+8
+8
+8
+7
+7
+7
+6
+6
+6
+6
+5
+5
+5
+5
+4
+4
+4
+4
+4
+3
+3
+3
+3
+3
+3
+3
+2
+2
+2
+2
+2
+2
+2
+2
+2
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+/*end contains*/
+/*loop1 ends*/
+/*loop1 for n_burst_sec*/ /*short exp*/
+177 /*n_burstidx*/
+1   /*nbyte_entry*/
+0   /*burstidx_min*/
+1   /*n_op*/
+/*loop0 for n_op*/
+1   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+24  /*reg_lsb: left shift to reg*/
+12  /*nbit_mask*/ /*NOTE!! LSB12->8*/
+/*loop0 ends*/
+/*contains for n_burstidx * nbyte_entry*/
+21
+89
+143
+184
+213
+230
+236
+230
+214
+188
+152
+107
+53
+244
+174
+96
+11
+171
+72
+219
+107
+242
+118
+241
+107
+220
+76
+180
+27
+122
+213
+48
+132
+212
+36
+109
+180
+247
+59
+121
+180
+237
+38
+90
+140
+188
+233
+24
+66
+106
+144
+181
+216
+250
+29
+60
+90
+118
+146
+172
+196
+220
+243
+12
+33
+53
+72
+91
+108
+125
+141
+157
+171
+186
+199
+212
+225
+237
+248
+6
+16
+26
+36
+45
+54
+63
+71
+78
+86
+93
+100
+106
+112
+118
+124
+129
+135
+140
+145
+149
+154
+158
+162
+166
+169
+173
+176
+180
+183
+186
+189
+191
+194
+196
+199
+201
+203
+205
+207
+209
+211
+213
+215
+216
+218
+219
+221
+222
+223
+225
+226
+227
+228
+229
+230
+231
+232
+233
+233
+234
+235
+236
+236
+237
+238
+238
+239
+240
+240
+241
+241
+242
+242
+242
+243
+243
+244
+244
+244
+245
+245
+245
+246
+246
+246
+247
+247
+247
+247
+247
+248
+248
+248
+248
+248
+249
+249
+/*end contains*/
+/*loop1 ends*/
+/*loop1 for n_burst_sec*/
+39  /*n_burstidx*/
+4   /*nbyte_entry*/
+138 /*burstidx_min*/
+2   /*n_op*/
+/*loop0 for n_op*/
+2   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+13  /*reg_lsb: left shift to reg*/
+13  /*nbit_mask*/
+/*loop0 ends*/
+/*loop0 for n_op*/
+2   /*tmpl_reg: reg# in template, 0-based*/
+16  /*entry_lsb: right shift table entry contain*/
+26  /*reg_lsb: left shift to reg*/
+13  /*nbit_mask*/
+/*loop0 ends*/
+/*contains for n_burstidx * nbyte_entry*/
+158
+14
+179
+14
+91
+11
+112
+11
+127
+7
+148
+7
+15
+3
+36
+3
+126
+15
+147
+15
+251
+9
+16
+10
+246
+3
+11
+4
+225
+14
+246
+14
+234
+7
+255
+7
+130
+0
+151
+0
+24
+10
+45
+10
+219
+1
+240
+1
+165
+10
+186
+10
+165
+1
+186
+1
+181
+9
+202
+9
+85
+17
+106
+17
+102
+7
+123
+7
+123
+14
+144
+14
+215
+3
+236
+3
+85
+10
+106
+10
+140
+16
+161
+16
+21
+5
+42
+5
+200
+10
+221
+10
+61
+16
+82
+16
+12
+4
+33
+4
+14
+9
+35
+9
+217
+13
+238
+13
+5
+1
+26
+1
+106
+5
+127
+5
+160
+9
+181
+9
+167
+13
+188
+13
+85
+17
+106
+17
+203
+3
+224
+3
+85
+7
+106
+7
+184
+10
+205
+10
+247
+13
+12
+14
+19
+17
+40
+17
+162
+2
+183
+2
+124
+5
+145
+5
+/*end contains*/
+/*loop1 ends*/
+/*vtable partition: n_vtblsec,def_vtype(0:no used,1:vcount,0xff:100us timer)*/
+1
+1
+/*loop3 for n_vtblsec*/
+79  /*n_vidx*/
+1   /*nbyte_entry*/
+0   /*vmin*/
+1   /*vtype*/
+/*contains n_vidx * nbyte_entry*/
+30
+29
+28
+27
+26
+25
+24
+23
+22
+21
+20
+19
+18
+18
+17
+16
+15
+15
+14
+14
+13
+13
+12
+12
+11
+11
+10
+10
+9
+9
+9
+8
+8
+8
+7
+7
+7
+7
+6
+6
+6
+6
+5
+5
+5
+5
+5
+4
+4
+4
+4
+4
+4
+4
+3
+3
+3
+3
+3
+3
+3
+3
+3
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+/*end contains*/
+/*end loop3*/
+/*error table: n_erridx, emin, err unit in "N"-th ev*/
+0
+0
+64
+/*contains, for n_erridx (SINT8)*/
+/*end contains*/
+/*loop2 ends*/
+/*loop2 for n_tbl*/
+177 /*n_entry*/
+0    /*tblidx_min*/
+0x40 /*sensorMode of this tbl*/
+/*apex value of tblidx i = (i + exp_tblidx0_unit) / exp_tblidx_unit*/
+0  /*(SINT8)exp_tblidx0_unit*/
+16 /*exp_tblidx_unit*/
+3 /*n_burst_sec*/
+/*template*/ /*nreg*/
+0x63
+0
+0
+0
+0
+/*template*/
+0x64
+0x10
+0
+0
+0
+/*template*/
+0x68
+0xf0
+0xff
+0xff
+0x3f
+/*loop1 for n_burst_sec*/ /*long exp*/
+79  /*n_burstidx*/
+1  /*nbyte_entry*/
+0  /*burstidx_min*/
+1  /*n_op*/
+/*loop0 for n_op*/
+0   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+12  /*reg_lsb: left shift to reg*/
+12  /*nbit_mask*/ /*NOTE! LSB12->8*/
+/*loop0 ends*/
+/*contains for n_burstidx * nbyte_entry*/
+29
+28
+27
+26
+25
+24
+23
+22
+21
+20
+19
+18
+17
+17
+16
+15
+14
+14
+13
+13
+12
+12
+11
+11
+10
+10
+9
+9
+8
+8
+8
+7
+7
+7
+6
+6
+6
+6
+5
+5
+5
+5
+4
+4
+4
+4
+4
+3
+3
+3
+3
+3
+3
+3
+2
+2
+2
+2
+2
+2
+2
+2
+2
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+/*end contains*/
+/*loop1 ends*/
+/*loop1 for n_burst_sec*/ /*short exp*/
+177 /*n_burstidx*/
+1   /*nbyte_entry*/
+0   /*burstidx_min*/
+1   /*n_op*/
+/*loop0 for n_op*/
+1   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+24  /*reg_lsb: left shift to reg*/
+12  /*nbit_mask*/ /*NOTE!! LSB12->8*/
+/*loop0 ends*/
+/*contains for n_burstidx * nbyte_entry*/
+21
+89
+143
+184
+213
+230
+236
+230
+214
+188
+152
+107
+53
+244
+174
+96
+11
+171
+72
+219
+107
+242
+118
+241
+107
+220
+76
+180
+27
+122
+213
+48
+132
+212
+36
+109
+180
+247
+59
+121
+180
+237
+38
+90
+140
+188
+233
+24
+66
+106
+144
+181
+216
+250
+29
+60
+90
+118
+146
+172
+196
+220
+243
+12
+33
+53
+72
+91
+108
+125
+141
+157
+171
+186
+199
+212
+225
+237
+248
+6
+16
+26
+36
+45
+54
+63
+71
+78
+86
+93
+100
+106
+112
+118
+124
+129
+135
+140
+145
+149
+154
+158
+162
+166
+169
+173
+176
+180
+183
+186
+189
+191
+194
+196
+199
+201
+203
+205
+207
+209
+211
+213
+215
+216
+218
+219
+221
+222
+223
+225
+226
+227
+228
+229
+230
+231
+232
+233
+233
+234
+235
+236
+236
+237
+238
+238
+239
+240
+240
+241
+241
+242
+242
+242
+243
+243
+244
+244
+244
+245
+245
+245
+246
+246
+246
+247
+247
+247
+247
+247
+248
+248
+248
+248
+248
+249
+249
+/*end contains*/
+/*loop1 ends*/
+/*loop1 for n_burst_sec*/
+39  /*n_burstidx*/
+4   /*nbyte_entry*/
+138 /*burstidx_min*/
+2   /*n_op*/
+/*loop0 for n_op*/
+2   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+13  /*reg_lsb: left shift to reg*/
+13  /*nbit_mask*/
+/*loop0 ends*/
+/*loop0 for n_op*/
+2   /*tmpl_reg: reg# in template, 0-based*/
+16  /*entry_lsb: right shift table entry contain*/
+26  /*reg_lsb: left shift to reg*/
+13  /*nbit_mask*/
+/*loop0 ends*/
+/*contains for n_burstidx * nbyte_entry*/
+158
+14
+179
+14
+91
+11
+112
+11
+127
+7
+148
+7
+15
+3
+36
+3
+126
+15
+147
+15
+251
+9
+16
+10
+246
+3
+11
+4
+225
+14
+246
+14
+234
+7
+255
+7
+130
+0
+151
+0
+24
+10
+45
+10
+219
+1
+240
+1
+165
+10
+186
+10
+165
+1
+186
+1
+181
+9
+202
+9
+85
+17
+106
+17
+102
+7
+123
+7
+123
+14
+144
+14
+215
+3
+236
+3
+85
+10
+106
+10
+140
+16
+161
+16
+21
+5
+42
+5
+200
+10
+221
+10
+61
+16
+82
+16
+12
+4
+33
+4
+14
+9
+35
+9
+217
+13
+238
+13
+5
+1
+26
+1
+106
+5
+127
+5
+160
+9
+181
+9
+167
+13
+188
+13
+85
+17
+106
+17
+203
+3
+224
+3
+85
+7
+106
+7
+184
+10
+205
+10
+247
+13
+12
+14
+19
+17
+40
+17
+162
+2
+183
+2
+124
+5
+145
+5
+/*end contains*/
+/*loop1 ends*/
+/*vtable partition: n_vtblsec,def_vtype(0:no used,1:vcount,0xff:100us timer)*/
+1
+1
+/*loop3 for n_vtblsec*/
+79  /*n_vidx*/
+1   /*nbyte_entry*/
+0   /*vmin*/
+1   /*vtype*/
+/*contains n_vidx * nbyte_entry*/
+30
+29
+28
+27
+26
+25
+24
+23
+22
+21
+20
+19
+18
+18
+17
+16
+15
+15
+14
+14
+13
+13
+12
+12
+11
+11
+10
+10
+9
+9
+9
+8
+8
+8
+7
+7
+7
+7
+6
+6
+6
+6
+5
+5
+5
+5
+5
+4
+4
+4
+4
+4
+4
+4
+3
+3
+3
+3
+3
+3
+3
+3
+3
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+/*end contains*/
+/*end loop3*/
+/*error table: n_erridx, emin, err unit in "N"-th ev*/
+0
+0
+64
+/*contains, for n_erridx (SINT8)*/
+/*end contains*/
+/*loop2 ends*/

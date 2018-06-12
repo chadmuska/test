@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<iSimuProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Type>iSimu</Type>
+  <TemplateName>6350-ControlBox</TemplateName>
+  <TemplateVersion>0.0.1</TemplateVersion>
+  <Platform>6350</Platform>
+  <ConfigTxtGroupFiles>
+    <string>apppar.txt sp6350par.txt</string>
+  </ConfigTxtGroupFiles>
+  <InGroup>
+    <string>raw</string>
+    <string>res</string>
+  </InGroup>
+  <OutGroup>
+    <string>bmp</string>
+    <string>fpga</string>
+  </OutGroup>
+  <IndexMode>false</IndexMode>
+  <Index>0</Index>
+</iSimuProjectInfo>

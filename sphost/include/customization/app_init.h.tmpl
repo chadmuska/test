@@ -1,0 +1,272 @@
+/**************************************************************************
+ *
+ *       Copyright (c) 2006-2018 by iCatch Technology, Inc.
+ *
+ *  This software is copyrighted by and is the property of iCatch
+ *  Technology, Inc.. All rights are reserved by iCatch Technology, Inc..
+ *  This software may only be used in accordance with the corresponding
+ *  license agreement. Any unauthorized use, duplication, distribution,
+ *  or disclosure of this software is expressly forbidden.
+ *
+ *  This Copyright notice MUST not be removed or modified without prior
+ *  written consent of iCatch Technology, Inc..
+ *
+ *  iCatch Technology, Inc. reserves the right to modify this software
+ *  without notice.
+ *
+ *  iCatch Technology, Inc.
+ *  19-1, Innovation First Road, Science-Based Industrial Park,
+ *  Hsin-Chu, Taiwan.
+ *
+ **************************************************************************/
+/**
+ * @file app_init.h
+ *
+ * @author
+ */
+#ifndef _APP_INIT_H_
+#define _APP_INIT_H_
+
+/**************************************************************************
+ *                        H E A D E R   F I L E S
+ **************************************************************************/
+#include "customization/project_def.h"
+
+/**************************************************************************
+ *                           C O N S T A N T S                            *
+ **************************************************************************/
+/* cmd task init */
+#define CMD_TASK_INIT             1
+
+#define CMD_MEM     1
+#define CMD_OS      1
+#define CMD_DOS     1
+#define CMD_DISK    1
+#define CMD_ERR     0
+#define CMD_MEDIA   1
+#define CMD_ISP     1
+#define CMD_HW      0
+#define CMD_SD      1
+#define CMD_NAND    1
+#define CMD_SNAP    1
+#define CMD_USB     1
+
+
+/* vendor command init */
+#define VENDOR_CMD_INIT           1
+/* usb mass storage driver init */
+#define MASS_STORAGE_INIT         1
+/* usb still image cleass driver init */
+#define STILL_IMAGE_CLASS_INIT    1
+/* usb task init */
+#define USB_DRIVER_INIT           1
+/* USB OTG init */
+#define ON_THE_GO_DRIVER_INIT     0
+/* USB picture bridge init */
+#define PICTURE_BRIDGE_INIT       0
+
+/* Snap fast background preview, 0=disabled, o/w=enabled with N frame period */
+#define SNAP_FAST_BK_PREVIEW_SUPPORT  0
+/* ---- media ----------------------- */
+/* support media codec type define
+ *
+ * A/V format
+ * H264  : H.264 MPEG video
+ * MJPG  : motion JPEG video
+ * PCM   : linear PCM audio
+ * ULAW  : mu-law audio
+ * ALAW  : a-law audio
+ * ADPCM : adaptive DPCM audio
+ * MP3   : MPEG-1 audio layer 3
+ * WMA   : Microsoft WMA audio
+ * AAC   : Advanced Audio Coding audio
+ *
+ * container format
+ * MOV   : Apple Quicktime MOV file format
+ * AVI   : Microsoft AVI file format
+ * ASF   : Microsoft ASF file format
+ * WAV   : Microsoft WAV audio file format
+ */
+/*decoders*/
+#define MEDIA_DEC_H264            1
+#define MEDIA_DEC_MJPG            1
+#define MEDIA_DEC_PCM             1
+#define MEDIA_DEC_MULAW           1
+#define MEDIA_DEC_ALAW            1
+#define MEDIA_DEC_ADPCM           0
+#define MEDIA_DEC_MP3             0
+#define MEDIA_DEC_WMA             0
+#define MEDIA_DEC_AAC             1
+
+/*encoders*/
+#define MEDIA_ENC_H264            1
+#define MEDIA_ENC_MJPG            1
+#define MEDIA_ENC_PCM             1
+#define MEDIA_ENC_MULAW           1
+#define MEDIA_ENC_ALAW            1
+#define MEDIA_ENC_ADPCM           0
+#define MEDIA_ENC_AAC             1
+
+/*mux recorders*/
+#define MEDIA_RECORD_MOV          1
+#define MEDIA_RECORD_AVI          1
+#define MEDIA_RECORD_ASF          0
+#define MEDIA_RECORD_WAV          1
+#define MEDIA_RECORD_MP3          0
+
+/*demux players*/
+#define MEDIA_PLAY_MOV            1
+#define MEDIA_PLAY_AVI            1
+#define MEDIA_PLAY_ASF            0
+#define MEDIA_PLAY_WAV            1
+#define MEDIA_PLAY_MP3            0
+#define MEDIA_PLAY_WMA            0
+
+/*edit*/
+#define MEDIA_EDIT_MOV            0
+#define MEDIA_EDIT_AVI            0
+
+#define SP5K_LDC_SUPPORT		1
+/* -- iCatch AE/AWB/AF frameworks support -- */
+#define SP5K_AF_FRAMEWORK   1
+
+/* -- iCatch default AE/AWB support -- */
+/*if user intends to use the iCatch default preview AE algorithm
+ * at any point of time, including pre-flash AE, define as 1
+ */
+#define AE_DEFAULT_SUPPORT 0
+/*if user intends to use the iCatch default preview AWB algorithm
+ * at any point of time, define as 1
+ */
+#define AWB_DEFAULT_SUPPORT 0
+
+/*s Add by Aries 10/05/12*/
+/* Smear reduction support */
+#define SMEAR_REDUCT_SUPPORT	0
+
+/* -- playback flow options -- */
+#define PB_MAX_COMPRESSION_RATIO    3
+/*e Add by Aries 10/05/12*/
+
+/* -- iCatch object tracking support -- */
+#define OBJ_TRACK_PREVIEW_SUPPORT 1
+
+/* -- ALG effect support -- */
+#define ALG_EFFECT_FACE_BEAUTY_SUPPORT      0
+#define ALG_EFFECT_SUPER_RESOLUTION_SUPPORT	1
+#define ALG_EFFECT_MULTI_WDR_SUPPORT	      0
+#define ALG_EFFECT_DYNAMIC_TONE_SUPPORT	    0
+#define ALG_EFFECT_SEPIA_SUPPORT	          0
+#define ALG_EFFECT_POSTERIZE_SUPPORT	      0
+#define ALG_EFFECT_SOFT_SUPPORT	            0
+#define ALG_EFFECT_PAINT_SUPPORT	          0
+
+
+/* -- iCatch DIST support -- */
+#if SPCA5310
+#define STILL_DIST_SUPPORT 1
+#define VIDEO_DIST_SUPPORT 1
+#else
+#define STILL_DIST_SUPPORT 0
+#define VIDEO_DIST_SUPPORT 0
+#endif
+
+/* -- iCatch face tracking support -- */
+
+#define FACE_TRACK_PREVIEW_SUPPORT   1
+#define FACE_TRACK_SNAP_SUPPORT      0
+#define FACE_TRACK_PLAYBACK_SUPPORT  0
+#define FACE_TRACK_TINY_FACE_DETECT  0
+#define FACE_TRACK_SMILE_DETECT      0
+#define FACE_TRACK_BLINK_DETECT      0
+#define FACE_TRACK_TINY_SMILE_DETECT 0
+#define FACE_TRACK_TINY_BLINK_DETECT 0
+#define FACE_TRACK_CHECK_FACE_COLOR  1
+#define FACE_TRACK_ALGO_TYPE         1
+#define FACE_TRACK_CAR_SUPPORT       1
+
+
+/* -- Adas Algorithm support -- */
+#ifdef TEST_ADAS_LDWS
+#define ADAS_ALGO_LDWS_SUPPORT  1
+#else
+#define ADAS_ALGO_LDWS_SUPPORT  0
+#endif
+#ifdef TEST_ADAS_ROD
+#define ADAS_ALGO_ROD_SUPPORT  1
+#else
+#define ADAS_ALGO_ROD_SUPPORT  0
+#endif
+#ifdef TEST_ADAS_LPD
+#define ADAS_ALGO_LPD_SUPPORT  1
+#else
+#define ADAS_ALGO_LPD_SUPPORT  0
+#endif
+
+/* -- custom host UI config -- */
+/*if user intends to use evbSimpleJobDo() as host message handler, define as 1 */
+#define SIMPLE_UI_FLOW 0
+
+
+/*define how many messages at most are available for host UI queue*/
+#define	HOST_MSG_MAX_SIZE 128
+
+/*define how many messages at most are available for custom APP queue*/
+#define	CUSTOMAPP_MSG_MAX_SIZE 128
+
+/*to use separated custom heap in blocks, define as 1*/
+#define CUSTOM_HEAP_BLOCK_SUPPORT 1
+
+/*to use separated custom heap in byte pool, define request size*/
+#define CUSTOM_HEAP_BYTE_POOL_SIZE (256*1024) /*0: no separated byte pool custom heap*/
+
+
+/* -- Snap flow options -- */
+/* Snap mode */
+#if 0 /* original */
+#define SNAP_CAPTURE_MODE			1 /* 1:S2S */
+/* Snap heap raw and jpeg blocks */
+#define SNAP_HEAP_RAW_BLOCKS		1 /* If 0, auto mode */
+#define SNAP_HEAP_JPEG_BLOCKS		2 /* If 0, auto mode */
+#else /*Edward 20090106*/
+#define SNAP_CAPTURE_MODE			2 /* 2:RGB */
+#endif
+/* Snap jpeg max compression ratio */
+#define SNAP_MAX_COMPRESSION_RATIO	800
+/* Proprietary APP Image Size */
+#define APP_QVGA_WIDTH		320
+#define APP_QVGA_HEIGHT		240
+#define AUDIO_SAMPLE_RATE   44100   /*MUST same as audio resource/Video/HDMI output*/
+
+/* slide show effects. */
+#define SLIDE_EFFECT_FADE_SUPPORT            1
+#define SLIDE_EFFECT_FRAME_DRAG_SUPPORT      1
+#define SLIDE_EFFECT_FRAME_SCROLL_SUPPORT    1
+#define SLIDE_EFFECT_FRAME_STRETCH_SUPPORT   1
+#define SLIDE_EFFECT_STRIP_DRAG_SUPPORT      1
+#define SLIDE_EFFECT_DRAPE_DRAG_SUPPORT      1
+#define SLIDE_EFFECT_DRAPE_PROGRESS_SUPPORT  1
+#define SLIDE_EFFECT_SLOPE_PROGRESS_SUPPORT  1
+#define SLIDE_EFFECT_ZIPPER_DRAG_SUPPORT     1
+#define SLIDE_EFFECT_ZOOM_FADE_SUPPORT       1
+#if SPCA5210
+#define SLIDE_EFFECT_DIAGONAL_CUT_SUPPORT    0
+#define SLIDE_EFFECT_STRIPE_FADE_SUPPORT     0
+#define SLIDE_EFFECT_TWIST_SUPPORT           0
+#define SLIDE_EFFECT_SWIRL_DRAG_SUPPORT      0
+#define SLIDE_EFFECT_CROSS_SPLIT_SUPPORT     0
+#define SLIDE_EFFECT_DOOR_OPEN_SUPPORT       0
+#endif
+
+/* calibration */
+#define CALIB_BP_SUPPORT			1
+#define CALIB_LSC_SUPPORT			1
+
+#include "macro_expand.h"
+
+typedef struct rsvSize_s{
+	UINT32 size;
+}rsvSize_t;
+
+#endif  /* _APP_INIT_H_ */
+

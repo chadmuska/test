@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CameraScene SceneName="Demo">
+  <Resources>
+    <SfnResource Resource_Type="Icon" FontFile="" ResourceFile="A\RO_RES\UI\ICON\ICON56.SFN" IndexTable="0,1,2,3,4,5,6,7,8,9,10,11,12,13,0,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31" Palette="0xffffff,0x400,0xc44562,0xdb5d7a,0xf07391,0xee9baf,0xe1626,0x495367,0x85c7f5,0x7c8920,0xdeea86,0xc6a00c,0xff0000,0xfafafa,0x212121,0x585858,0xd0d0d0,0xb400ff,0xff00,0xf7941d,0xd2e6ff,0x8000ff,0x8080,0x323232,0x808080,0xff0000,0x449f59,0xffff00,0xff,0xff00ff,0xffff,0x800000" />
+    <SfnResource Resource_Type="Icon" FontFile="" ResourceFile="A\RO_RES\UI\ICON\MUBODY.SFN" IndexTable="0,1,2,3,4,5,6,7,8,9,10,11,12,13,0,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31" Palette="0xffffff,0x400,0xc44562,0xdb5d7a,0xf07391,0xee9baf,0xe1626,0x495367,0x85c7f5,0x7c8920,0xdeea86,0xc6a00c,0xff0000,0xfafafa,0x212121,0x585858,0xd0d0d0,0xb400ff,0xff00,0xf7941d,0xd2e6ff,0x8000ff,0x8080,0x323232,0x808080,0xff0000,0x449f59,0xffff00,0xff,0xff00ff,0xffff,0x800000" />
+    <SfnResource Resource_Type="String" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" ResourceFile="A\RO_RES\UI\SST\STR5KTK.SST" IndexTable="0,13,1,0,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31" Palette="0xffffff,0x400,0xc44562,0xdb5d7a,0xf07391,0xee9baf,0xe1626,0x495367,0x85c7f5,0x7c8920,0xdeea86,0xc6a00c,0xff0000,0xfafafa,0x212121,0x585858,0xd0d0d0,0xb400ff,0xff00,0xf7941d,0xd2e6ff,0x8000ff,0x8080,0x323232,0x808080,0xff0000,0x449f59,0xffff00,0xff,0xff00ff,0xffff,0x800000" />
+    <SfnResource Resource_Type="Icon" FontFile="" ResourceFile="A\RO_RES\UI\ICON\ICONTK.SFN" IndexTable="0,1,2,3,4,5,6,7,8,9,10,11,12,13,0,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31" Palette="0xffffff,0x400,0xc44562,0xdb5d7a,0xf07391,0xee9baf,0xe1626,0x495367,0x85c7f5,0x7c8920,0xdeea86,0xc6a00c,0xff0000,0xfafafa,0x212121,0x585858,0xd0d0d0,0xb400ff,0xff00,0xf7941d,0xd2e6ff,0x8000ff,0x8080,0x323232,0x808080,0xff0000,0x449f59,0xffff00,0xff,0xff00ff,0xffff,0x800000" />
+  </Resources>
+  <LayoutView Width="320" Height="240">
+    <Layer Width="320" Height="240" ID="8" AlphaEnable="false" AlphaValue="128" AlphaFormat="0" OriginX="0" OriginY="0">
+      <Item Name="0x00B7" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICON56.SFN" Type="Icon" X="73" Y="9" ScaleX="1" ScaleY="1" ZIndex="0" Width="56" Height="40" />
+      <Item Name="0x00B4" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICON56.SFN" Type="Icon" X="17" Y="9" ScaleX="1" ScaleY="1" ZIndex="1" Width="56" Height="40" />
+      <Item Name="0x0000" FontFile="" OwnFile="A\RO_RES\UI\ICON\MUBODY.SFN" Type="Icon" X="17" Y="45" ScaleX="1" ScaleY="1" ZIndex="2" Width="292" Height="173" />
+    </Layer>
+  </LayoutView>
+  <MenuInfo VisibleMenuItemCount="5">
+    <MenuTemplate Width="260" Height="30">
+      <Item Name="0x0001" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="0" Height="0" />
+      <Item Name="0x00CA" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="0" Height="0" />
+    </MenuTemplate>
+    <MenuLocation>
+      <LocationItem Left="33" Top="56" />
+      <LocationItem Left="33" Top="86" />
+      <LocationItem Left="33" Top="116" />
+      <LocationItem Left="33" Top="146" />
+      <LocationItem Left="33" Top="178" />
+    </MenuLocation>
+    <MenuItemList>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x00D3" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0013" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="92" Height="28" />
+      </MenuItem>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x002C" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0020" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="62" Height="28" />
+      </MenuItem>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x00BE" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0024" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="76" Height="28" />
+      </MenuItem>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x00E6" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0028" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="128" Height="28" />
+      </MenuItem>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x00B6" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0033" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="33" Height="28" />
+      </MenuItem>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x0071" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0050" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="100" Height="28" />
+      </MenuItem>
+      <MenuItem Width="260" Height="30">
+        <Item Name="0x0071" FontFile="" OwnFile="A\RO_RES\UI\ICON\ICONTK.SFN" Type="Icon" X="205" Y="2" ScaleX="1" ScaleY="1" ZIndex="0" Width="36" Height="32" />
+        <Item Name="0x0055" FontFile="A\RO_RES\UI\FONT\FONTENG.SFN" OwnFile="A\RO_RES\UI\SST\STR5KTK.SST" Type="String" X="12" Y="2" ScaleX="1" ScaleY="1" ZIndex="1" Width="40" Height="28" />
+      </MenuItem>
+    </MenuItemList>
+  </MenuInfo>
+</CameraScene>

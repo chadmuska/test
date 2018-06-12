@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<SolutionInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Projects>
+    <string>CTA\CTA.icatproj</string>
+    <string>CTA-video\CTA-video.icatproj</string>
+    <string>CTCW\CTCW.icatproj</string>
+    <string>CTCW-video\CTCW-video.icatproj</string>
+    <string>CTD50\CTD50.icatproj</string>
+    <string>CTD50-video\CTD50-video.icatproj</string>
+    <string>CTH\CTH.icatproj</string>
+    <string>CTH-video\CTH-video.icatproj</string>
+    <string>CTTL\CTTL.icatproj</string>
+    <string>CTTL-video\CTTL-video.icatproj</string>
+    <string>ISO100\ISO100.icatproj</string>
+    <string>ISO100-video\ISO100-video.icatproj</string>
+    <string>ISO200\ISO200.icatproj</string>
+    <string>ISO200-video\ISO200-video.icatproj</string>
+    <string>ISO400\ISO400.icatproj</string>
+    <string>ISO400-video\ISO400-video.icatproj</string>
+    <string>ISO800\ISO800.icatproj</string>
+    <string>ISO800-video\ISO800-video.icatproj</string>
+    <string>ISO1600\ISO1600.icatproj</string>
+    <string>ISO1600-video\ISO1600-video.icatproj</string>
+    <string>ISO3200\ISO3200.icatproj</string>
+    <string>ISO3200-video\ISO3200-video.icatproj</string>
+  </Projects>
+  <VirtualFolders />
+  <Platform>6350</Platform>
+</SolutionInfo>

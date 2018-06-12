@@ -1,0 +1,40 @@
+6000	//sysBoot   //----akaline
+6000	//lensBoot
+6000	//lensMove
+6000	//shutDown
+6688  //battery level 0
+7410	//battery level 1
+7980 	//battery level 2
+0     //battery level 3
+15    //sampleNum
+0     //reserved
+6000	//sysBoot   //----NiMH
+6000	//lensBoot
+6000	//lensMove
+6000	//shutDown
+6688  //battery level 0
+7410	//battery level 1
+7980 	//battery level 2
+0     //battery level 3
+15    //sampleNum
+0     //reserved
+6000	//sysBoot   //----Lithium
+6000	//lensBoot
+6000	//lensMove
+6000	//shutDown
+6688  //battery level 0
+7410	//battery level 1
+7980 	//battery level 2
+0     //battery level 3
+15    //sampleNum
+0     //reserved
+6000	//sysBoot   //----Oxyride
+6000	//lensBoot
+6000	//lensMove
+6000	//shutDown
+6688  //battery level 0
+7410	//battery level 1
+7980 	//battery level 2
+0     //battery level 3
+15    //sampleNum
+0     //reserved

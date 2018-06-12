@@ -1,0 +1,169 @@
+48   /*n_entry*/
+0    /*tblidx_min*/
+1    /*nreg*/
+80   /*agcidx0_svscale,iso100*/
+16   /*agc_svscale*/
+1    /*n_burst_tbl*/
+0x35
+0
+0 /*template*/
+/*loop1 for n_burst_tbl*/
+48   /*n_entry_burst*/
+2    /*nbyte_entry*/
+0    /*burstidx_min*/
+1  /*nreg_involved*/
+/*loop0 for nreg_involved*/
+0  /*reg# in template*/
+0  /*lsb right shift*/
+8  /*lsb left shift*/
+16  /*nbit_mask*/
+/*contains, for n_entry_burst*/
+0
+16
+0
+16
+0
+17
+0
+18
+0
+19
+0
+19
+0
+20
+0
+21
+0
+22
+0
+23
+0
+24
+0
+25
+0
+26
+0
+28
+0
+29
+0
+30
+0
+31
+0
+33
+0
+34
+0
+36
+0
+38
+0
+39
+0
+41
+0
+43
+0
+45
+0
+47
+0
+49
+0
+51
+0
+53
+0
+56
+0
+58
+0
+61
+0
+63
+0
+66
+0
+69
+0
+72
+0
+76
+0
+79
+0
+82
+0
+86
+0
+90
+0
+94
+0
+98
+0
+103
+0
+107
+0
+112
+0
+117
+0
+122
+/*end contains, end loop1*/
+48
+0
+64  /*error table, n_erridx, emin, err unit in "N"-th ev*/
+/*contains, for n_erridx*/
+0
+4
+2
+1
+0
+4
+3
+3
+3
+2
+3
+3
+3
+0
+1
+2
+3
+1
+2
+1
+0
+2
+1
+1
+1
+1
+1
+1
+1
+0
+1
+0
+1
+1
+1
+1
+0
+1
+1
+1
+1
+1
+1
+0
+1
+0
+0
+0

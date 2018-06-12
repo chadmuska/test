@@ -1,0 +1,26 @@
+[SRM] 2 - [CT]
+CT,TableSize,UsedSize,ResCnt,ResLoadFlag
+[1],256,16,2,0
+	,Index,TicketNo,Dummy,Pointer,FN,Type,Size,CheckSum
+	,[0],44,0,0x3a63c2c,CD86BC80.032,LSC,9216,CD86BC80
+	,[1],45,0,0x27ebd8c,BD801007.257,API1,64,BD801007
+[2],256,16,2,0
+	,Index,TicketNo,Dummy,Pointer,FN,Type,Size,CheckSum
+	,[0],46,0,0x3a6605c,D7C20227.032,LSC,9216,D7C20227
+	,[1],45,0,0x27ebd8c,BD801007.257,API1,64,BD801007
+[3],256,16,2,0
+	,Index,TicketNo,Dummy,Pointer,FN,Type,Size,CheckSum
+	,[0],47,0,0x3a6848c,2680AE23.032,LSC,9216,2680AE23
+	,[1],45,0,0x27ebd8c,BD801007.257,API1,64,BD801007
+[4],256,16,2,0
+	,Index,TicketNo,Dummy,Pointer,FN,Type,Size,CheckSum
+	,[0],47,0,0x3a6848c,2680AE23.032,LSC,9216,2680AE23
+	,[1],45,0,0x27ebd8c,BD801007.257,API1,64,BD801007
+[5],256,16,2,0
+	,Index,TicketNo,Dummy,Pointer,FN,Type,Size,CheckSum
+	,[0],48,0,0x3a6a8bc,61219682.032,LSC,9216,61219682
+	,[1],45,0,0x27ebd8c,BD801007.257,API1,64,BD801007
+[6],256,16,2,0
+	,Index,TicketNo,Dummy,Pointer,FN,Type,Size,CheckSum
+	,[0],49,0,0x3c546cc,CF4C2241.032,LSC,9216,CF4C2241
+	,[1],45,0,0x27ebd8c,BD801007.257,API1,64,BD801007

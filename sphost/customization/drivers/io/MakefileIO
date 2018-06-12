@@ -1,0 +1,55 @@
+#/**************************************************************************
+# *
+# *         Copyright (c) 2002-2013 by iCatch Technology Inc.
+# *
+# *  This software is copyrighted by and is the property of iCatch
+# *  Technology Inc. All rights are reserved by iCatch Technology Inc.
+# *  This software may only be used in accordance with the corresponding
+# *  license agreement. Any unauthorized use, duplication, distribution,
+# *  or disclosure of this software is expressly forbidden.
+# *
+# *  This Copyright notice MUST not be removed or modified without prior
+# *  written consent of iCatch Technology Inc.
+# *
+# *  iCatch Technology Inc. reserves the right to modify this software
+# *  without notice.
+# *
+# *  iCatch Technology Inc.
+# *  19-1, Innovation First Road, Science-Based Industrial Park,
+# *  Hsin-Chu, Taiwan.
+# *
+# **************************************************************************/
+HOST_ROOT := ../../..
+include $(HOST_ROOT)/host.def
+
+TOOL_PATH := $(HOST_ROOT)/../tool
+
+IOCONV := $(TOOL_PATH)/ioconv.sh
+
+ifeq (,$(HW_VER))
+IO_BASE := $(HW_NAME)
+else
+IO_BASE := $(HW_NAME)_$(HW_VER)
+endif
+
+GPIO_SRC := $(IO_BASE).io
+GOAL := app_Gpio_$(IO_BASE).h
+BUILD_GOAL := $(HOST_ROOT)/_$(PRJ)/include/$(GOAL)
+
+#---------------------------------------------------------------------------
+# Explicit rules
+#---------------------------------------------------------------------------
+.PHONY: all
+all: $(BUILD_GOAL)
+
+$(BUILD_GOAL): $(GPIO_SRC)
+	@mkdir -p $(dir $@)
+	$(IOCONV) $< -o=$@
+
+# cancelling implicit rules to build source files
+%.def: ;
+%.io: ;
+
+.PHONY: clean
+clean:
+	rm -f $(BUILD_GOAL)

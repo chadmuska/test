@@ -1,0 +1,53 @@
+0x00   //capSetting.CurViewMode
+0xFF   //capSetting.CurScene
+0x00   //capSetting.qvSec
+0x00   //capSetting.reserve
+0x01   //sound.shutter
+0x01   //sound.powerOn
+0x00   //sound.beep
+0x02   //sound.volume
+0x00   //pbSlideSetting.intvl
+0x00   //pbSlideSetting.trans
+0x00   //pbSlideSetting.music
+0x00   //pbSlideSetting.isRepeat
+0x00   //periodicalCap.periodicalSet
+0x00
+0x00   //periodicalCap.videoFileKey
+0x00   //
+0x00   //periodicalCap.imgProcCnt
+0x00   //
+0x00   //periodicalCap.interval
+0x00
+0x00   //periodicalCap.duration
+0x00
+0x01   //playback.filetype
+0x00   //setup.lightFrequency
+0x00   //setup.powerSave
+0x01   //setup.powerOnRecord
+0x00   //setup.dateTime
+0x00   //setup.language
+0x00   //setup.TV
+0x00   //setup.usbMode
+0x02   //setup.batteryType
+0x01   //setup.powerOnLogo
+0x01   //setup.videoFormat
+0x02   //setup.mediaFormat
+0x00   //videosize
+0x07   //buzzer
+0x01   //voice recoerd
+0x00   // ParkingModesetting;
+0x00   // ParkingModereCordingTimeH;
+0x1E   // ParkingModereCordingTimeL;
+0x70   // ParkingModebatteryVoltageS;
+0x03   // ParkingModegSensorLevel;
+0x00   // ParkingModeparkingEvntToAVN;
+0x00   // ParkingModebyPassTimeH;
+0x1E   // ParkingModebyPassTimeL;
+0x00	//ParkingTrigger
+0x03    //Gsensor
+0x00    //Gsensor cal X
+0x00    //Gsensor cal Y
+0x00    //Gsensor cal Z
+0x00   //setup.wifiConnectStatus
+0x0c   //setup.TimezoneSTATUS
+0x01   //setup.GPSSTATUS

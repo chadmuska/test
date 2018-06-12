@@ -1,0 +1,124 @@
+#
+# CFLAGS are for c code, other defines are for makefile
+#
+ifndef CFLAGS
+CFLAGS :=
+endif
+
+ifndef ASFLAGS
+ASFLAGS :=
+endif
+
+CLK_135MHZ := 0
+CLK_189MHZ := 1
+CLK_165MHZ := 2
+CLK_267MHZ := 3
+CLK_243MHZ := 4
+CLK_297MHZ := 5
+CLK_300MHZ := 6
+CLK_333MHZ := 7
+CLK_360MHZ := 8
+CLK_216MHZ := 9
+CLK_450MHZ := 10
+CLK_500MHZ := 11
+
+THIRD_LIB_PATH := ./lib/thirdparty
+THIRD_INC_PATH := ./include/thirdparty
+
+# called by host/Makefile or host/customization/hostfw/Makefile
+# or $(foreach dir,$(SUBDIRS), $(dir)/Makefile)
+ifdef HOST_ROOT
+
+# $(PRJ) to specify project file and build destination path name.
+#   typically provided by "make PRJ=xxx" or "./config.sh xxx".
+# $(PRJ_NAME) to specify project name, used as resource/image path/file names
+#   and project-dependent compile option.
+#   typically provided in "_$(PRJ)/project/$(PRJ).def", which is derived from
+#   "project/$(PRJ).def.tmpl".
+
+ifndef PRJ # use last project if no project specified
+ -include $(HOST_ROOT)/lastprj.def
+ ifndef PRJ
+  PRJ := FPGA
+ endif
+endif
+
+-include $(HOST_ROOT)/last_hwver_$(PRJ).def
+
+DEST_DIR  := $(HOST_ROOT)/_$(PRJ)
+
+ifeq (,$(wildcard $(DEST_DIR)/project/$(PRJ).def))
+ -include $(DEST_DIR)/project/$(PRJ).def
+ include $(HOST_ROOT)/project/$(PRJ).def.tmpl
+else
+ include $(DEST_DIR)/project/$(PRJ).def
+endif
+
+CFG_DEFS += project/$(PRJ).def
+
+ifndef PLATFORM
+PLATFORM := spca6350
+endif
+
+ifndef CHIP
+CHIP := $(shell echo '$(PLATFORM)' | \
+	/bin/sed -e 's/^[^0-9]*//' -e 's/[^0-9]*$$//')
+endif
+
+PLATFORM_CAP := $(shell echo '$(PLATFORM)' | /bin/sed 's/^.*$$/\U&/')
+
+ifndef PLATFORM_PATH
+ PLATFORM_PATH := $(PLATFORM)
+endif #ifndef PLATFORM_PATH
+
+# for c code
+CFLAGS += -DCHIP='"$(PLATFORM_CAP)"'
+CFLAGS += -DPRJ_$(PRJ_NAME) 
+ifneq (,$(HW_NAME))
+CFLAGS += -D$(HW_NAME)
+endif
+CFLAGS += -DHW_VER_$(HW_VER)
+CFLAGS += -DAPP_MODEL='"$(PRJ_NAME)"'
+CFLAGS += -DHW_MODEL='"$(HW_NAME)_$(HW_VER)"'
+ifneq (,$(HW_VER))
+CFLAGS += -DGPIO_INC='"app_Gpio_$(HW_NAME)_$(HW_VER).h"'
+CFLAGS += -DBTN_INC='"app_btn_def_$(BTN_NAME)_$(HW_VER).h"'
+CFLAGS += -DHW_INC='"app_hw_$(BTN_NAME)_def_$(HW_VER).h"'
+else
+CFLAGS += -DGPIO_INC='"app_Gpio_$(HW_NAME).h"'
+CFLAGS += -DBTN_INC='"app_btn_def_$(BTN_NAME).h"'
+CFLAGS += -DHW_INC='"app_hw_$(BTN_NAME)_def.h"'
+endif
+ifeq ($(TOUCH_PANEL), YES)
+CFLAGS += -DTOUCH_FUNC_ENABLE
+endif
+
+
+ifndef RSV_A_SIZE
+ RSV_A_SIZE := 0x7A0000
+endif
+
+ifndef RSV_B_SIZE
+ RSV_B_SIZE := 0x80000
+endif
+
+ifeq ($(TOUCH_PANEL), YES)
+TOUCH_UI := YES
+else
+TOUCH_UI := NO
+endif
+
+HW_FACETRACK ?= NO
+HW_DIST ?= NO
+
+ifeq ($(HW_FACETRACK), YES)
+CFLAGS += -DHW_FACETRACK
+endif
+
+ifeq ($(HW_DIST), YES)
+CFLAGS += -DHW_DIST
+endif
+
+# CFLAGS += -DWHQL_TEST
+
+endif # HOST_ROOT

@@ -1,0 +1,9 @@
+Modules:libnet lwip-1.4.1 wlan/tools wlan/wpas-hapd-0.8 RTL8192cu_4.0.2_9000
+Platform: spca6350
+TCPIP: lwip
+BUS: usb
+CONCURRENT: 0
+BaseFW Rev.: 26675
+NDK Rev.: Binary file (standard input) matches
+Date: Fri, Jul 15, 2016  3:32:47 AM
+User: 

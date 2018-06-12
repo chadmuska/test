@@ -1,0 +1,923 @@
+#/**************************************************************************
+# *
+# *       Copyright (c) 2002-2014 by iCatch Technology, Inc.
+# *
+# *  This software is copyrighted by and is the property of iCatch
+# *  Technology, Inc.. All rights are reserved by iCatch Technology, Inc..
+# *  This software may only be used in accordance with the corresponding
+# *  license agreement. Any unauthorized use, duplication, distribution,
+# *  or disclosure of this software is expressly forbidden.
+# *
+# *  This Copyright notice MUST not be removed or modified without prior
+# *  written consent of iCatch Technology, Inc..
+# *
+# *  iCatch Technology, Inc. reserves the right to modify this software
+# *  without notice.
+# *
+# *  iCatch Technology, Inc.
+# *  19-1, Innovation First Road, Science-Based Industrial Park,
+# *  Hsin-Chu, Taiwan.
+# *
+# *  Author: Anmin Deng
+# *
+# **************************************************************************/
+#TOOLCHAIN     := GCC_3.4.3
+TOOLCHAIN     := ICATCHTEK
+ICAT_ON_LINUX ?= NO
+#NO: real chip, maskrom; YES: FPGA
+ifndef FPGA
+FPGA := NO
+endif
+
+ifndef CFLAGS
+CFLAGS :=
+endif
+
+ifndef ASFLAGS
+ASFLAGS :=
+endif
+
+ifndef LDFLAGS
+LDFLAGS :=
+endif
+
+ifndef TOOL_PATH
+TOOL_PATH := $(ROOT)/../tool
+endif
+ifeq ($(shell /bin/uname),Linux)
+TOOL_PATH_EXE := $(TOOL_PATH).linux
+else
+TOOL_PATH_EXE := $(TOOL_PATH)
+endif
+
+ifeq ($(TOOLCHAIN), GXX_SOURCERY)
+
+ARCH := arm
+PREFIX := c:/progra~1/codeso~1/source~1/bin/arm-none-linux-gnueabi-
+CFLAGS += -mcpu=arm926ej-s
+CFLAGS += -mlittle-endian
+# avoid using sourcery provided libc too bloat xlocale and ctype
+# CFLAGS += -fno-builtin -fno-inline -D__NO_CTYPE
+LDSCRIPT_CPPFLAGS += -DI_CACHE_LINE_SIZE=32
+LDSCRIPT_CPPFLAGS += -DD_CACHE_LINE_SIZE=32
+
+else ifeq ($(TOOLCHAIN), ICATCHTEK)
+
+ARCH := mips
+CORE_ARCH := mips24k
+DSP := YES
+
+ifeq ($(shell /bin/uname),Linux)
+ifneq ($(ICAT_ON_LINUX), YES)
+PREFIX := $(if $(ENV_ICATOS_TOOLCHAIN_ROOT_DIR_LOCAL),$(ENV_ICATOS_TOOLCHAIN_ROOT_DIR_LOCAL),/home/android_camera/iCatchtek/tool-chain4)/bin/mipsel-icatchtek-elf-
+else
+PREFIX := /opt/icatchtek/mipsel-icatchtek-elf/usr/bin/mipsel-linux-
+CFLAGS += -mdsp -mips32r2 -EL -muclibc -msoft-float -mtune=24kec -march=24kec -pthread
+endif
+else
+ifdef TOOLCHAIN_RAM_DRIVE_ICATCHTEK
+# Force drive name to lower case
+# LC_TOOLCHAIN_RAM_DRIVE_ICATCHTEK = `echo $(TOOLCHAIN_RAM_DRIVE_ICATCHTEK) | tr A-Z a-z`
+# PREFIX := /cygdrive/$(TOOLCHAIN_RAM_DRIVE_ICATCHTEK)/tool-chain4/bin/mipsel-icatchtek-elf-
+PREFIX := /cygdrive/$(shell echo '$(TOOLCHAIN_RAM_DRIVE_ICATCHTEK)' | /bin/sed 's/^.*$$/\L&/')/tool-chain4/bin/mipsel-icatchtek-elf-
+else
+PREFIX := $(firstword $(strip $(foreach e,1 2 3 4 5 6 7 8 9,$(wildcard /cygdrive/c/Progra~$(e)/iCatchtek/tool-chain4/bin/))))mipsel-icatchtek-elf-
+endif
+endif
+
+#CFLAGS += -march=lexra5ke
+ifeq ($(DSP),YES)
+ CFLAGS += -DCPU_CORE_USE_DSP=1
+ archmxext := e
+else
+ archmxext :=
+endif
+ifeq ($(FPU),YES)
+ LDFLAGS += -mhard-float
+ CFLAGS += -mhard-float
+ CFLAGS += -DCPU_CORE_USE_FPU=1
+ archfpext := f2_1
+else
+ LDFLAGS += -msoft-float
+ CFLAGS += -msoft-float
+ archfpext := c
+endif
+CFLAGS += -march=24k$(archmxext)$(archfpext)
+CFLAGS += -mips32r2
+CFLAGS += -mno-branch-likely
+CFLAGS += -mno-dsp
+CFLAGS += -msym32
+CFLAGS += -membedded-data
+CFLAGS += -muninit-const-in-rodata
+CFLAGS += -mcode-readable=pcrel #no
+#CFLAGS += -mno-unaligned-insn
+CFLAGS += -mdivide-traps
+CFLAGS += -fstrict-volatile-bitfields
+CFLAGS += -fno-builtin-memcpy
+CFLAGS += -fno-common
+CFLAGS += -EL
+LDSCRIPT_CPPFLAGS += -DI_CACHE_LINE_SIZE=32
+LDSCRIPT_CPPFLAGS += -DD_CACHE_LINE_SIZE=32
+
+else ifeq ($(TOOLCHAIN), GCC_3.4.3)
+
+ARCH := mips
+
+ifdef TOOLCHAIN_RAM_DRIVE
+PREFIX := $(TOOLCHAIN_RAM_DRIVE):/gnu/bin/
+else
+PREFIX := $(firstword $(strip $(foreach e,1 2 3 4 5 6 7 8 9,$(wildcard C:/Progra~$(e)/Sunplus/MIDE-V2.2.0/gnu/bin/))))
+endif
+
+CFLAGS += -mBongoIII
+CFLAGS += -mno-unaligned-insn
+CFLAGS += -fno-builtin-memcpy
+CFLAGS += -fno-common
+CFLAGS += -EL
+LDSCRIPT_CPPFLAGS += -DI_CACHE_LINE_SIZE=16
+LDSCRIPT_CPPFLAGS += -DD_CACHE_LINE_SIZE=16
+
+else
+
+ARCH := mips
+PREFIX := C:/Progra~1/Sunplus/MIDE/bin/
+CFLAGS += -mcpu=LX5180
+CFLAGS += -fno-common
+CFLAGS += -EL
+LDSCRIPT_CPPFLAGS += -DI_CACHE_LINE_SIZE=16
+LDSCRIPT_CPPFLAGS += -DD_CACHE_LINE_SIZE=16
+
+endif #$(TOOLCHAIN)
+
+CFLAGS += -DUART_BAUD=115200
+CFLAGS += -DSPCA5110=1
+CFLAGS += -DSPCA5210=1
+CFLAGS += -DSPCA5310=1
+CFLAGS += -DSPCA5330=1
+CFLAGS += -DSPCA6330=1
+CFLAGS += -DSPCA6350=1
+CFLAGS += -DCHIP_ID=6350
+
+ifeq ($(FPGA), YES)
+CFLAGS += -DMASTER_CLK=10
+CFLAGS += -DFPGA=1
+else
+CFLAGS += -DMASTER_CLK=48
+endif
+
+ifeq ($(DMEM), YES)
+CFLAGS += -DDATA_ON_DMEM=1
+CFLAGS += -DMEM_TOO_SMALL=1
+endif
+
+#system stack defines
+CFLAGS += -DSYS_STACK_SIZE=1024 #at least 512, must be power of 2
+CFLAGS += -DSYS_STACK_BOT=0xd0002000 #all stack in the same +-32K block
+CFLAGS += -DSYS_DEAD_FRAME=0xd0001800 #all stack in the same +-32K block
+LDSCRIPT_CPPFLAGS += -DSYS_STACK_BOT=0xd0002000
+
+# to set to use priority IRQ design connection
+CFLAGS += -DCPU_HAS_PRIO_IRQ_CONNECTED=1
+# LBUS error, etc ERR IRQ connected to separated HW IRQ pin since spca5210
+#CFLAGS += -DCPU_HAS_ERR_IRQ_DISCONNECTED=1
+
+#to enable for SPCA5110~SPCA6330 LEXRA cores buggy "cache" instruction
+#CFLAGS += -DD_CACHE_HAS_NO_CACHE_INSN=1
+
+ASFLAGS += -x assembler-with-cpp
+ASFLAGS += -D__ASSEMBLER__=1     # why CPP manual said this is predefined???
+
+
+## 
+## Add macro for controlling output of C preprocess file. (1: Output intermediate file, remarked: no output intermediate file (Default))
+##
+# OUTPUT_C_PREPROCESS_FILE := 1
+
+PLATFORM := spca6350
+
+CPP     := $(PREFIX)cpp
+CC      := $(PREFIX)gcc
+AR      := $(PREFIX)ar
+OBJDUMP := $(PREFIX)objdump
+OBJCOPY := $(PREFIX)objcopy
+SIZE    := $(PREFIX)size
+NM      := $(PREFIX)nm
+CXX     := $(PREFIX)g++
+ECHO    := echo
+CP      := /bin/cp -f
+MV      := /bin/mv -f
+MKDIR   := /bin/mkdir -p
+RM      := /bin/rm -f
+RMR     := /bin/rm -rf
+CAT     := /bin/cat
+TOUCH   := /bin/touch
+SED     := /bin/sed
+GREP    := /bin/grep
+DIFF    := /usr/bin/diff
+PATCH   := /usr/bin/patch
+SORT    := /usr/bin/sort
+FIND    := /usr/bin/find
+CSPLIT  := /usr/bin/csplit
+DOXYGEN := /usr/bin/doxygen
+TR      := /usr/bin/tr
+WC      := /usr/bin/wc
+CUT     := /usr/bin/cut
+
+
+# defining functions in makefiles for multi boot support
+
+# /** \brief $(call numeric-sort,$(1)), numeric sorting unique level values
+#  * \param $(1), a space-separated numeric list of stage levels
+#  */
+numeric-sort = $(shell $(ECHO) '$(strip $(1))' | $(TR) ' ' '\n' | $(SORT) -g -u)
+
+# /** \brief $(call stage-value,$(1),$(2)),
+#  * to find all the stage values of the multi boot stage name list
+#  * \param $(1), the header file (multiboot_api.h) defines stage values
+#  * \param $(2), a space-separated list of multi boot stage names
+#  */
+stage-value = $(shell $(TOOL_PATH)/multiboot_stage_values.pl $(1) $(2))
+
+# /** \brief $(call find-stage-list,$(1),$(2)),
+#  * to find all the multie boot levels used in $(2) file list
+#  * \param $(1), the header file (multiboot_api.h) defines stage values
+#  * \param $(2), a space-separated list of source files
+#  */
+find-stage-list = $(shell $(TOOL_PATH)/multiboot_stage_values.pl \
+			-s $(1) MULTI_BOOT_STAGE_OPEN $(addprefix @,$(2)))
+
+# /** \brief $(call objs-attach-stage,$(1),$(2),$(3)),
+#  * to attach suffix to stage obj files in obj list for building stage $(1)
+#  * \param $(1), the stage value to build
+#  * \param $(2), a space-separated list of all the prerequist obj files
+#  * \param $(3), a space-separated list of stage obj files
+#  * \return a list of obj files $(2) with stage suffix attached for stage $(1)
+#  */
+objs-attach-stage = \
+$(foreach obj,$(2),$(if $(filter $(obj),$(3)),$(obj:.o=.stage$(1).o),$(obj)))
+
+
+# canceling implicit rules to build source files
+%.tmpl: ;
+%.def: ;
+%.c: ;
+%.cc: ;
+%.S: ;
+%.h: ;
+%.ld: ;
+%.txt: ;
+%.TXT: ;
+%.dat: ;
+%.DAT: ;
+%.bin: ;
+%.BIN: ;
+%.bak: ;
+%.exe: ;
+%.io: ;
+%.sym: ;
+# %.d: ;
+# %.o: ;
+# %.a: ;
+# %.elf: ;
+
+# -- Common Message, please don t remove. --
+MSG_SPLIT_LINE =
+#MSG_COMPILING = @$(ECHO) "   Compiling <$<>"
+MSG_COMPILING = @$(ECHO) "   Compiling < $< > to < $(notdir $@) >"
+MSG_GOAL_OK = @$(ECHO) "*** $@ is built successfully! ***"
+
+
+pathext :=
+ifeq ($(ram4g),1)
+ CFLAGS += -DRAM_4GBIT_SUPPORT=1
+ pathext := $(pathext).ram4g
+endif
+ifeq ($(rom),1)
+ CFLAGS += -DROM_PROGRAM=1
+ ifeq ($(BEV),1)
+  CFLAGS += -DCPU_CORE_USE_ROM_INT_VECTOR=1
+ endif
+ pathext := $(pathext).rom
+else ifeq ($(ram),1)
+ CFLAGS += -DRAM_BOOT=1
+ pathext := $(pathext).ram
+else
+ CFLAGS += -DRAM_PROGRAM=1
+endif
+ifeq ($(FPGA),YES)
+ pathext := $(pathext).fpga
+endif
+ifdef OBJS_PATH
+ OBJS_PATH := $(OBJS_PATH)$(pathext)
+endif
+
+# -- template of generic goal rules --
+# /** \brief $(eval $(call GEN_GOAL_RULES))
+#  * to invoke generic goal and objs make rules in module Makefile
+#  */
+define GEN_GOAL_RULES
+
+ ifndef HOST_ROOT
+  SRC_ROOT := $$(ROOT)/src
+  INST_GOAL_DIR := $$(ROOT)/lib$$(pathext)
+  BUILD_ROOT := $$(ROOT)/build$$(pathext)
+ else
+  SRC_ROOT := $$(HOST_ROOT)
+  BUILD_ROOT := $$(OBJS_PATH)
+ endif #ifndef HOST_ROOT
+
+ # /** \brief $(eval $(call VAR_GOAL_INI,var_prefix,file_suffix))
+ #  * to initialize make variables of variant goal
+ #  * \param $$(1) variable prefix, eg, DBG_
+ #  * \param $$(2) filename suffix, eg, .dbg
+ #  */
+ define VAR_GOAL_INI
+
+  $$(1)GOAL := $$$$(GOAL:.a=$$(2).a)
+  ALL_GOALS += $$$$($$(1)GOAL)
+  DEP_OBJS += $$$$($$(1)OBJS:.o=$$(2).o)
+
+  #--------------------------------------------------------------------------
+  # multi boot definitions
+  #--------------------------------------------------------------------------
+  ifneq (,$$$$(and $$(1)STAGE_OBJS,$$$$(wildcard $$$$(MULTI_BOOT_DEF_HDR))))
+   $$(1)STAGE_LIST := $$$$(call find-stage-list, $$$$(MULTI_BOOT_DEF_HDR), \
+		$$$$(addprefix $$$$(SRC_DIR)/,$$$$($$(1)STAGE_OBJS:.o=.c)))
+
+   $$(1)STAGE_GOALS := $$$$(foreach n,\
+	$$$$($$(1)STAGE_LIST),$$$$($$(1)GOAL:.a=.stage$$$$(n).a))
+   $$(1)STAGE_ALL_OBJS := $$$$(foreach n,\
+	$$$$($$(1)STAGE_LIST),$$$$($$(1)STAGE_OBJS:.o=$$(2).stage$$$$(n).o))
+
+   ALL_GOALS += $$$$($$(1)STAGE_GOALS)
+   DEP_OBJS += $$$$($$(1)STAGE_ALL_OBJS)
+  else  #ifdef $$(1)STAGE_OBJS
+   $$(1)STAGE_LIST :=
+   $$(1)STAGE_GOALS :=
+   $$(1)STAGE_ALL_OBJS :=
+  endif #ifdef $$(1)STAGE_OBJS
+
+ endef #define VAR_GOAL_INI
+
+ #---------------------------------------------------------------------------
+ # Intermediate build objects
+ #---------------------------------------------------------------------------
+ ALL_GOALS :=
+ INST_ALL_GOALS :=
+ CLEAN_ALL_GOALS :=
+
+ DEP_OBJS := $$(EXT_OBJS)
+
+ ifdef GOAL
+
+  $$(eval $$(call VAR_GOAL_INI,,))
+
+  ifdef ISP_OBJS
+  $$(eval $$(call VAR_GOAL_INI,ISP_,.isp))
+  endif #ifdef ISP_OBJS
+
+  ifdef GDB_OBJS
+  $$(eval $$(call VAR_GOAL_INI,GDB_,.gdb))
+  endif #ifdef GDB_OBJS
+
+  ifdef DBG_OBJS
+  $$(eval $$(call VAR_GOAL_INI,DBG_,.dbg))
+  endif #ifdef DBG_OBJS
+
+  ifdef FUJI_OBJS
+  $$(eval $$(call VAR_GOAL_INI,FUJI_,.ff))
+  endif #ifdef FUJI_OBJS
+
+  ifdef FUJI_DBG_OBJS
+  $$(eval $$(call VAR_GOAL_INI,FUJI_DBG_,.ff.dbg))
+  endif #ifdef FUJI_DBG_OBJS
+
+ endif #ifdef GOAL
+
+ ALL_OBJS := $$(DEP_OBJS) $$(REV_OBJS) $$(EMPTY_IMPL_OBJS)
+
+ #*SIGH* make v3.80 or earlier does not support function $(abspath FILES..)
+ ABS_SRC_DIR := $$(abspath $$(SRC_DIR))
+ ABS_SRC_ROOT := $$(abspath $$(SRC_ROOT))
+ #REL_SRC_DIR := $$(patsubst $$(ABS_SRC_ROOT)/%,%,$$(ABS_SRC_DIR))
+ REL_SRC_DIR := $$(shell p='$$(ABS_SRC_DIR)'; $$(ECHO) $$$${p\#'$$(ABS_SRC_ROOT)/'})
+ BUILD_DIR := $$(BUILD_ROOT)/$$(REL_SRC_DIR)
+
+ BUILD_ALL_GOALS := $$(addprefix $$(BUILD_DIR)/,$$(ALL_GOALS))
+
+ BUILD_EXT_OBJS := $$(addprefix $$(BUILD_DIR)/,$$(EXT_OBJS))
+ BUILD_REV_OBJS := $$(addprefix $$(BUILD_DIR)/,$$(REV_OBJS))
+ BUILD_DEP_OBJS := $$(addprefix $$(BUILD_DIR)/,$$(DEP_OBJS))
+ BUILD_EMPTY_IMPL_OBJS := $$(addprefix $$(BUILD_DIR)/,$$(EMPTY_IMPL_OBJS))
+
+ #---------------------------------------------------------------------------
+ # CFLAGS DEF definitions
+ #---------------------------------------------------------------------------
+ ifdef OBJS_CFLAGS_DEF
+  BUILD_OBJS_CFLAGS_DEF := $$(addprefix $$(BUILD_DIR)/,$$(OBJS_CFLAGS_DEF))
+  BUILD_CFLAGS_DEF_OBJS := $$(BUILD_DIR)/CFLAGS.objs.def
+  CFLAGS_DEF := $$(filter -D% -U%,$$(CFLAGS))
+ endif #ifdef OBJS_CFLAGS_DEF
+
+ ifdef HEADERS_CFLAGS_DEF
+  BUILD_CFLAGS_DEF_HEADERS := $$(BUILD_DIR)/CFLAGS.headers.def
+  ifndef BUILD_CFLAGS_DEF_OBJS
+  BUILD_CFLAGS_DEF_OBJS := $$(BUILD_DIR)/CFLAGS.objs.def
+  CFLAGS_DEF := $$(filter -D% -U%,$$(CFLAGS))
+  endif #ifndef BUILD_CFLAGS_DEF_OBJS
+  ifdef DEFS_HEADERS_CFLAGS
+  empty :=
+  space := $$(empty) $$(empty)
+  SED_DEFS_HEADERS_CFLAGS := $$(subst \
+		$$(space),\|,$$(strip $$(DEFS_HEADERS_CFLAGS)))
+  endif #ifdef DEFS_HEADERS_CFLAGS
+ endif #ifdef HEADERS_CFLAGS_DEF
+
+ ifeq (,$$(strip $$(BUILD_ALL_GOALS) $$(BUILD_EXT_OBJS)))
+  BUILD_MASKROM_SYM :=
+  ifndef HOST_ROOT
+   INST_MASKROM_SYM :=
+  endif
+ else  #ifneq (,$$(strip $$(BUILD_ALL_GOALS) $$(BUILD_EXT_OBJS)))
+  BUILD_MASKROM_SYM := $$(BUILD_DIR)/_maskrom.undef.sym
+  ifndef HOST_ROOT
+   INST_MASKROM_SYM := $$(INST_GOAL_DIR)/_maskrom.undef.sym
+  endif
+ endif #ifneq (,$$(strip $$(BUILD_ALL_GOALS) $$(BUILD_EXT_OBJS)))
+
+ #---------------------------------------------------------------------------
+ # Explicit rules
+ #---------------------------------------------------------------------------
+ .PHONY: all $$(ALL_GOALS) $$(ALL_OBJS)
+ all: $$(ALL_PRIVATE) $$(ALL_GOALS) $$(EXT_OBJS) $$(BUILD_MASKROM_SYM)
+ $$(ALL_GOALS) $$(ALL_OBJS): %: $$(BUILD_DIR)/%
+
+ ifdef BUILD_MASKROM_SYM
+  $$(BUILD_MASKROM_SYM): $$(BUILD_ALL_GOALS) $$(BUILD_EXT_OBJS)
+	@$$(RM) $$@
+	@$$(NM) -u $$^ | $$(TR) -d '\r' | \
+	$$(SED) -ne 's,^ \{9\}U _maskrom_\(.\+\)$$$$,\1,p' | $$(SORT) -u \
+			> $$@.bak
+	@$$(MV) $$@.bak $$@
+ endif #ifdef BUILD_MASKROM_SYM
+
+ ifdef GOAL
+ ifndef APP_BUILD
+  $$(BUILD_ALL_GOALS):
+	$$(MSG_SPLIT_LINE)
+	@$$(RM) $$@
+	@$$(AR) rus $$@ $$^
+	$$(MSG_GOAL_OK)
+ endif #ifndef APP_BUILD
+ endif #GOAL
+
+ # /** \brief
+ #  * $(eval $(call VAR_GOAL_RULES,var_prefix,file_suffix,inst_suffix,cflags))
+ #  * the make rules for variant goal
+ #  * \param $$(1) variable prefix, eg, DBG_
+ #  * \param $$(2) filename suffix, eg, .dbg
+ #  * \param $$(3) installing path name suffix, eg, <empty>
+ #  * \param $$(4) extra cflags for this variant, eg, -DBASEFW_DBG_SUPPORT=1
+ #  */
+ define VAR_GOAL_RULES
+
+  ifdef $$(1)OBJS
+  BUILD_$$(1)GOAL := $$$$(addprefix $$$$(BUILD_DIR)/,$$$$($$(1)GOAL))
+  BUILD_$$(1)OBJS := $$$$(addprefix $$$$(BUILD_DIR)/,$$$$($$(1)OBJS:.o=$$(2).o))
+
+  ifeq (,$$(3)) # default install dir
+  $$$$(BUILD_$$(1)GOAL): $$$$(BUILD_$$(1)OBJS) $$$$(BUILD_REV_OBJS) \
+				$$$$(BUILD_EMPTY_IMPL_OBJS)
+  else  #ifeq (,$$(3)) # specific install dir
+  $$$$(BUILD_$$(1)GOAL): $$$$(BUILD_$$(1)OBJS) $$$$(BUILD_REV_OBJS)
+  endif #ifeq (,$$(3))
+  endif #ifdef $$(1)OBJS
+
+ #---------------------------------------------------------------------------
+ # Implicit rules
+ #---------------------------------------------------------------------------
+  ifdef $$(1)STAGE_GOALS
+  BUILD_$$(1)STAGE_GOALS := $$$$(addprefix $$$$(BUILD_DIR)/,$$$$($$(1)STAGE_GOALS))
+  BUILD_$$(1)STAGE_OBJS := $$$$(addprefix $$$$(BUILD_DIR)/,$$$$($$(1)STAGE_OBJS:.o=$$(2).o))
+
+  # /** \brief
+  #  * $(eval $(call STAGE_GOAL_RULES,stage))
+  #  * the make rules for multiboot specific stage goal
+  #  * \param $$$$(1) the specfic stage number
+  #  */
+  define STAGE_GOAL_RULES
+   BUILD_$$(1)STAGE$$$$(1)_OBJS := $$$$$$$$(call objs-attach-stage,$$$$(1),\
+		$$$$$$$$(BUILD_$$(1)OBJS),$$$$$$$$(BUILD_$$(1)STAGE_OBJS))
+   BUILD_$$(1)STAGE$$$$(1)_GOAL := $$$$$$$$(BUILD_$$(1)GOAL:.a=.stage$$$$(1).a)
+
+   $$$$$$$$(BUILD_$$(1)STAGE$$$$(1)_GOAL): \
+   $$$$$$$$(BUILD_$$(1)STAGE$$$$(1)_OBJS) \
+   $$$$$$$$(BUILD_REV_OBJS) $$$$$$$$(BUILD_EMPTY_IMPL_OBJS)
+
+   #add by kevin for replace "-O2 -Os" into "-g".
+   ifeq ($$(1),GDB_)
+    $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d: \
+		CFLAGS := $$$$$$$$(filter-out -O%, $$$$$$$$(CFLAGS)) \
+			-DMULTI_BOOT_STAGE=$$$$(1) $$(4)
+    $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).o: \
+		CFLAGS := $$$$$$$$(filter-out -O%, $$$$$$$$(CFLAGS)) \
+			-DMULTI_BOOT_STAGE=$$$$(1) $$(4)
+   else
+    $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d: \
+		CFLAGS += -DMULTI_BOOT_STAGE=$$$$(1) $$(4)
+    $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).o: \
+		CFLAGS += -DMULTI_BOOT_STAGE=$$$$(1) $$(4)
+   endif
+
+   $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d: $$$$$$$$(SRC_DIR)/%.c
+	@$$$$$$$$(MKDIR) $$$$$$$$(dir $$$$$$$$@)
+   ifeq ($(OUTPUT_C_PREPROCESS_FILE), 1)
+	@$$$$$$$$(CC) $$$$$$$$(CFLAGS) -E -o $$$$$$$$(@:.d=.i) $$$$$$$$<
+   endif
+	@$$$$$$$$(CC) $$$$$$$$(CFLAGS) -MM -MT '$$$$$$$$(@:.d=.o) $$$$$$$$@' -o $$$$$$$$@ $$$$$$$$<
+
+   $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d: $$$$$$$$(SRC_DIR)/%.cc
+	@$$$$$$$$(MKDIR) $$$$$$$$(dir $$$$$$$$@)
+   ifeq ($(OUTPUT_C_PREPROCESS_FILE), 1)
+	@$$$$$$$$(CXX) $$$$$$$$(CFLAGS) $$$$$$$$(CXXFLAGS) -E -o $$$$$$$$(@:.d=.i) $$$$$$$$<
+   endif
+	@$$$$$$$$(CXX) $$$$$$$$(CFLAGS) $$$$$$$$(CXXFLAGS) -MM -MT '$$$$$$$$(@:.d=.o) $$$$$$$$@' -o $$$$$$$$@ $$$$$$$$<
+
+   $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d: $$$$$$$$(SRC_DIR)/%.S
+	@$$$$$$$$(MKDIR) $$$$$$$$(dir $$$$$$$$@)
+	@$$$$$$$$(CC) $$$$$$$$(ASFLAGS) $$$$$$$$(CFLAGS) -MM -MT '$$$$$$$$(@:.d=.o) $$$$$$$$@' -o $$$$$$$$@ $$$$$$$$<
+
+   $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).o: \
+   $$$$$$$$(SRC_DIR)/%.c $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d
+	$$$$$$$$(MSG_SPLIT_LINE)
+	$$$$$$$$(MSG_COMPILING)
+	@$$$$$$$$(CC) -c $$$$$$$$(CFLAGS) -o $$$$$$$$@ $$$$$$$$<
+
+   $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).o: \
+   $$$$$$$$(SRC_DIR)/%.cc $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d
+	$$$$$$$$(MSG_SPLIT_LINE)
+	$$$$$$$$(MSG_COMPILING)
+	@$$$$$$$$(CXX) -c $$$$$$$$(CFLAGS) $$$$$$$$(CXXFLAGS) -o $$$$$$$$@ $$$$$$$$<
+
+   $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).o: \
+   $$$$$$$$(SRC_DIR)/%.S $$$$$$$$(BUILD_DIR)/%$$(2).stage$$$$(1).d
+	$$$$$$$$(MSG_SPLIT_LINE)
+	$$$$$$$$(MSG_COMPILING)
+	@$$$$$$$$(CC) -c $$$$$$$$(ASFLAGS) $$$$$$$$(CFLAGS) -o $$$$$$$$@ $$$$$$$$<
+  endef #STAGE_GOAL_RULES
+
+  $$$$(foreach n,\
+	$$$$($$(1)STAGE_LIST),$$$$(eval $$$$(call STAGE_GOAL_RULES,$$$$(n))))
+  endif #$$(1)STAGE_GOALS
+
+
+  #add by kevin for replace "-O2 -Os" into "-g".
+  ifeq ($$(1),GDB_)
+   $$$$(BUILD_$$(1)OBJS): \
+		CFLAGS := $$$$(filter-out -O%, $$$$(CFLAGS)) $$(4)
+   $$$$(BUILD_$$(1)OBJS:.o=.d): \
+		CFLAGS := $$$$(filter-out -O%, $$$$(CFLAGS)) $$(4)
+  else
+   $$$$(BUILD_$$(1)OBJS): CFLAGS += $$(4)
+   $$$$(BUILD_$$(1)OBJS:.o=.d): CFLAGS += $$(4)
+  endif
+
+  $$$$(BUILD_DIR)/%$$(2).d: $$$$(SRC_DIR)/%.c
+	@$$$$(MKDIR) $$$$(dir $$$$@)
+  ifeq ($(OUTPUT_C_PREPROCESS_FILE), 1)
+	@$$$$(CC) $$$$(CFLAGS) -E -o $$$$(@:.d=.i) $$$$<
+  endif
+	@$$$$(CC) $$$$(CFLAGS) -MM -MT '$$$$(@:.d=.o) $$$$@' -o $$$$@ $$$$<
+
+  $$$$(BUILD_DIR)/%$$(2).o: $$$$(SRC_DIR)/%.c $$$$(BUILD_DIR)/%$$(2).d
+	$$$$(MSG_SPLIT_LINE)
+	$$$$(MSG_COMPILING)
+	@$$$$(CC) -c $$$$(CFLAGS) -o $$$$@ $$$$<
+
+  $$$$(BUILD_DIR)/%$$(2).d: $$$$(SRC_DIR)/%.cc
+	@$$$$(MKDIR) $$$$(dir $$$$@)
+  ifeq ($(OUTPUT_C_PREPROCESS_FILE), 1)
+	@$$$$(CXX) $$$$(CFLAGS) $$$$(CXXFLAGS) -E -o $$$$(@:.d=.i) $$$$<
+  endif
+	@$$$$(CXX) $$$$(CFLAGS) $$$$(CXXFLAGS) -MM -MT '$$$$(@:.d=.o) $$$$@' -o $$$$@ $$$$<
+
+  $$$$(BUILD_DIR)/%$$(2).o: $$$$(SRC_DIR)/%.cc $$$$(BUILD_DIR)/%$$(2).d
+	$$$$(MSG_SPLIT_LINE)
+	$$$$(MSG_COMPILING)
+	@$$$$(CXX) -c $$$$(CFLAGS) $$$$(CXXFLAGS) -o $$$$@ $$$$<
+
+  $$$$(BUILD_DIR)/%$$(2).d: $$$$(SRC_DIR)/%.S
+	@$$$$(MKDIR) $$$$(dir $$$$@)
+	@$$$$(CC) $$$$(ASFLAGS) $$$$(CFLAGS) -MM -MT '$$$$(@:.d=.o) $$$$@' -o $$$$@ $$$$<
+
+  $$$$(BUILD_DIR)/%$$(2).o: $$$$(SRC_DIR)/%.S $$$$(BUILD_DIR)/%$$(2).d
+	$$$$(MSG_SPLIT_LINE)
+	$$$$(MSG_COMPILING)
+	@$$$$(CC) -c $$$$(ASFLAGS) $$$$(CFLAGS) -o $$$$@ $$$$<
+
+  ifndef HOST_ROOT
+
+  ifndef APP_BUILD
+  BUILD_$$(1)STAGE_LIST := $$$$(BUILD_$$(1)GOAL).stagelist
+
+  # to remove outdated stage builds if stage list changed
+  INST_$$(1)OUTDATE_GOALS := $$$$(filter-out $$$$(foreach stage,$$$$($$(1)STAGE_LIST),\
+	$$$$(addprefix $$$$(INST_GOAL_DIR)/,$$$$(notdir $$$$($$(1)GOAL:.a=.stage$$$$(stage).a)))), \
+	$$$$(wildcard $$$$(INST_GOAL_DIR)/$$$$(notdir $$$$($$(1)GOAL:.a=.stage*.a))))
+
+  ifneq (,$$$$(strip $$$$(INST_$$(1)OUTDATE_GOALS)))
+   CLEAN_$$(1)OUTDATE_GOALS := $$$$(RM) $$$$(INST_$$(1)OUTDATE_GOALS) ;
+  else
+   CLEAN_$$(1)OUTDATE_GOALS :=
+  endif #INST_$$(1)OUTDATE_GOALS
+
+  .PHONY: $$$$(BUILD_$$(1)STAGE_LIST).bak
+  $$$$(BUILD_$$(1)STAGE_LIST).bak:
+	@$$$$(MKDIR) $$$$(dir $$$$@)
+	@$$$$(RM) $$$$@
+	@$$$$(ECHO) $$$$($$(1)STAGE_LIST) > $$$$@
+
+  $$$$(BUILD_$$(1)STAGE_LIST): $$$$(BUILD_$$(1)STAGE_LIST).bak
+	@if ! $$$$(DIFF) -q -N $$$$@ $$$$< ; then \
+		$$$$(CLEAN_$$(1)OUTDATE_GOALS) \
+		$$$$(CP) $$$$< $$$$@ ; \
+	fi
+
+  else  #ifndef APP_BUILD
+  BUILD_$$(1)STAGE_LIST :=
+  endif #ifndef APP_BUILD
+
+  INST_ALL_GOALS += INST_$$(1)GOAL
+
+  .PHONY: INST_$$(1)GOAL
+  INST_$$(1)GOAL: $$$$(BUILD_$$(1)STAGE_LIST) \
+  $$$$(BUILD_$$(1)GOAL) $$$$(BUILD_$$(1)STAGE_GOALS)
+	@$$$$(MKDIR) $$$$(INST_GOAL_DIR)$$(3)/
+	$$$$(CP) -u $$$$(BUILD_$$(1)GOAL) $$$$(INST_GOAL_DIR)$$(3)/
+  ifeq (,$$(3))
+  ifdef $$(1)STAGE_GOALS
+	$$$$(CP) -u $$$$(BUILD_$$(1)STAGE_GOALS) $$$$(INST_GOAL_DIR)/
+  endif #ifdef $$(1)STAGE_GOALS
+  ifndef APP_BUILD
+	@$$$$(TOOL_PATH)/multiboot_archive_bak.sh \
+	$$$$(addprefix $$$$(INST_GOAL_DIR)/,$$$$(notdir $$$$($$(1)GOAL))) \
+	$$$$(PREFIX)
+  endif #ifndef APP_BUILD
+  endif #ifeq (,$$(3))
+
+  CLEAN_ALL_GOALS += CLEAN_$$(1)GOAL
+
+  .PHONY: CLEAN_$$(1)GOAL
+  CLEAN_$$(1)GOAL:
+	$$$$(RM) $$$$(addprefix $$$$(INST_GOAL_DIR)$$(3)/,$$$$(notdir $$$$($$(1)GOAL)))
+  ifeq (,$$(3))
+  ifdef $$(1)STAGE_GOALS
+	$$$$(RM) $$$$(wildcard $$$$(INST_GOAL_DIR)/$$$$(notdir $$$$($$(1)GOAL:.a=.stage*.a)))
+  endif #ifdef $$(1)STAGE_GOALS
+  ifndef APP_BUILD
+	$$$$(RMR) $$$$(INST_GOAL_DIR)/_multiboot.bak/$$$$(notdir $$$$($$(1)GOAL:.a=))
+  endif #ifndef APP_BUILD
+  endif #ifeq (,$$(3))
+  endif #ifndef HOST_ROOT
+
+ endef #define VAR_GOAL_RULES
+
+ ifdef GOAL
+
+  $$(eval $$(call VAR_GOAL_RULES,,,,))
+
+  ifdef ISP_OBJS
+  $$(eval $$(call VAR_GOAL_RULES,ISP_,.isp,.isp,-Os -DISP_BIN_CREATE))
+  endif #ifdef ISP_OBJS
+
+  ifdef GDB_OBJS
+  $$(eval $$(call VAR_GOAL_RULES,GDB_,.gdb,,-DBASEFW_GDB_SUPPORT=1 -g -gstabs+))
+  endif #ifdef GDB_OBJS
+
+  ifdef DBG_OBJS
+  $$(eval $$(call VAR_GOAL_RULES,DBG_,.dbg,,-DBASEFW_DBG_SUPPORT=1))
+  endif #ifdef DBG_OBJS
+
+  ifdef FUJI_OBJS
+  $$(eval $$(call VAR_GOAL_RULES,FUJI_,.ff,,-DBASEFW_FUJI_SUPPORT=1))
+  endif #ifdef FUJI_OBJS
+
+  ifdef FUJI_DBG_OBJS
+  $$(eval $$(call VAR_GOAL_RULES,FUJI_DBG_,.ff.dbg,,-DBASEFW_FUJI_SUPPORT=1 -DBASEFW_DBG_SUPPORT=1))
+  endif #ifdef FUJI_DBG_OBJS
+
+ endif #ifdef GOAL
+
+ ifdef REV_OBJS
+  $$(BUILD_REV_OBJS): $$(BUILD_REV_OBJS:.o=.c)
+	$$(MSG_SPLIT_LINE)
+	$$(MSG_COMPILING)
+	@$$(CC) -c $$(CFLAGS) -o $$@ $$<
+
+  $$(BUILD_REV_OBJS:.o=.c): \
+  $$(SRC_DIR)/$$(REV_OBJS:.o=.tmpl) $$(BUILD_REV_OBJS:.o=.rev.bak)
+	@$$(SED) -e 's/\$$$$Rev.*\$$$$/'"`$$(CAT) $$(@:.c=.rev.bak)`/" $$< > $$@.bak
+	@$$(MV) -u $$@.bak $$@
+
+  $$(BUILD_REV_OBJS:.o=.rev.bak): $$(BUILD_DEP_OBJS) #all versioned resources
+	@$$(MKDIR) $$(dir $$@)
+	@$$(ROOT)/findrev.sh . $$@
+ endif #REV_OBJS
+
+ ifdef EMPTY_IMPL_OBJS
+  $$(BUILD_EMPTY_IMPL_OBJS): CFLAGS += -I.
+
+  $$(BUILD_EMPTY_IMPL_OBJS): $$(BUILD_DIR)/%.o : $$(BUILD_DIR)/%.c $$(BUILD_DIR)/%.d
+	$$(MSG_SPLIT_LINE)
+	$$(MSG_COMPILING)
+	@$$(CC) -c $$(CFLAGS) -o $$@ $$<
+
+  $$(BUILD_EMPTY_IMPL_OBJS:.o=.d): $$(BUILD_DIR)/%.d: $$(BUILD_DIR)/%.c
+	@$$(CC) $$(CFLAGS) -MM -MT '$$(@:.d=.o) $$@' -o $$@ $$<
+
+  $$(BUILD_EMPTY_IMPL_OBJS:.o=.c): $$(BUILD_DIR)/%.c: $$(SRC_DIR)/%.tmpl
+	@$$(MKDIR) $$(dir $$@)
+	@$$(CP) $$< $$@
+ endif #EMPTY_IMPL_OBJS
+
+
+ #---------------------------------------------------------------------------
+ # CFLAGS DEF rules
+ #---------------------------------------------------------------------------
+ ifdef HEADERS_CFLAGS_DEF
+  $$(HEADERS_CFLAGS_DEF): $$(BUILD_CFLAGS_DEF_HEADERS)
+	@$$(TOUCH) $$@
+	@$$(ECHO) "updating $$@..."
+ endif #ifdef HEADERS_CFLAGS_DEF
+
+ ifdef OBJS_CFLAGS_DEF
+  $$(BUILD_OBJS_CFLAGS_DEF:.o=.d): $$(BUILD_CFLAGS_DEF_OBJS)
+  $$(BUILD_OBJS_CFLAGS_DEF): $$(BUILD_CFLAGS_DEF_OBJS)
+  $$(BUILD_OBJS_CFLAGS_DEF:.o=.%.d): $$(BUILD_CFLAGS_DEF_OBJS)
+  $$(BUILD_OBJS_CFLAGS_DEF:.o=.%.o): $$(BUILD_CFLAGS_DEF_OBJS)
+ endif #ifdef OBJS_CFLAGS_DEF
+
+ ifdef BUILD_CFLAGS_DEF_HEADERS
+  .PHONY: $$(BUILD_CFLAGS_DEF_HEADERS).bak
+  $$(BUILD_CFLAGS_DEF_HEADERS).bak: $$(BUILD_CFLAGS_DEF_OBJS).bak
+	@$$(RM) $$@
+  ifdef DEFS_HEADERS_CFLAGS
+	@$$(SED) -n -e '/\b\($$(SED_DEFS_HEADERS_CFLAGS)\)\b/p' $$< > $$@
+  else  #ifdef DEFS_HEADERS_CFLAGS
+	@$$(CP) $$< $$@
+  endif #ifdef DEFS_HEADERS_CFLAGS
+
+  $$(BUILD_CFLAGS_DEF_HEADERS): $$(BUILD_CFLAGS_DEF_HEADERS).bak
+	@if ! $$(DIFF) -q -N $$@ $$< ; then \
+		$$(CP) $$< $$@ ; \
+	fi
+ endif #ifdef BUILD_CFLAGS_DEF_HEADERS
+
+ ifdef BUILD_CFLAGS_DEF_OBJS
+  .PHONY: $$(BUILD_CFLAGS_DEF_OBJS).bak
+  $$(BUILD_CFLAGS_DEF_OBJS).bak:
+	@$$(MKDIR) $$(dir $$@)
+	@$$(RM) $$@
+	@$$(ECHO) '$$(CFLAGS_DEF)' | $$(TR) ' ' '\n' | \
+	$$(SED) -e 's/^-U/#undef /' -e 's/^-D\(.\+\)=\(.\+\)/#define \1 \2/' \
+		-e 's/^-D/#define /' > $$@
+
+  $$(BUILD_CFLAGS_DEF_OBJS): $$(BUILD_CFLAGS_DEF_OBJS).bak
+	@if ! $$(DIFF) -q -N $$@ $$< ; then \
+		$$(CP) $$< $$@ ; \
+	fi
+ endif #ifdef BUILD_CFLAGS_DEF_OBJS
+
+
+ ifndef HOST_ROOT
+ .PHONY: install
+ install: all $$(INST_ALL_GOALS) $$(INSTALL_PRIVATE)
+	$$(MSG_SPLIT_LINE)
+	$$(MKDIR) $$(INST_GOAL_DIR)/
+	@if [ -s "$$(BUILD_MASKROM_SYM)" ] ; then \
+		if [ -f "$$(INST_MASKROM_SYM)" ] ; then \
+		 	$$(SORT) -u $$(INST_MASKROM_SYM) \
+					$$(BUILD_MASKROM_SYM) \
+					> $$(INST_MASKROM_SYM).bak ; \
+		else \
+		 	$$(SORT) -u $$(BUILD_MASKROM_SYM) \
+					> $$(INST_MASKROM_SYM).bak ; \
+		fi && \
+		if ! $$(DIFF) -q -N \
+		$$(INST_MASKROM_SYM) $$(INST_MASKROM_SYM).bak ; then \
+			$$(MV) $$(INST_MASKROM_SYM).bak $$(INST_MASKROM_SYM) ; \
+		fi ; \
+	fi
+ ifdef EXT_OBJS
+	$$(CP) -u $$(BUILD_EXT_OBJS) $$(INST_GOAL_DIR)/
+ endif #EXT_OBJS
+ ifdef INST_HEADERS
+	$$(MKDIR) $$(INST_HEADER_DIR)/
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(INST_HEADERS)) $$(INST_HEADER_DIR)/
+ endif
+ ifdef INST_HEADERS2
+	$$(MKDIR) $$(INST_HEADER_DIR2)/
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(INST_HEADERS2)) $$(INST_HEADER_DIR2)/
+ endif
+ ifdef EXT_HEADERS
+	$$(MKDIR) $$(INST_HEADER_DIR)/
+	$$(MKDIR) $$(EXT_HEADER_DIR)/
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(EXT_HEADERS)) $$(INST_HEADER_DIR)/
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(EXT_HEADERS)) $$(EXT_HEADER_DIR)/
+ endif
+ ifdef EXT_HEADERS2
+	$$(MKDIR) $$(INST_HEADER_DIR2)/
+	$$(MKDIR) $$(EXT_HEADER_DIR2)/
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(EXT_HEADERS2)) $$(INST_HEADER_DIR2)/
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(EXT_HEADERS2)) $$(EXT_HEADER_DIR2)/
+ endif
+ ifdef INST_EXTLIB
+	$$(CP) -u $$(addprefix $$(SRC_DIR)/,$$(INST_EXTLIB)) $$(INST_GOAL_DIR)/
+ endif
+
+# Create each folder s doxygen files with ALL the dependency information
+# $$(addprefix $$(BUILD_DIR)/,doxygen.cfg): $$(BUILD_OBJS:.o=.d) $$(BUILD_EXT_OBJS:.o=.d)
+#	@$$(ROOT)/doxygen_input_combine.sh $$(BUILD_DIR)/doxygen.in $$^       #accumulate input files
+#	@$$(ECHO) $$(CFLAGS) > $$(BUILD_DIR)/doxygen.cflags
+#	@$$(ROOT)/doxygen_cfg_build.sh $$(ROOT) $$(REL_SRC_DIR) $$(BUILD_DIR) #change input files & CFLAGS
+#
+# .PHONY: doc
+# doc: $$(addprefix $$(BUILD_DIR)/,doxygen.cfg)
+#	@$$(DOXYGEN) doxygen.cfg
+#	@$$(RM) doxygen.cfg
+
+# Original doxygen generation
+# .PHONY: doc
+# doc:
+#	@/bin/sh $$(ROOT)/gendoc.sh $$(ROOT) $$(REL_SRC_DIR) $$(GOAL) $$(CFLAGS)
+#	@$$(DOXYGEN) doxycfg
+#	@$$(RM) doxycfg
+
+ DOC_GOAL_DIR := $$(ROOT)/doc$$(pathext)
+ DOC_GOAL := $$(addprefix $$(DOC_GOAL_DIR)/,$$(GOAL:.a=.doxygen.in))
+ .PHONY: doc
+ ifdef GOAL
+ doc: $$(BUILD_OBJS:.o=.d) $$(BUILD_EXT_OBJS:.o=.d) # we don t want revision & empty implementation objects
+	@$$(MKDIR) $$(DOC_GOAL_DIR)
+	@$$(ECHO) $$(INST_HEADERS) > $$(DOC_GOAL_DIR)/$$(GOAL:.a=.doxygen.del)
+	@$$(ROOT)/../doc/doxygen_input_filter.pl $$(DOC_GOAL_DIR)/$$(GOAL:.a=.doxygen.del) ../$$(PLATFORM)/src/$$(REL_SRC_DIR) $$(DOC_GOAL) $$^ 
+ else
+ doc:
+	@$$(ECHO) "GOAL not defined"
+ endif
+
+ endif #ifndef HOST_ROOT
+
+ .PHONY: clean
+ clean: $$(CLEAN_ALL_GOALS) $$(CLEAN_PRIVATE)
+	$$(MSG_SPLIT_LINE)
+	$$(RMR) $$(BUILD_DIR)
+ ifndef HOST_ROOT
+ ifdef EXT_OBJS
+	$$(RM) $$(addprefix $$(INST_GOAL_DIR)/,$$(notdir $$(EXT_OBJS)))
+ endif #EXT_OBJS
+ ifdef INST_HEADERS
+	$$(RM) $$(addprefix $$(INST_HEADER_DIR)/,$$(notdir $$(INST_HEADERS)))
+ endif
+ ifdef INST_HEADERS2
+	$$(RM) $$(addprefix $$(INST_HEADER_DIR2)/,$$(notdir $$(INST_HEADERS2)))
+ endif
+ ifdef EXT_HEADERS
+	$$(RM) $$(addprefix $$(INST_HEADER_DIR)/,$$(notdir $$(EXT_HEADERS)))
+	$$(RM) $$(addprefix $$(EXT_HEADER_DIR)/,$$(notdir $$(EXT_HEADERS)))
+ endif
+ ifdef EXT_HEADERS2
+	$$(RM) $$(addprefix $$(INST_HEADER_DIR2)/,$$(notdir $$(EXT_HEADERS2)))
+	$$(RM) $$(addprefix $$(EXT_HEADER_DIR2)/,$$(notdir $$(EXT_HEADERS2)))
+ endif
+ ifdef INST_EXTLIB
+	$$(RM) $$(addprefix $$(INST_GOAL_DIR)/,$$(notdir $$(INST_EXTLIB)))
+ endif
+ endif #ifndef HOST_ROOT
+
+
+ GOAL_DEPS := $$(filter $$(BUILD_ALL_GOALS) $$(ALL_GOALS) all install $$(INST_ALL_GOALS),$$(MAKECMDGOALS))
+ BUILD_DEPS := $$(filter $$(BUILD_DEP_OBJS),$$(MAKECMDGOALS))
+ OBJ_DEPS := $$(filter $$(DEP_OBJS),$$(MAKECMDGOALS))
+ CLEAN_DEPS := $$(filter clean $$(CLEAN_ALL_GOALS),$$(MAKECMDGOALS))
+ NO_DEPS := $$(filter $$(BUILD_REV_OBJS) $$(REV_OBJS),$$(MAKECMDGOALS))
+ ifeq (,$$(CLEAN_DEPS))
+  ifeq (,$$(GOAL_DEPS))
+   ifeq (,$$(strip $$(BUILD_DEPS) $$(OBJ_DEPS)))
+    ifeq (,$$(NO_DEPS))
+     -include $$(BUILD_DEP_OBJS:.o=.d)
+    endif
+   else
+    ifneq (,$$(BUILD_DEPS))
+     -include $$(BUILD_DEPS:.o=.d)
+    endif
+    ifneq (,$$(OBJ_DEPS))
+     -include $$(addprefix $$(BUILD_DIR)/,$$(OBJ_DEPS:.o=.d))
+    endif
+   endif
+  else
+   -include $$(BUILD_DEP_OBJS:.o=.d)
+  endif
+ endif
+
+endef #GEN_GOAL_RULES

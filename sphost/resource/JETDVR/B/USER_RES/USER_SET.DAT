@@ -1,0 +1,37 @@
+0x00   //capSetting.CurViewMode
+0xFF   //capSetting.CurScene
+0x00   //capSetting.qvSec
+0x00   //capSetting.reserve
+0x01   //sound.shutter
+0x01   //sound.powerOn
+0x01   //sound.beep
+0x02   //sound.volume
+0x00   //pbSlideSetting.intvl
+0x00   //pbSlideSetting.trans
+0x00   //pbSlideSetting.music
+0x00   //pbSlideSetting.isRepeat
+0x00   //periodicalCap.periodicalSet
+0x00
+0x00   //periodicalCap.videoFileKey
+0x00   //
+0x00   //periodicalCap.imgProcCnt
+0x00   //
+0x00   //periodicalCap.interval
+0x00
+0x00   //periodicalCap.duration
+0x00
+0x01   //playback.filetype
+0x00   //setup.lightFrequency
+0x00   //setup.powerSave
+0x00   //setup.powerOnRecord
+0x00   //setup.dateTime
+0x00   //setup.language
+0x00   //setup.TV
+0x00   //setup.usbMode
+0x02   //setup.batteryType
+0x01   //setup.powerOnLogo
+0x01   //setup.videoFormat
+0x01   //setup.mediaFormat
+0x00   //setup.wifiConnectStatus
+0x0c   //setup.TimezoneSTATUS
+0x01   //setup.GPSSTATUS

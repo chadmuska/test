@@ -1,0 +1,130 @@
+#/**************************************************************************
+# *
+# *         Copyright (c) 2002-2018 by iCatch Technology Inc.
+# *
+# *  This software is copyrighted by and is the property of iCatch
+# *  Technology Inc. All rights are reserved by iCatch Technology Inc.
+# *  This software may only be used in accordance with the corresponding
+# *  license agreement. Any unauthorized use, duplication, distribution,
+# *  or disclosure of this software is expressly forbidden.
+# *
+# *  This Copyright notice MUST not be removed or modified without prior
+# *  written consent of iCatch Technology Inc.
+# *
+# *  iCatch Technology Inc. reserves the right to modify this software
+# *  without notice.
+# *
+# *  iCatch Technology Inc.
+# *  19-1, Innovation First Road, Science-Based Industrial Park,
+# *  Hsin-Chu, Taiwan.
+# *
+# *  Author: Royce
+# *
+# **************************************************************************/
+#init empty simple flavor variables before any include
+
+# include & environment
+HOST_MAKE       := YES
+HOST_ROOT       := .
+TOOL_PATH       := ../tool
+RES_PATH        := resource
+
+include $(HOST_ROOT)/host.def
+
+ifndef PLATFORM_PATH
+PLATFORM_PATH   := $(PLATFORM)
+endif
+PLATFORM_ROOT   := ../$(PLATFORM_PATH)
+
+# output
+DEST_DIR        := _$(PRJ)
+DOWN_PATH       := $(DEST_DIR)/download
+RO_DOWN_PATH    := $(DOWN_PATH)/A/RO_RES
+USER_DOWN_PATH  := $(DOWN_PATH)/B/USER_RES
+SYS_RES_PATH    := $(PLATFORM_ROOT)/resource
+PLATFORM_IDSTR  := 6350
+
+# Include the definition of tool chain
+include $(PLATFORM_ROOT)/tool_chain.def
+
+#command
+ifneq (file,$(origin SORT))
+CC      := $(PREFIX)gcc
+AR      := $(PREFIX)ar
+OBJDUMP := $(PREFIX)objdump
+OBJCOPY := $(PREFIX)objcopy
+SIZE    := $(PREFIX)size
+NM      := $(PREFIX)nm
+CXX     := $(PREFIX)g++
+ECHO    := echo
+CP      := /bin/cp -f
+MV      := /bin/mv -f
+MKDIR   := /bin/mkdir -p
+RM      := /bin/rm -f
+RMR     := /bin/rm -rf
+CAT     := /bin/cat
+TOUCH   := /bin/touch
+SED     := /bin/sed
+GREP    := /bin/grep
+DIFF    := /usr/bin/diff
+SORT    := /usr/bin/sort
+endif
+
+#---------------------------------------------------------------------------
+# Default definition:
+#---------------------------------------------------------------------------
+
+ifeq ($(DIQ_FRAMEWORK), YES)
+DIQ_OTHER_BIN_PATH := $(RES_PATH)/$(PRJ_NAME)/A/RO_RES/IQ/$(IQ_NAME)
+CDSPPARA_PATH := $(DIQ_OTHER_BIN_PATH)/DIQ
+ifeq ($(OS), Windows_NT)
+DIQ_CUR_DIR := $(shell cygpath -w $(shell pwd))
+DIQ_CLEAR_BAT := $(shell cygpath -m "$(COMSPEC)")
+else
+DIQ_CUR_DIR := $(shell pwd)
+DIQ_CLEAR_BAT :=
+endif ##ifeq ($(OS), Windows_NT)
+DIQ_TOOL_WORK_PATH := $(CDSPPARA_PATH)
+DIQ_TOOL_UI_FLAG := /silent
+DIQ_TOOL_SRC_PATH := sln:"$(DIQ_CUR_DIR)/$(CDSPPARA_PATH)/DESIGN/"
+DIQ_TOOL_DST_PATH := bin:"$(DIQ_CUR_DIR)/$(CDSPPARA_PATH)/"
+DIQ_TOOL_DBG_FLAG := dbg:1
+endif ##ifeq ($(DIQ_FRAMEWORK), YES)
+##$(warning $(DIQ_CUR_DIR))
+##$(warning $(DIQ_CLEAR_BAT))
+##$(warning $(DIQ_TOOL_SRC_PATH))
+##$(warning $(DIQ_TOOL_DST_PATH))
+##$(warning $(DIQ_TOOL_DBG_FLAG))
+##$(warning $(OS))
+
+#---------------------------------------------------------------------------
+# Explicit rules
+#---------------------------------------------------------------------------
+.PHONY: diq_cal
+diq_cal:
+ifeq ($(DIQ_FRAMEWORK), YES)
+ ifeq ($(CHECK_WINE_PRG), YES)
+	#$(RM) $(CDSPPARA_PATH)/diq.def
+  ifneq (, $(wildcard $(TOOL_PATH)/diq/$(PLATFORM_IDSTR)/ResCmpz.exe))	
+	@$(WINE_PRG) $(TOOL_PATH)/diq/$(PLATFORM_IDSTR)/ResCmpz.exe $(DIQ_TOOL_UI_FLAG) $(DIQ_TOOL_SRC_PATH) $(DIQ_TOOL_DST_PATH) $(DIQ_TOOL_DBG_FLAG) 2>/dev/null
+  else
+	@$(error DIQ FATAL: ResCmpz.exe NOT found!!!)
+  endif
+ endif ##ifeq ($(CHECK_WINE_PRG), )
+ ifeq ($(OS), Windows_NT)
+  ifeq ($(DIQ_PA), 1)
+	@$(WINE_PRG) $(TOOL_PATH)/diq/$(PLATFORM_IDSTR)/DiqPA1.exe $(DIQ_TOOL_UI_FLAG) $(DIQ_TOOL_SRC_PATH) $(DIQ_TOOL_DBG_FLAG)
+	@exit 1
+  endif
+ endif
+else
+	@$(ECHO) 1st if failed! 
+endif ##ifeq ($(DIQ_FRAMEWORK), )
+
+.PHONY: clean
+clean:
+ifeq ($(DIQ_FRAMEWORK), YES)
+ #ifeq ($(OS), Windows_NT)	
+ #	$(DIQ_CLEAR_BAT) /c "cd $(CDSPPARA_PATH)/DESIGN/-diq/dbg & _Clear_This_Folder.bat"
+ #endif ##ifeq ($(OS), Windows_NT)
+endif ##ifeq ($(DIQ_FRAMEWORK), YES)

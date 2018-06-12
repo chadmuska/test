@@ -1,0 +1,210 @@
+#/**************************************************************************
+# *
+# *         Copyright (c) 2002-2018 by iCatch Technology Inc.
+# *
+# *  This software is copyrighted by and is the property of iCatch
+# *  Technology Inc. All rights are reserved by iCatch Technology Inc.
+# *  This software may only be used in accordance with the corresponding
+# *  license agreement. Any unauthorized use, duplication, distribution,
+# *  or disclosure of this software is expressly forbidden.
+# *
+# *  This Copyright notice MUST not be removed or modified without prior
+# *  written consent of iCatch Technology Inc.
+# *
+# *  iCatch Technology Inc. reserves the right to modify this software
+# *  without notice.
+# *
+# *  iCatch Technology Inc.
+# *  19-1, Innovation First Road, Science-Based Industrial Park,
+# *  Hsin-Chu, Taiwan.
+# *
+# *  Author: Anmin Deng
+# *
+# **************************************************************************/
+
+# this file included by $host/Makefile for manual config multi stage fast boot
+
+ifneq ($(MULTI_BOOT_CUSTOM_DEFINE),YES) # not config in host or project .def
+
+# if not config in host.def or individual project .def, manual config here
+
+MULTI_BOOT_TOOL_REMAP := YES
+
+MULTI_BOOT := NO
+
+# host define symbols in Makefile, named "USE_*", where "*"
+# is one of "MULTI_BOOT_STAGE_*" define macros in "api/inc/multiboot_api.h"
+USE_MULTI_BOOT_STAGE_PWR_GPIO   := NO
+USE_MULTI_BOOT_STAGE_VFS        := NO
+USE_MULTI_BOOT_STAGE_DEV_START  := NO
+USE_MULTI_BOOT_STAGE_DEV_RTC    := NO
+USE_MULTI_BOOT_STAGE_DEV_TEST   := NO
+USE_MULTI_BOOT_STAGE_DISK_RSV   := NO
+USE_MULTI_BOOT_STAGE_DISP       := NO
+USE_MULTI_BOOT_STAGE_SENSOR     := NO
+USE_MULTI_BOOT_STAGE_DEV_SECOND := NO
+USE_MULTI_BOOT_STAGE_DISK_MEDIA := NO
+USE_MULTI_BOOT_STAGE_DEV_AUDIO  := NO
+USE_MULTI_BOOT_STAGE_DEV_USB    := NO
+USE_MULTI_BOOT_STAGE_MEDIA      := NO
+USE_MULTI_BOOT_STAGE_MODESW     := NO
+USE_MULTI_BOOT_STAGE_SYS_RES    := NO
+USE_MULTI_BOOT_STAGE_APP_START  := NO
+USE_MULTI_BOOT_STAGE_CMD        := NO
+USE_MULTI_BOOT_STAGE_HOST       := NO
+USE_MULTI_BOOT_STAGE_APP_DELAY  := NO
+USE_MULTI_BOOT_STAGE_SLIDE      := NO
+
+#=== image size limits of stages in KB ===
+SIZE_LIMIT_STAGE_OPEN :=
+SIZE_LIMIT_STAGE_RESOURCE :=
+
+# end of user edit block
+
+endif
+
+
+# System usage. DO NOT EDIT after this
+
+STAGE_LIST :=
+
+
+ifeq ($(MULTI_BOOT),YES)
+ ifeq (,$(or $(nand),$(spi)))
+  MULTI_BOOT_ERR := $(error error: multi boot only supports boot from nand)
+ else
+
+  ifneq ($(TOOLCHAIN), ICATCHTEK)
+   MULTI_BOOT_TOOL_REMAP :=
+  endif
+
+  ifneq (,$(and $(wildcard $(TOOL_PATH)/multiboot_stage_values.pl),\
+	$(wildcard $(TOOL_PATH)/multiboot_lscript_input.pl),\
+	$(wildcard $(TOOL_PATH)/multiboot_lscript_remap.pl)))
+   HAS_MULTI_BOOT_TOOL_REMAP := YES
+  endif
+
+  USE_MBOOT_STAGE_LIST :=
+
+  MULTI_BOOT_DEF_HDR := $(PLATFORM_ROOT)/inc/api/multiboot_api.h
+
+  ifndef HAS_MULTI_BOOT_TOOL_REMAP
+   MULTI_BOOT_STAGE_LIST := $(shell s=[[:blank:]]; w=[_[:alnum:]]; \
+	sed -ne "s/^$$s*\#$$s*define$$s\+\(MULTI_BOOT_STAGE_$$w\+\).*/\1/p" \
+	$(MULTI_BOOT_DEF_HDR))
+  else
+   MULTI_BOOT_STAGE_LIST := $(shell \
+	$(TOOL_PATH)/multiboot_stage_values.pl -l $(MULTI_BOOT_DEF_HDR))
+  endif
+
+# defining functions in makefiles for multi boot support
+# /** \brief $(call host-stage-val,$(1)),
+#  * to find the stage values of the specific multi boot stage name list
+#  * \param $(1), space-separated list of multi boot stage names
+#  * \return the numeric stage value list of the stage list $(1)
+#  */
+  host-stage-val = $(call stage-value,$(MULTI_BOOT_DEF_HDR),$(1))
+
+  define USE_MULTI_BOOT_STAGE
+   $(1) := $$(call host-stage-val,$(1))
+
+   ifeq ($$(USE_$(1)),YES)
+    USE_MBOOT_STAGE_LIST += $(1)
+    CFLAGS += -DUSE_$(1)=1
+   endif
+  endef
+
+  $(foreach stage, $(MULTI_BOOT_STAGE_LIST), \
+		$(eval $(call USE_MULTI_BOOT_STAGE,$(stage))))
+
+
+  ifndef HAS_MULTI_BOOT_TOOL_REMAP
+
+# force final stage enabled
+   STAGE_LIST := $(call host-stage-val,$(USE_MBOOT_STAGE_LIST) \
+			MULTI_BOOT_STAGE_ALL)
+   STAGE_LIST := $(call numeric-sort,$(STAGE_LIST))
+
+
+# /** \brief $(call stage-archive,$(1),$(2)),
+#  * to find the archive stage file used to build multi boot stage $(1)
+#  * \param $(1), we want to build multi boot stage $(1)
+#  * \param $(2), the space-separated list of specific base archive file name,
+#  * eg, libmy.a ..
+#  * \return the archive stage file, eg, libmy.stage%.a, used
+#  * to build multi boot stage $(1)
+#  */
+   stage-archive = $(foreach lib,$(2),\
+		$(shell $(TOOL_PATH)/multiboot_stage_archive.sh $(1) $(lib)))
+
+# /** \brief $(call stage-obj,$(1),$(2),$(3)),
+#  * to find the obj stage file used to build multi boot stage $(1)
+#  * \param $(1), we want to build multi boot stage $(1)
+#  * \param $(2), the specific base obj file name, eg, myobj1.o
+#  * \param $(3), the space-separated list of obj files with stage support
+#  * \return the obj stage file, eg, myobj1.stage%.o, used
+#  * to build multi boot stage $(1)
+#  */
+   stage-obj = $(foreach obj,\
+	$(2),$(if $(filter $(obj),$(3)),$(obj:.o=.stage$(1).o),\
+	$(if $(filter $(obj:.o=.nostage)%.o,$(3)),\
+		$(shell $(TOOL_PATH)/multiboot_nostage_obj.sh $(1) \
+			$(filter $(obj:.o=.nostage)%.o,$(3))),$(obj))))
+
+  else  #ifndef HAS_MULTI_BOOT_TOOL_REMAP
+
+# force final stage enabled
+   STAGE_LIST := $(shell $(TOOL_PATH)/multiboot_stage_values.pl \
+	-s $(MULTI_BOOT_DEF_HDR) $(USE_MBOOT_STAGE_LIST) MULTI_BOOT_STAGE_ALL)
+
+# /** \brief $(call stage-archive,$(1),$(2)),
+#  * to find the archive stage file used to build multi boot stage $(1)
+#  * \param $(1), we want to build multi boot stage $(1)
+#  * \param $(2), the space-separated list of specific base archive file name,
+#  * eg, libmy.a ..
+#  * \return the space-separated list of archive stage file,
+#  * eg, libmy.stage%.a .., used to build multi boot stage $(1)
+#  */
+   stage-archive = $(shell \
+		$(TOOL_PATH)/multiboot_lscript_input.pl $(1) '$(2)')
+
+# /** \brief $(call stage-obj,$(1),$(2),$(3)),
+#  * to find the obj stage file used to build multi boot stage $(1)
+#  * \param $(1), we want to build multi boot stage $(1)
+#  * \param $(2), the space-separated list of specific base obj file name,
+#  * eg, myobj1.o or myobj2.nostage%.o ..
+#  * \param $(3), the space-separated list of obj files with stage support
+#  * \return the space-separated list of obj stage file,
+#  * eg, myobj1.stage%.o .., used to build multi boot stage $(1)
+#  */
+   stage-obj = $(shell \
+		$(TOOL_PATH)/multiboot_lscript_input.pl $(1) '$(2)' '$(3)')
+
+  endif #ifndef HAS_MULTI_BOOT_TOOL_REMAP
+
+  ifeq (,$(and $(filter YES,$(MULTI_BOOT_TOOL_REMAP)),\
+	$(filter YES,$(HAS_MULTI_BOOT_TOOL_REMAP))))
+
+# defining functions in makefiles for multi boot support
+# /** \brief $(call pre-stage,$(1),$(2)),
+#  * to find the previous host request stage value of the specific stage
+#  * \param $(1), the specific stage value
+#  * \param $(2), the space-separated numeric list of multi boot stage values
+#  * \return the previous stage value of stage $(1) in stage list $(2)
+#  */
+   pre-stage = $(shell $(ECHO) '$(call numeric-sort,$(2))' | \
+		$(SED) -n -e 's/^.*\b\([0-9]\+\) $(1)\b.*$$/\1/p')
+
+  endif #$(MULTI_BOOT_TOOL_REMAP) == YES && $(HAS_MULTI_BOOT_TOOL_REMAP) == YES
+
+
+  BUILD_NOSTAGE_OBJS :=
+# BUILD_NOSTAGE_OBJS += $(LIB_PATH)/hal.a(hal_rtc.nostage$(MULTI_BOOT_STAGE_DEV_RTC).o)
+  BUILD_NOSTAGE_OBJS += $(LIB_PATH)/libdisk.a(disk_logi.nostage$(MULTI_BOOT_STAGE_DISK_RSV).o)
+  BUILD_NOSTAGE_OBJS += $(LIB_PATH)/hal.a(hal_disp_int.nostage$(MULTI_BOOT_STAGE_DISP).o)
+  BUILD_NOSTAGE_OBJS += $(LIB_PATH)/libdisp.nostage$(MULTI_BOOT_STAGE_DISP).a
+  BUILD_NOSTAGE_OBJS += $(LIB_PATH)/libsensor.nostage$(MULTI_BOOT_STAGE_SENSOR).a
+  BUILD_NOSTAGE_OBJS += $(LIB_PATH)/libcmd.nostage$(MULTI_BOOT_STAGE_CMD).a
+
+ endif
+endif

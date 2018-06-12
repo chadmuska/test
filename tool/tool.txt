@@ -1,0 +1,52 @@
+tool\
+
+- 7z.exe/7za.exe : 7-zip windows & cygwin version
+
+- addhdr.exe : Insert SP5K bin header
+
+- addr2func.exe : helper utility to convert FW address to function
+
+- drampara.exe : convert DRAM parameter between text & binary format
+
+- dramparascan_convert.exe : convert DRAM parameter scan result to DRAM parameter
+
+- evtbl.exe : EV table utility
+
+- fic.exe & fif.exe : FileInCode & FileInFile utility
+
+- FRM-F5.exe : activate and send F5 key to FRM window to execute ISP funciton
+
+- ioconv.exe : convert .io (GPIO definition) to c header
+
+- k33CodeSentryParser.exe
+
+- objdump.exe : another version of objdump to provide more features
+
+- objref.exe : find reference chain of specified module
+
+- sumpatch.exe : FW binary checksum patcher
+
+- t2b.exe, t2b_patch.exe : Text-To-Binary converter
+
+- usbboot.exe, SetPara.exe, SetReg.exe : USB boot
+
+- zlib.bat : zip SP5K environment (5210 + tool folder)
+
+- histinfo.exe : Codesentry reason dump.
+
+vc83\
+- config.sh : configure vc83 hardware & project
+config.sh vca370z
+
+- release.sh : release script to build everything and zip everything
+release.sh
+
+- zbin.sh : zip download folder & elf+map file
+zip bin to .7z: zbin.sh 
+zip bin to .zip: zbin.sh zip
+
+- zvc83.sh : zip vc83 sources
+usage: same as zbin.sh
+
+- addr.sh : find function name of specified address
+addr.sh 8007146c 80082032

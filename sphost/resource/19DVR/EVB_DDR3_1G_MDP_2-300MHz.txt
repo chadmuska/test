@@ -1,0 +1,277 @@
+0x493E0 // 300 MHz
+0x1053 0x28 # regAbortTime
+0x00C9 0x01 # tgPllM
+0x00CA 0x20 # tgPllN
+0x00CF 0x34 # tgPll CP (charge pump) current
+0x0291 0x01 # tgPll resistor selection
+0x00CD 0x00 # tgPll TG clk divider
+0x0293 0x01 # tgPll VCO bias' resistor control
+0x0292 0x01 # tgPll 2nd TG clk divider enable
+0x0074 0x00 # tgPll DONOT gating during unstable region
+0x00C8 0x03 # tgPll enable
+0x00D0 0x01 # audPll enable
+0x100C 0x00 # pertIntEn disable
+0x9050 0xFF # [front] Define line number for designated-time interrupt (delay, due to regAbort)
+0x008A 0x08 # regClkDiv
+0x008E 0x0C # clk48mDiv
+0x0092 0x09 # fmClkDiv
+0x1104 0x90 # UART baud div [LSB]
+0x1105 0x01 # UART baud div [MSB]
+0x0070 0x01 # bdrampllclk src from TGPLL (1) (1 for TGPLL; 0 for SSPLL)
+0x0078 0x00 # SSPLL disable >>>
+0x007A 0x90 # SSPLL N [LSB]
+0x007B 0x01 # SSPLL N [MSB]
+0x0079 0x03 # SSPLL CP (charge pump) current
+0x007C 0x10 # SSPLL div2_sel
+0x007D 0x74 # SSPLL MDS
+0x026C 0x20 # SSPLL VCO free running frequency controlled by charge pump
+0x0298 0x04 # SSPLL resistor of LPF control
+0x0299 0x03 # SSPLL resistor of VCO control
+0x0078 0x01 # SSPLL enable <<<
+0x00E8 0x02 # CpuSusClk source selection: audpllclk
+0x009A 0x01 # CPU ENTER power saving mode
+0x02BC 0x00 # CPUPLL disable >>>
+0x02BE 0x2C # CPUPLL N [LSB]
+0x02BF 0x01 # CPUPLL N [MSB]
+0x02BD 0x02 # CPUPLL CP (charge pump) current
+0x02C0 0x00 # CPUPLL [2]: div2_sel_cpu, [6]cpuckout_half
+0x02C1 0x74 # CPUPLL MDS
+0x02C2 0x15 # [2:0] CPUPLL resistor of LPF control; [5:3] CPUPLL resistor of VCO control
+0x02C3 0x01 # CPUPLL VCO free running frequency controlled by charge pump
+0x0089 0x00 # cpuOprDiv. cpuOprClk = (CPUPLL/2) / (cpuOprDiv+1)
+0x02BC 0x01 # CPUPLL enable <<<
+0x1055 0x26 # extRomActTime
+0x1056 0x02 # extRomRcvTim
+0x008B 0x01 # romClkDiv
+0x9050 0xFF # [front] Define line number for designated-time interrupt (delay, due to regAbort)
+0x0070 0x00 # bdrampllclk src from SSPLL (0) (1 for TGPLL; 0 for SSPLL)
+0x009A 0x00 # CPU EXIT power saving mode
+0x00E8 0x00 # CpuSusClk source selection: cpupllclk
+0x00DC 0x00 # config DRAM type (0 for DDR2 1.8v; 1 for DDR 2.5v; 2 for MDDR 1.8v; 3 for SDR 3.3v)
+0x7122 0x00 # [DRAM] Toggle LOW (low active) for RAS, CAS, MWE, MCS, CKE, CLK, MA.
+0x7121 0x00 # [DRAM] RST pin output LOW (low active)
+0x9050 0xFF # [front] Define line number for designated-time interrupt (delay, due to regAbort)
+0x7121 0x01 # [DRAM] RST pin output HIGH (low active)
+0x9050 0xFF # [front] Define line number for designated-time interrupt (delay, due to regAbort)
+0x7120 0xC0 # [DRAM] MCS output HIGH; CKE output HIGH during DRAM initialize
+0x7050 0x90 # [DRAM] DDR3, 1G bits
+0x7054 0x2A # [DRAM] tREF [LSB]
+0x7055 0x09 # [DRAM] tREF [MSB]
+0x7056 0x03 # [DRAM] ZQCS period [LSB]
+0x7057 0x40 # [DRAM] ZQCS period [MSB]
+0x7058 0x0B # [DRAM] tRP [LSB]
+0x7059 0x34 # [DRAM] tRP [MSB]
+0x705A 0x0D # [DRAM] tFAW
+0x705B 0x0F # [DRAM] tRC
+0x705D 0x30 # [DRAM] tRFC
+0x705E 0x15 # [DRAM] tWRP
+0x705F 0x31 # [DRAM] tRCD, tRRD
+0x7064 0x20 # [DRAM] MRS CAS latency
+0x7065 0x03 # [DRAM] Reset SDRAM DLL, DRAM recovery time
+0x7066 0x12 # [DRAM] EMR
+0x7067 0x00 # [DRAM] EMR
+0x7068 0x00 # [DRAM] EMR2
+0x7069 0x00 # [DRAM] EMR2
+0x706E 0x03 # [DRAM] tMRW
+0x706F 0x00 # [DRAM] tMRW
+0x7072 0x09 # [DRAM] Write ready latency
+0x7073 0xBC # [DRAM] Read ready latency; Read dqsie latency
+0x7074 0x0C # [DRAM] tW2R
+0x7075 0x09 # [DRAM] tR2W
+0x7080 0x01 # [DRAM] sync read data with mclk
+0x7081 0x09 # [DRAM] DDR PHY freq range (1: 300~700MHz); DDR PHY power-on,
+0x7082 0xBB # [DRAM] LDQS selection; UDQS selection;
+0x7090 0x66 # [DRAM] DQ[1] + DQ[0]
+0x7091 0x66 # [DRAM] DQ[3] + DQ[2]
+0x7092 0x66 # [DRAM] DQ[5] + DQ[4]
+0x7093 0x66 # [DRAM] DQ[7] + DQ[6]
+0x7094 0x66 # [DRAM] DQ[9] + DQ[8]
+0x7095 0x66 # [DRAM] DQ[11] + DQ[10]
+0x7096 0x66 # [DRAM] DQ[13] + DQ[12]
+0x7097 0x66 # [DRAM] DQ[15] + DQ[14]
+0x7790 0x22 # [DRAM] mem io driving [MD01|MD00]
+0x7791 0x22 # [DRAM] mem io driving [MD03|MD02]
+0x7792 0x22 # [DRAM] mem io driving [MD05|MD04]
+0x7793 0x22 # [DRAM] mem io driving [MD07|MD06]
+0x7794 0x22 # [DRAM] mem io driving [MD09|MD08]
+0x7795 0x22 # [DRAM] mem io driving [MD11|MD10]
+0x7796 0x22 # [DRAM] mem io driving [MD13|MD12]
+0x7797 0x22 # [DRAM] mem io driving [MD15|MD14]
+0x7782 0x44 # [DRAM] mem io driving [CLK|MCS+RST+CKE]
+0x7120 0x00 # [DRAM] MCS output LOW;
+0x9050 0xFF # [front] Define line number for designated-time interrupt (delay, due to regAbort)
+0x70E6 0x02 # [DRAM] initialize DRAM
+0x9050 0xFF # [front] Define line number for designated-time interrupt (delay, due to regAbort)
+0x7051 0x00 # [DRAM] (Too many info) Please check DRAM register
+0x0020 0x01 # Set SW reset for FRONT
+0x0020 0x00 # Clear SW reset for FRONT
+0x7001 0x10 # [DRAM] Clear LBUS error during DDR RESET
+0x1004 0x80 # Clear PerIntSts[7] LBUS error
+0x100C 0x80 # Set PerIntEn[7] as 1
+0x0282 0x03 # gpeClkDiv
+0x0140 0xFF # FM io pad driving, 8mA for FMIF3~0
+0x0141 0xFF # FM io pad driving, 8mA for FMIF7~4
+0x0142 0xFF # FM io pad driving, 8mA for FMIF11~8
+0x0143 0xFF # FM io pad driving, 8mA for FMIF15~12
+0x0144 0xFF # FM io pad driving, 8mA for FMIF19~16
+0x0145 0xFF # FM io pad driving, 8mA for FMIF23~20
+0x0146 0xFF # FM io pad driving, 8mA for FMIF27~24
+0x0147 0xFF # FM io pad driving, 8mA for FMIF31~28
+0x0148 0xFF # FM io pad driving, 8mA for FMIF35~32
+0x0149 0xFF # FM io pad driving, 8mA for FMIF39~36
+0x014A 0xFF # FM io pad driving, 8mA for FMIF43~40
+0x014B 0xFF # FM io pad driving, 8mA for FMIF47~44
+0x014C 0xFF # FM io pad driving, 8mA for FMIF51~48
+0x4061 0x22 # [FM] NAND Act/Rcv time
+0x4070 0x07 # use SPI 0x00 : 48MHz, 0x07 : 96MHz
+0x4071 0x03 # use SPI mode 3
+0x407A 0x0C # Phase -4
+0x407B 0x02 # use SPI 0x00 1 bit read , 0x01 : 2bit read , 0x02 : 4bit read
+0x407C 0x10 # Latch bt pass
+0x493E0 // 300 MHz
+0x7122 0x00 # [DRAM] Toggle LOW (low active) for RAS, CAS, MWE, MCS, CKE, CLK, MA.
+0x7120 0xC0 # [DRAM] MCS output HIGH; CKE output HIGH during DRAM initialize
+0x7050 0x90 # [DRAM] DDR3, 1G bits
+0x7054 0x2A # [DRAM] tREF [LSB]
+0x7055 0x09 # [DRAM] tREF [MSB]
+0x7056 0x03 # [DRAM] ZQCS period [LSB]
+0x7057 0x40 # [DRAM] ZQCS period [MSB]
+0x7058 0x0B # [DRAM] tRP [LSB]
+0x7059 0x34 # [DRAM] tRP [MSB]
+0x705A 0x0D # [DRAM] tFAW
+0x705B 0x0F # [DRAM] tRC
+0x705D 0x30 # [DRAM] tRFC
+0x705E 0x15 # [DRAM] tWRP
+0x705F 0x31 # [DRAM] tRCD, tRRD
+0x7064 0x20 # [DRAM] MRS CAS latency
+0x7065 0x03 # [DRAM] Reset SDRAM DLL, DRAM recovery time
+0x7066 0x12 # [DRAM] EMR
+0x7067 0x00 # [DRAM] EMR
+0x7068 0x00 # [DRAM] EMR2
+0x7069 0x00 # [DRAM] EMR2
+0x706E 0x03 # [DRAM] tMRW
+0x706F 0x00 # [DRAM] tMRW
+0x7072 0x09 # [DRAM] Write ready latency
+0x7073 0xBC # [DRAM] Read ready latency; Read dqsie latency
+0x7074 0x0C # [DRAM] tW2R
+0x7075 0x09 # [DRAM] tR2W
+0x7080 0x01 # [DRAM] sync read data with mclk
+0x7081 0x09 # [DRAM] DDR PHY freq range (1: 300~700MHz); DDR PHY power-on,
+0x7082 0xBB # [DRAM] LDQS selection; UDQS selection;
+0x7090 0x66 # [DRAM] DQ[1] + DQ[0]
+0x7091 0x66 # [DRAM] DQ[3] + DQ[2]
+0x7092 0x66 # [DRAM] DQ[5] + DQ[4]
+0x7093 0x66 # [DRAM] DQ[7] + DQ[6]
+0x7094 0x66 # [DRAM] DQ[9] + DQ[8]
+0x7095 0x66 # [DRAM] DQ[11] + DQ[10]
+0x7096 0x66 # [DRAM] DQ[13] + DQ[12]
+0x7097 0x66 # [DRAM] DQ[15] + DQ[14]
+0x7782 0x44 # [DRAM] mem io driving [CLK|MCS+RST+CKE]
+0x7120 0x00 # [DRAM] MCS output LOW;
+0x70E6 0x02 # [DRAM] initialize DRAM
+0x7051 0x00 # [DRAM] (Too many info) Please check DRAM register
+0x57E40 // 360 MHz
+0x7122 0x00 # [DRAM] Toggle LOW (low active) for RAS, CAS, MWE, MCS, CKE, CLK, MA.
+0x7120 0xC0 # [DRAM] MCS output HIGH; CKE output HIGH during DRAM initialize
+0x7050 0x90 # [DRAM] DDR3, 1G bits
+0x7054 0x2A # [DRAM] tREF [LSB]
+0x7055 0x09 # [DRAM] tREF [MSB]
+0x7056 0x03 # [DRAM] ZQCS period [LSB]
+0x7057 0x40 # [DRAM] ZQCS period [MSB]
+0x7058 0x0A # [DRAM] tRP [
+0x7059 0x34 # [DRAM] tRP
+0x705A 0x0D # [DRAM] tFAW
+0x705B 0x0F # [DRAM] tRC
+0x705D 0x30 # [DRAM] tRFC
+0x705E 0x14 # [DRAM] tWRP
+0x705F 0x31 # [DRAM] tRCD, tRRD
+0x7064 0x10 # [DRAM] MRS CAS latency
+0x7065 0x03 # [DRAM] Reset SDRAM DLL, DRAM recovery time
+0x7066 0x12 # [DRAM] EMR
+0x7067 0x00 # [DRAM] EMR
+0x7068 0x00 # [DRAM] EMR2
+0x7069 0x00 # [DRAM] EMR2
+0x706E 0x03 # [DRAM] tMRW
+0x706F 0x00 # [DRAM] tMRW
+0x7072 0x08 # [DRAM] Write ready latency
+0x7073 0x9A # [DRAM] Read ready latency; Read dqsie latency
+0x7074 0x0D # [DRAM] tW2R
+0x7075 0x08 # [DRAM] tR2W
+0x7080 0x00 # [DRAM] sync read data with mclk
+0x7081 0x09 # [DRAM] DDR PHY freq range (1: 300~700MHz); DDR PHY power-on,
+0x7082 0xAA # [DRAM] LDQS selection; UDQS selection;
+0x7090 0x55 # [DRAM] DQ[1] + DQ[0]
+0x7091 0x55 # [DRAM] DQ[3] + DQ[2]
+0x7092 0x55 # [DRAM] DQ[5] + DQ[4]
+0x7093 0x55 # [DRAM] DQ[7] + DQ[6]
+0x7094 0x55 # [DRAM] DQ[9] + DQ[8]
+0x7095 0x55 # [DRAM] DQ[11] + DQ[10]
+0x7096 0x55 # [DRAM] DQ[13] + DQ[12]
+0x7097 0x55 # [DRAM] DQ[15] + DQ[14]
+0x7782 0xA4 # [DRAM] mem io driving [CLK|MCS+RST+CKE]
+0x7120 0x00 # [DRAM] MCS output LOW;
+0x70E6 0x02 # [DRAM] initialize DRAM
+0x7051 0x00 # [DRAM] (Too many info) Please check DRAM register
+0x6DDD0 // 450 MHz
+0x7122 0x00 # [DRAM] Toggle LOW (low active) for RAS, CAS, MWE, MCS, CKE, CLK, MA.
+0x7120 0xC0 # [DRAM] MCS output HIGH; CKE output HIGH during DRAM initialize
+0x7050 0x90 # [DRAM] DDR3, 1G bits
+0x7054 0x25 # [DRAM] tREF [LSB]
+0x7055 0x0F # [DRAM] tREF [MSB]
+0x7056 0x03 # [DRAM] ZQCS period [LSB]
+0x7057 0x40 # [DRAM] ZQCS period [MSB]
+0x7058 0x0E # [DRAM] tRP [LSB]
+0x7059 0x55 # [DRAM] tRP [MSB]
+0x705A 0x16 # [DRAM] tFAW
+0x705B 0x18 # [DRAM] tRC
+0x705D 0x4F # [DRAM] tRFC
+0x705E 0x1C # [DRAM] tWRP
+0x705F 0x31 # [DRAM] tRCD, tRRD
+0x7064 0x30 # [DRAM] MRS CAS latency
+0x7065 0x09 # [DRAM] Reset SDRAM DLL, DRAM recovery time
+0x7066 0x30 # [DRAM] EMR
+0x7067 0x00 # [DRAM] EMR
+0x7068 0x08 # [DRAM] EMR2
+0x7069 0x00 # [DRAM] EMR2
+0x706E 0x03 # [DRAM] tMRW
+0x706F 0x00 # [DRAM] tMRW
+0x7072 0x0B # [DRAM] Write ready latency
+0x7073 0xDF # [DRAM] Read ready latency; Read dqsie latency
+0x7074 0x0D # [DRAM] tW2R
+0x7075 0x0A # [DRAM] tR2W
+0x7080 0x01 # [DRAM] sync read data with mclk
+0x7081 0x09 # [DRAM] DDR PHY freq range (1: 300~700MHz); DDR PHY power-on,
+0x7082 0xBB # [DRAM] LDQS selection; UDQS selection;
+0x7090 0x77 # [DRAM] DQ[1] + DQ[0]
+0x7091 0x77 # [DRAM] DQ[3] + DQ[2]
+0x7092 0x77 # [DRAM] DQ[5] + DQ[4]
+0x7093 0x77 # [DRAM] DQ[7] + DQ[6]
+0x7094 0x77 # [DRAM] DQ[9] + DQ[8]
+0x7095 0x77 # [DRAM] DQ[11] + DQ[10]
+0x7096 0x77 # [DRAM] DQ[13] + DQ[12]
+0x7097 0x77 # [DRAM] DQ[15] + DQ[14]
+0x7780 0x22 # [DRAM] mem io driving [CAS|RAS]
+0x7781 0x22 # [DRAM] mem io driving [ODT|MWE]
+0x7782 0x22 # [DRAM] mem io driving [CLK|MCS+RST+CKE]
+0x7783 0x22 # [DRAM] mem io driving [UDQS|LDQS]
+0x7784 0x22 # [DRAM] mem io driving [UDQM|LDQM]
+0x7785 0x22 # [DRAM] mem io driving [MA01|MA00]
+0x7786 0x22 # [DRAM] mem io driving [MA03|MA02]
+0x7787 0x22 # [DRAM] mem io driving [MA05|MA04]
+0x7788 0x22 # [DRAM] mem io driving [MA07|MA06]
+0x7789 0x22 # [DRAM] mem io driving [MA09|MA08]
+0x778A 0x22 # [DRAM] mem io driving [MA11|MA10]
+0x778B 0x22 # [DRAM] mem io driving [MA13|MA12]
+0x778C 0x22 # [DRAM] mem io driving [MA15|MA14]
+0x778D 0x22 # [DRAM] mem io driving [MA17|MA16]
+0x7790 0x22 # [DRAM] mem io driving [MD01|MD00]
+0x7791 0x22 # [DRAM] mem io driving [MD03|MD02]
+0x7792 0x22 # [DRAM] mem io driving [MD05|MD04]
+0x7793 0x22 # [DRAM] mem io driving [MD07|MD06]
+0x7794 0x22 # [DRAM] mem io driving [MD09|MD08]
+0x7795 0x22 # [DRAM] mem io driving [MD11|MD10]
+0x7796 0x22 # [DRAM] mem io driving [MD13|MD12]
+0x7797 0x22 # [DRAM] mem io driving [MD15|MD14]
+0x7120 0x00 # [DRAM] MCS output LOW;
+0x70E6 0x02 # [DRAM] initialize DRAM
+0x7051 0x00 # [DRAM] (Too many info) Please check DRAM register

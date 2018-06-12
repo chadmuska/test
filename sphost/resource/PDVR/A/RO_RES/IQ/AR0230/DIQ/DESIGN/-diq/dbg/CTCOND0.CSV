@@ -1,0 +1,8 @@
+[SRM] 0 - [CT]
+CT,TableSize,UsedSize,ResCnt,ResLoadFlag
+[0],264,40,4,0
+,Index,TicketNo,Dummy,Pointer,FN,Type,Size
+,[0],1,0,0x405e558,92CE60FA.273,CCM,64
+,[1],2,0,0x3ebfad8,13015A8A.032,LSC,38464
+,[2],6,0,0x276a7b8,2E343B4B.043,HCORR,768
+,[3],9,0,0x2849018,9E7094CC.257,API1,256

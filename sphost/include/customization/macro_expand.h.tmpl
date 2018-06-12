@@ -1,0 +1,729 @@
+/**************************************************************************
+ *
+ *       Copyright (c) 2006-2018 by iCatch Technology, Inc.
+ *
+ *  This software is copyrighted by and is the property of iCatch
+ *  Technology, Inc.. All rights are reserved by iCatch Technology, Inc..
+ *  This software may only be used in accordance with the corresponding
+ *  license agreement. Any unauthorized use, duplication, distribution,
+ *  or disclosure of this software is expressly forbidden.
+ *
+ *  This Copyright notice MUST not be removed or modified without prior
+ *  written consent of iCatch Technology, Inc..
+ *
+ *  iCatch Technology, Inc. reserves the right to modify this software
+ *  without notice.
+ *
+ *  iCatch Technology, Inc.
+ *  19-1, Innovation First Road, Science-Based Industrial Park,
+ *  Hsin-Chu, Taiwan.
+ *
+ **************************************************************************/
+/**
+ * @file macro_expand.h
+ *
+ * @author
+ */
+
+/**************************************************************************
+ *                        H E A D E R   F I L E S
+ **************************************************************************/
+#include "common.h"
+
+/**************************************************************************
+ *                              M A C R O S
+ **************************************************************************/
+#ifdef _DEV_INIT_H_
+#ifndef _MACRO_EXPAND_H_DEV_
+#define _MACRO_EXPAND_H_DEV_
+
+/*_________________________________________________________________________
+
+  audio codec.
+ _________________________________________________________________________
+*/
+/*
+  primary audio device, for SP5K_AUD_DEV_PRIMARY.
+*/
+#if   (SP5K_AUD_DEVICE_INTERNAL == 1)
+	#define audioCodecInit audCodecOnChipRegister
+#elif (SP5K_AUD_DEVICE_HDMI == 1)
+	#define audioCodecInit audCodecHdmiAudRegister
+#endif
+
+
+#ifdef audioCodecInit
+void audioCodecInit(void);
+#else
+#error Please select audio CODEC in dev_init.h...
+#endif
+
+/*
+  secondary audio device, for SP5K_AUD_DEV_SECONDARY.
+*/
+#if   (SP5K_AUD_DEVICE2_INTERNAL == 1)
+	#define audioCodec2Init audCodecOnChipRegister
+#elif (SP5K_AUD_DEVICE2_HDMI == 1)
+	#define audioCodec2Init audCodecHdmiAudRegister
+#endif
+
+
+#ifdef audioCodec2Init
+void audioCodec2Init(void);
+#else
+#error Please select audio CODEC #2 in dev_init.h...
+#endif
+
+/*_________________________________________________________________________
+
+  disp device.
+ _________________________________________________________________________
+*/
+/*
+  panel #1
+*/
+#undef dispLcdInit
+
+#else /* SPCA5110 */
+
+#if (SP5K_LCD_GPM1177B1_UPS052)
+	#define dispLcdInit dispGpGpm1177b1Ups052Open
+#elif (SP5K_LCD_DUMMY)
+	#define dispLcdInit dispDummyOpen
+	
+#elif (SP5K_LCD_VS020C2A_UPS052)
+	#define dispLcdInit dispVsVs020c2aUps520Open
+	
+#elif (SP5K_LCD_GM15000_UPS052)
+	#define dispLcdInit dispGtGm15000Ups520Open 
+#endif
+
+#ifdef dispLcdInit
+UINT32 dispLcdInit(void);  /* api prototype. */
+#else
+#error Please select LCD type in dev_init.h...
+#endif
+
+#if DISP_DRIVER_NEW_ARCH
+/*
+  Composite tv.
+*/
+#undef dispCompositeTvOpen
+#define dispCompositeTvOpen dispCompositeTvAllOpen
+
+#ifdef dispCompositeTvOpen
+UINT32 dispCompositeTvOpen(void);  /* api prototype. */
+#else
+#define dispCompositeTvOpen()
+#warning Composite tv not selected in dev_init.h...
+#endif
+#else  /* ELSE #if DISP_DRIVER_NEW_ARCH */
+/*
+  tv ntsc.
+*/
+#undef dispTvNtscOpen
+#define dispTvNtscOpen dispCompositeTvNtscOpen
+
+#ifdef dispTvNtscOpen
+UINT32 dispTvNtscOpen(void);  /* api prototype. */
+#else
+#error Please select TV NTSC type in dev_init.h...
+#endif
+
+/*
+  tv pal.
+*/
+#undef dispTvPalOpen
+#define dispTvPalOpen dispCompositeTvPalOpen
+
+#ifdef dispTvPalOpen
+UINT32 dispTvPalOpen(void);  /* api prototype. */
+#else
+#error Please select TV PAL type in dev_init.h...
+#endif
+#endif  /* END #if DISP_DRIVER_NEW_ARCH */
+
+/*
+  panel #2
+*/
+#undef dispLcd2Init
+
+#ifdef dispLcd2Init
+UINT32 dispLcd2Init(void);  /* api prototype. */
+#else
+#define dispLcd2Init()
+#endif
+
+/*
+  hdmi
+*/
+#undef dispHdmiOpen
+#define dispHdmiOpen dispHdmiTvOpen
+
+#ifdef dispHdmiOpen
+UINT32 dispHdmiOpen(void);  /* api prototype. */
+#else
+#define dispHdmiOpen()
+#warning HDMI not selected in dev_init.h...
+#endif
+
+
+/*_________________________________________________________________________
+
+  front: selection of sensor/TG, AFE.
+ _________________________________________________________________________
+*/
+#if SP5K_SENSOR_OV4689
+	#define devFrontTgInstall()  sensorTg_ov4689_Install()
+	#define devFrontAfeInstall() sensorAfe_ov4689_Install()
+	void sensorTg_ov4689_Install(void);
+	void sensorAfe_ov4689_Install(void);
+#endif
+
+#if SP5K_SENSOR_FAKE
+	#define devFrontTgInstall()  sensorTg_Fake_Install()
+	#define devFrontAfeInstall() sensorAfe_Fake_Install()
+	void sensorTg_Fake_Install(void);
+	void sensorAfe_Fake_Install(void);
+#endif
+
+#if SP5K_SENSOR_AR0230
+	#define devFrontTgInstall()  sensorTg_ar0230_Install()
+	#define devFrontAfeInstall() sensorAfe_ar0230_Install()
+	void sensorTg_ar0230_Install(void);
+	void sensorAfe_ar0230_Install(void);
+#endif
+
+#ifndef devFrontTgInstall
+ #define devFrontTgInstall()
+#endif
+#ifndef devFrontAfeInstall
+ #define devFrontAfeInstall()
+#endif
+#ifndef devFrontTvInDecInstall
+ #define devFrontTvInDecInstall()
+#endif
+
+#endif  /* _MACRO_EXPAND_H_DEV_ */
+#endif  /* _DEV_INIT_H_ */
+
+
+/**************************************************************************
+ *                                _APP_INIT_H_
+ **************************************************************************/
+#ifdef _APP_INIT_H_
+#ifndef _MACRO_EXPAND_H_APP_
+#define _MACRO_EXPAND_H_APP_
+
+/*_________________________________________________________________________
+
+  command.c
+ _________________________________________________________________________
+*/
+#if !CMD_MEM
+#define cmdMemInit()
+#endif
+#if !CMD_OS
+#define cmdOsInit()
+#endif
+#if !CMD_DOS
+#define cmdDosInit()
+#endif
+#if !CMD_DISK
+#define cmdDiskInit()
+#endif
+#if !CMD_ERR
+#define cmdErrInit()
+#endif
+#if !CMD_MEDIA
+#define cmdMediaInit()
+#endif
+#if !CMD_ISP
+#define cmdIspInit()
+#endif
+#if !CMD_HW
+#define cmdHwInit()
+#endif
+#if !CMD_NAND
+#define cmdNandInit()
+#endif
+#if !CMD_SD
+#define cmdSdInit()
+#endif
+#if !CMD_USB
+#define cmdUsbInit()
+#endif
+#if !CMD_GPE
+#define cmdGpeInit()
+#endif
+#if !CMD_SNAP
+#define cmdSnapInit()
+#endif
+#if !CMD_ICAT
+#define cmdIcatInit()
+#endif
+#if !CMD_LMI
+#define cmdLmiInit()
+#endif
+#if !CMD_KEY
+#define cmdKeyInit()
+#endif
+#if !CMD_SAD
+#define cmdSadInit()
+#endif
+
+/*_________________________________________________________________________
+
+  app_init.c
+ _________________________________________________________________________
+*/
+#if CMD_TASK_INIT
+ extern void cmdTaskInit(void);
+#else
+ #undef cmdTaskInit
+ #define cmdTaskInit()
+#endif
+
+/*_________________________________________________________________________
+
+  snap modules.
+ _________________________________________________________________________
+*/
+#if SNAP_FAST_BK_PREVIEW_SUPPORT
+ extern void snapFastBkPreviewModAdd(UINT32 period);
+#else
+ #define snapFastBkPreviewModAdd(x)
+#endif
+
+
+/*_________________________________________________________________________
+
+  ALG effect modules.
+ _________________________________________________________________________
+*/
+
+#if ALG_EFFECT_FACE_BEAUTY_SUPPORT
+ extern void faceBeautyProcAdd(void);
+#else
+ #define faceBeautyProcAdd(x)
+#endif
+
+
+#if ALG_EFFECT_SUPER_RESOLUTION_SUPPORT
+ extern void superResolutionProcAdd(void);
+#else
+ #define superResolutionProcAdd(x)
+#endif
+
+#if ALG_EFFECT_MULTI_WDR_SUPPORT
+ extern void multiWdrProcAdd(void);
+#else
+ #define multiWdrProcAdd(x)
+#endif
+
+#if ALG_EFFECT_DYNAMIC_TONE_SUPPORT
+ extern void dynamicToneEffectProcAdd(void);
+#else
+ #define dynamicToneEffectProcAdd(x)
+#endif
+
+#if ALG_EFFECT_SEPIA_SUPPORT
+ extern void sepiaEffectProcAdd(void);
+#else
+ #define sepiaEffectProcAdd(x)
+#endif
+
+#if ALG_EFFECT_POSTERIZE_SUPPORT
+ extern void posterizeEffectProcAdd(void);
+#else
+ #define posterizeEffectProcAdd(x)
+#endif
+
+#if ALG_EFFECT_SOFT_SUPPORT
+ extern void softEffectProcAdd(void);
+#else
+ #define softEffectProcAdd(x)
+#endif
+
+#if ALG_EFFECT_PAINT_SUPPORT
+ extern void paintEffectProcAdd(void);
+#else
+ #define paintEffectProcAdd(x)
+#endif
+
+
+/*_________________________________________________________________________
+
+  usb
+ _________________________________________________________________________
+*/
+#if !USB_DRIVER_INIT
+#pragma message("app init usb")
+#endif
+#if !VENDOR_CMD_INIT
+#define sp5kUsbVNDRFuncReg()
+#endif
+#if !MASS_STORAGE_INIT
+#define sp5kUsbMSDCFuncReg()
+#endif
+#if !STILL_IMAGE_CLASS_INIT
+#define sp5kUsbSIDCFuncReg()
+#endif
+#if API_TEST_INIT
+#pragma message("app init api test (vc init, vndr cmd?")
+#endif
+#if ON_THE_GO_DRIVER_INIT
+#pragma message("app init usb on the go")
+#endif
+#if !PICTURE_BRIDGE_INIT
+#define sp5kUsbDPSFuncReg()
+#endif
+
+/*_________________________________________________________________________
+
+  media: decoders.
+ _________________________________________________________________________
+*/
+#if MEDIA_DEC_MJPG
+ void mjpgDecoderRegister(void);
+#else
+ #define mjpgDecoderRegister()
+#endif
+
+#if MEDIA_DEC_H264
+ void h264DecoderRegister(void);
+#else
+ #define h264DecoderRegister()
+#endif
+
+#if MEDIA_DEC_PCM
+ void pcmDecoderRegister(void);
+#else
+ #define pcmDecoderRegister()
+#endif
+
+#if MEDIA_DEC_MULAW
+ void mulawDecoderRegister(void);/* FIXME: modified by Edward because mulaw audio is using in ui_AudioMain.c */
+#else
+ #define mulawDecoderRegister()
+#endif
+
+#if MEDIA_DEC_ALAW
+ UINT32 alawDecoderRegister(void);
+#else
+ #define alawDecoderRegister()
+#endif
+
+#if MEDIA_DEC_ADPCM
+ void adpcmDecoderRegister(void);
+#else
+ #define adpcmDecoderRegister()
+#endif
+
+#if MEDIA_DEC_MP3
+ void mp3DecoderRegister(void);
+#else
+ #define mp3DecoderRegister()
+#endif
+
+#if MEDIA_DEC_WMA
+ UINT32 wmaDecoderRegister(void);
+#else
+ #define wmaDecoderRegister()
+#endif
+
+#if MEDIA_DEC_AAC
+ void aacDecoderRegister(void);
+#else
+ #define aacDecoderRegister()
+#endif
+/*_________________________________________________________________________
+
+  media: encoders.
+ _________________________________________________________________________
+*/
+#if MEDIA_ENC_MJPG
+ void mjpgEncoderRegister(void);
+#else
+ #define mjpgEncoderRegister()
+#endif
+
+#if MEDIA_ENC_H264
+ void h264EncoderRegister(void);
+#else
+ #define h264EncoderRegister()
+#endif
+
+#if MEDIA_ENC_PCM
+ void pcmEncoderRegister(void);
+#else
+ #define pcmEncoderRegister()
+#endif
+
+#if MEDIA_ENC_MULAW
+ void mulawEncoderRegister(void);/* FIXME: modified by Edward because mulaw audio is using in ui_AudioMain.c */
+#else
+ #define mulawEncoderRegister()
+#endif
+
+#if MEDIA_ENC_ALAW
+ UINT32 alawEncoderRegister(void);
+#else
+ #define alawEncoderRegister()
+#endif
+
+#if MEDIA_ENC_ADPCM
+ void adpcmEncoderRegister(void);
+#else
+ #define adpcmEncoderRegister()
+#endif
+
+#if MEDIA_ENC_AAC
+ void aacEncoderRegister(void);
+#else
+ #define aacEncoderRegister()
+#endif
+
+/*_________________________________________________________________________
+
+  media: mux recorders.
+ _________________________________________________________________________
+*/
+#if MEDIA_RECORD_MOV
+ UINT32 mediaMovRecorderInit(void);     /* support record Mov format */
+#else
+ #define mediaMovRecorderInit()
+#endif
+#if MEDIA_RECORD_AVI
+ UINT32 mediaAviRecorderInit(void);     /* support record Avi format */
+#else
+ #define mediaAviRecorderInit()
+#endif
+
+#if MEDIA_RECORD_ASF
+ UINT32 mediaAsfRecorderInit(void);     /* support record Asf format */
+#else
+ #define mediaAsfRecorderInit()
+#endif
+
+#if MEDIA_RECORD_WAV
+ UINT32 mediaWavRecorderInit(void);     /* support record Wav format */
+#else
+ #define mediaWavRecorderInit()
+#endif
+
+#if MEDIA_RECORD_MP3
+ UINT32 mediaMp3RecorderInit(void);     /* support record Mp3 format */
+#else
+ #define mediaMp3RecorderInit()
+#endif
+
+/*_________________________________________________________________________
+
+  media: demux players.
+ _________________________________________________________________________
+*/
+#if MEDIA_PLAY_MOV
+ UINT32 mediaMovPlayerInit(void);       /* support play Mov format */
+#else
+ #define mediaMovPlayerInit()
+#endif
+#if MEDIA_PLAY_AVI
+ UINT32 mediaAviPlayerInit(void);       /* support play Avi format */
+#else
+ #define mediaAviPlayerInit()
+#endif
+
+#if MEDIA_PLAY_ASF
+ UINT32 mediaAsfPlayerInit(void);       /* support play Asf format */
+#else
+ #define mediaAsfPlayerInit()
+#endif
+
+#if MEDIA_PLAY_WAV
+ UINT32 mediaWavPlayerInit(void);       /* support play Wav format */
+#else
+ #define mediaWavPlayerInit()
+#endif
+
+#if MEDIA_PLAY_MP3
+ UINT32 mediaMp3PlayerInit(void);       /* support play Mp3 format */
+#else
+ #define mediaMp3PlayerInit()
+#endif
+
+#if MEDIA_PLAY_WMA
+ UINT32 mediaWmaPlayerInit(void);       /* support play Wma format */
+#else
+ #define mediaWmaPlayerInit()
+#endif
+
+/*_________________________________________________________________________
+  media: editor.
+ _________________________________________________________________________
+*/
+#if MEDIA_EDIT_AVI
+ UINT32 mediaAviEditorInit(void);       /* support edit Avi format */
+#else
+ #define mediaAviEditorInit()
+#endif
+
+#if MEDIA_EDIT_MOV
+ UINT32 mediaMovEditorInit(void);       /* support edit Mov format */
+#else
+ #define mediaMovEditorInit()
+#endif
+
+/*_________________________________________________________________________
+
+  iCatch default ae / awb.
+ _________________________________________________________________________
+*/
+/* -- iCatch AE/AWB/AF frameworks support -- */
+#if !SP5K_AF_FRAMEWORK
+ #define sp5kAfInit()
+#endif
+
+#if AE_DEFAULT_SUPPORT
+ extern void aeDefaultInit(void);
+#else
+ #define aeDefaultInit()
+#endif
+
+#if AWB_DEFAULT_SUPPORT
+ extern void awbDefaultInit(void);
+#else
+ #define awbDefaultInit()
+#endif
+
+/* -- iCatch lens distortion correction support -- */
+#if SP5K_LDC_SUPPORT
+#define ldcModuleAdd()   do { \
+		ldcPvModeInit(); \
+	} while (0)
+#else
+#define ldcModuleAdd()
+#endif
+
+/* -- iCatch DIST support -- */
+#if VIDEO_DIST_SUPPORT
+ extern void videoDistInit(void);
+#else
+ #define videoDistInit()
+#endif
+
+/* -- iCatch obj tracking support -- */
+#if !OBJ_TRACK_PREVIEW_SUPPORT
+ #define otrackPvInit()
+#endif
+
+/* -- Adas Algorithm support -- */
+#if ADAS_ALGO_LDWS_SUPPORT
+ extern void laneDetInstall(void);
+#else
+ #define laneDetInstall()
+#endif
+#if ADAS_ALGO_ROD_SUPPORT
+ extern void rodInstall(void);
+#else
+ #define rodInstall()
+#endif
+#if ADAS_ALGO_LPD_SUPPORT
+ extern void lpdInstall(void);
+#else
+ #define lpdInstall()
+#endif
+
+/* -- iCatch face tracking support -- */
+#if FACE_TRACK_PREVIEW_SUPPORT
+ extern void ftrackPvInit(void);
+#else
+ #define ftrackPvInit()
+#endif
+
+#if FACE_TRACK_SNAP_SUPPORT
+ extern void ftrackSnapInit(void);
+#else
+ #define ftrackSnapInit()
+#endif
+
+#if FACE_TRACK_PLAYBACK_SUPPORT
+ extern void ftrackPbInit(void);
+#else
+ #define ftrackPbInit()
+#endif
+
+#if FACE_TRACK_PREVIEW_SUPPORT || FACE_TRACK_SNAP_SUPPORT \
+|| FACE_TRACK_PLAYBACK_SUPPORT
+ extern void ftrackPvSoftIIModuleAdd(void);
+#else
+ #define ftrackPvSoftIIModuleAdd()
+#endif
+
+#if FACE_TRACK_TINY_SMILE_DETECT || FACE_TRACK_TINY_BLINK_DETECT \
+|| FACE_TRACK_SMILE_DETECT || FACE_TRACK_BLINK_DETECT \
+|| FACE_TRACK_CHECK_NOSE
+ extern void ftrackFDSoftIIModuleAdd(void);
+#else
+ #define ftrackFDSoftIIModuleAdd()
+#endif
+
+#if FACE_TRACK_CHECK_FACE_COLOR || FACE_TRACK_CHECK_FRAME_COLOR
+ extern void ftrackFDSoftUVModuleAdd(void);
+#else
+ #define ftrackFDSoftUVModuleAdd()
+#endif
+
+#if FACE_TRACK_CHECK_FRAME_COLOR
+ extern void ftrackFrameFleshModuleAdd(void);
+#else
+ #define ftrackFrameFleshModuleAdd()
+#endif
+
+#if FACE_TRACK_ALGO_TYPE
+ #define ftrackAlgoInitWrapper(ver) { \
+	extern void ftrackAlgo##ver##Init(); \
+	ftrackAlgo##ver##Init(); \
+ }
+ #define ftrackAlgoInit(ver) ftrackAlgoInitWrapper(ver);
+#else
+ #define ftrackAlgoInit(ver)
+#endif
+
+#if FACE_TRACK_CAR_SUPPORT
+    extern void ptrackCarInit(void);
+#else
+    #define ptrackCarInit()
+#endif
+
+
+/* -- iCatch Multiple Preview Support -- */
+#if MULTIPLE_PREVIEW_ENABLE
+ extern void multiplePreviewInit();
+#else
+ #define multiplePreviewInit()
+#endif
+
+/* -- Host access playback buffer during capture support -- */
+#if SNAP_PB_BUF_ACCESS_ENABLE
+ extern void snapPbBufModAdd()
+#else
+ #define snapPbBufModAdd()
+#endif
+
+/* -- yuv filter options -- */
+#if !YUV_FILTER_SUPPORT_1D_PERSPECTIVE
+ #define yuvFilterTrapeInit()
+#endif
+
+#if !YUV_FILTER_SUPPORT_RADIAL_BLUR
+ #define yuvFilterRadialBlurInit()
+#endif
+
+#if !YUV_FILTER_SUPPORT_HDR
+ #define yuvFilterHDRInit()
+#endif
+
+#endif  /* _MACRO_EXPAND_H_APP_ */
+#endif  /* _APP_INIT_H_ */
+

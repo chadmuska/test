@@ -1,0 +1,225 @@
+97   /*n_entry */
+0    /*tblidx_min*/
+1    /*nreg*/
+/*apex value of agc_tblidx i = (i + agc_tblidx0_unit) / agc_tblidx_unit*/
+80   /*(SINT8)agc_tblidx0_unit*/
+16   /*agc_tblidx_unit*/
+1    /*n_burst_sec*/
+/*template, nreg*/
+0x05
+0
+0
+0
+0
+/*loop1 for n_burst_sec*/
+97   /*n_burstidx*/
+2    /*nbyte_entry*/
+0    /*burstidx_min*/
+1  /*n_op*/
+/*loop0 for n_op*/
+0   /*tmpl_reg: reg# in template, 0-based*/
+0   /*entry_lsb: right shift table entry contain*/
+12  /*reg_lsb: left shift to reg*/
+10  /*nbit_mask*/
+/*loop0 ends*/
+/*contains, for n_burstidx * nbyte_entry*/
+0	
+0
+11	
+0
+21	
+0
+32	
+0
+43	
+0
+53	
+0
+64	
+0
+75	
+0
+85	
+0
+96	
+0
+107	
+0
+117	
+0
+128	
+0
+139	
+0
+149	
+0
+160	
+0
+171	
+0
+181	
+0
+192	
+0
+203	
+0
+213	
+0
+224	
+0
+235	
+0
+245	
+0
+0	
+1
+11	
+1
+21	
+1
+32	
+1
+43	
+1
+53	
+1
+64	
+1
+75	
+1
+85	
+1
+96	
+1
+107	
+1
+117	
+1
+128	
+1
+139	
+1
+149	
+1
+160	
+1
+171	
+1
+181	
+1
+192	
+1
+203	
+1
+213	
+1
+224	
+1
+235	
+1
+245	
+1
+0	
+2
+11	
+2
+21	
+2
+32	
+2
+43	
+2
+53	
+2
+64	
+2
+75	
+2
+85	
+2
+96	
+2
+107	
+2
+117	
+2
+128	
+2
+139	
+2
+149	
+2
+160	
+2
+171	
+2
+181	
+2
+192	
+2
+203	
+2
+213	
+2
+224	
+2
+235	
+2
+245	
+2
+0	
+3
+11	
+3
+21	
+3
+32	
+3
+43	
+3
+53	
+3
+64	
+3
+75	
+3
+85	
+3
+96	
+3
+107	
+3
+117	
+3
+128	
+3
+139	
+3
+149	
+3
+160	
+3
+171	
+3
+181	
+3
+192	
+3
+203	
+3
+213	
+3
+224	
+3
+235	
+3
+245	
+3
+255	
+3
+/*end contains, end loop1*/
+/*error table: n_erridx, emin, err unit in "N"-th ev*/
+0
+0
+64
+/*contains, for n_erridx (SINT8)*/
